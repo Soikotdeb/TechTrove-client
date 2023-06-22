@@ -58,7 +58,7 @@ const MainNav = () => {
           <a className="btn btn-ghost normal-case text-4xl">TechTrove</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div>
+          <div className='border p-2 border-gray-200 bg-white rounded'>
             <input
               type="text"
               placeholder="Type here"
