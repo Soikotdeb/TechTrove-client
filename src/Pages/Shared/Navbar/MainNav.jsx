@@ -73,7 +73,7 @@ const MainNav = () => {
               <option>Smartphones</option>
               <option>Cameras</option>
             </select>
-            <button className="btn btn-primary  ml-1 px-4 py-3">
+            <button className="btn   ml-1 px-4 py-3">
               <BiSearch className="w-6 h-6" />
             </button>
           </div>
