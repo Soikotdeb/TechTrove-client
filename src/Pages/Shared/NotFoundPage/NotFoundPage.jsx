@@ -13,8 +13,8 @@ const NotFoundPage = () => {
           className="w-80 h-auto mx-auto rounded-full border-4 border-gray-300 hover:shadow-lg transition-shadow duration-300"
         />
         <h1 className="text-3xl font-bold mt-8">Oops! Page Not Found</h1>
-        <p className="text-lg mb-4 mt-4">
-          The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+        <p className="text-3xl mb-4 mt-4">
+        It looks like nothing was found at this location.
         </p>
         <Link
           to="/"
