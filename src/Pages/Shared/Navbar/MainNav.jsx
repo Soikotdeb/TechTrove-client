@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineLogin } from 'react-icons/hi';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { useState } from 'react';
+import logo from '../../../assets/image/company logo.png'
 
 const MainNav = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -55,10 +56,11 @@ const MainNav = () => {
               </li>
             </ul>
           </div>
+          <img className='w-9 h-12 rounded' src={logo} alt="" />
           <a className="btn btn-ghost normal-case text-4xl">TechTrove</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div className='border p-2 border-gray-200 bg-white rounded'>
+          <div className='border py-1 px-1 border-gray-200 bg-white rounded'>
             <input
               type="text"
               placeholder="Type here"
@@ -68,10 +70,16 @@ const MainNav = () => {
               <option disabled selected>
                 Category?
               </option>
-              <option>Laptops</option>
-              <option>Lost</option>
-              <option>Smartphones</option>
-              <option>Cameras</option>
+              <option>Nokia</option>
+              <option>Huawei</option>
+              <option>iPhone</option>
+              <option>MacBook</option>
+              <option>Google</option>
+              <option>Xiaomi</option>
+              <option>Vivo</option>
+              <option>Samsung</option>
+              <option>OnePlus</option>
+              <option>Oppo</option>
             </select>
             <button className="btn   ml-1 px-4 py-3">
               <BiSearch className="w-6 h-6" />

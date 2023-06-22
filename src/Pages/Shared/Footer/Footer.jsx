@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="container mx-auto  py-8 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex items-center">
-            <img className="h-8 w-8 mr-2" src={logo} alt="Company Logo" />
+          <img className='w-9 h-12 mr-3 rounded' src={logo} alt="" />
             <span className="font-semibold text-4xl ">TechTrove</span>
           </div>
           <nav className="mt-4 sm:mt-0">
