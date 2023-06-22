@@ -14,13 +14,15 @@ import samsung from '../../assets/image/samsung_logo_PNG10.png';
 import onePlus from '../../assets/image/oneplus-logo-B6703954CF-seeklogo.com_-1.png';
 import iPhone from '../../assets/image/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4-2-e1593283971693.png';
 import { AiOutlineMobile } from 'react-icons/ai';
+import './Banner.css'
 
 
 
 const Banner = () => {
  
   return (
-    <div className="flex flex-col lg:flex-row-reverse">
+<div className='banner'>
+<div className="flex flex-col lg:flex-row-reverse">
       <div className="flex-1 mt-2 ml-4 mr-2">
       <div className="navbar bg-base-100 flex flex-col sm:flex-row sm:justify-between sm:items-center font-semibold">
   <div className="flex items-center mb-3 sm:mb-0 relative hover:text-purple-500 ">
@@ -78,7 +80,7 @@ const Banner = () => {
         </div>
       </div>
 
-      <div className="lg:w-96 border border-gray-200 p-3">
+      <div className="lg:w-96 border h-1/2 border-gray-200  p-3">
         <div className="collapse collapse-plus bg-base-200">
           <input type="radio" name="my-accordion-3" checked />
           <div className="collapse-title text-xl bg-orange-700 text-white font-bold">
@@ -164,6 +166,7 @@ const Banner = () => {
         </div>
       </div>
     </div>
+</div>
   );
 };
 
