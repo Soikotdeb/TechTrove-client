@@ -88,18 +88,18 @@ const MainNav = () => {
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link>
-                <FaHeart className="w-6 h-6" />
+                <FaHeart className="w-6 h-6 hover:text-purple-700" />
               </Link>
             </li>
             <li tabIndex={0}></li>
             <li>
               <a>
-                <FaShoppingCart className="w-6 h-6" />
+                <FaShoppingCart className="w-6 h-6 hover:text-purple-700" />
               </a>
             </li>
             <li>
               <a>
-                <FaExchangeAlt className="w-6 h-6" />
+                <FaExchangeAlt className="w-6 h-6 hover:text-purple-700" />
               </a>
             </li>
           </ul>

@@ -41,7 +41,7 @@ const TechTroveProducts = () => {
   }, []);
 
   return (
-    <div className="mb-28  bg-gray-100 rounded-lg">
+    <div className=" border border-purple-500  bg-gray-100 rounded-lg">
       <Tabs selectedIndex={activeTab} onSelect={handleTabChange}>
         <TabList className="flex">
           <div className="">
