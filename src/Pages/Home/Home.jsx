@@ -6,9 +6,10 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div className="">
-            <TechTroveProducts></TechTroveProducts>
-            </div>
+            <div className="lg:p-8 ">
+  <TechTroveProducts></TechTroveProducts>
+</div>
+
         </div>
     );
 };
