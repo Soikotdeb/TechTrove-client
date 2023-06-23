@@ -1,12 +1,8 @@
-import React from 'react';
+
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import logo from '../../../assets/image/company logo.png'
-import bkash from '../../../assets/image/bkash.png'
-import nagad from '../../../assets/image/nagad.jpg'
-import paypal from '../../../assets/image/paypal.png'
-import masterCard from '../../../assets/image/masterCard.png'
-import roket from '../../../assets/image/roket.jpg'
 import { FaEnvelope, FaPhone } from 'react-icons/fa';
+import pay from '../../../assets/image/SSL-Commerz-Pay-With-logo-All-Size-01-004.png'
 
 const Footer = () => {
   return (
@@ -71,27 +67,9 @@ const Footer = () => {
           </p>
         </div>
         <div className="mt-4 flex items-center justify-center">
-          <div className="mr-4">
-            
-            <ul className="flex">
-            <p className="text-sm text-gray-400 mr-2">Pay with: </p>
-              <li className="mr-2 rounded">
-                <img className="h-5 w-5" src={bkash} alt="bKash" />
-              </li>
-              <li className="mr-2">
-                <img className="h-5 w-5" src={nagad} alt="Nagad" />
-              </li>
-              <li className="mr-2">
-                <img className="h-5 w-5" src={paypal} alt="PayPal" />
-              </li>
-              <li className="mr-2">
-                <img className="h-5 w-5" src={masterCard} alt="Bankcard" />
-              </li>
-              <li className="mr-2">
-                <img className="h-5 w-5" src={roket} alt="Bankcard" />
-              </li>
-            </ul>
-          </div>
+       Pay With:   <img className='w-34 h-14' src={pay} alt="" />
+        
+
           <div>
             
             <ul className="flex">
