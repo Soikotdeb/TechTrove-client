@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "phone_name": "iPhone 13",
+      "phone_storage": "128GB",
+      "price": 999,
+      "color": "Midnight Blue",
+      "facility": ["Face ID", "Wireless Charging", "Water Resistant", "Dual SIM"],
+      "rating": 4.5,
+      "region": "Global",
+      "quantity": 50,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 2,
+      "phone_name": "Samsung Galaxy S21",
+      "phone_storage": "256GB",
+      "price": 899,
+      "color": "Phantom Black",
+      "facility": ["Ultra Fast Charging", "5G Connectivity", "Wireless PowerShare", "Water and Dust Resistant"],
+      "rating": 4.2,
+      "region": "Global",
+      "quantity": 30,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 3,
+      "phone_name": "Google Pixel 6",
+      "phone_storage": "128GB",
+      "price": 799,
+      "color": "Sorta Sage",
+      "facility": ["Titan M Security Chip", "Night Sight", "Fast Charging", "5G Connectivity"],
+      "rating": 4.7,
+      "region": "North America",
+      "quantity": 20,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 4,
+      "phone_name": "OnePlus 9 Pro",
+      "phone_storage": "256GB",
+      "price": 899,
+      "color": "Morning Mist",
+      "facility": ["Fluid AMOLED Display", "Warp Charge 65T", "Hasselblad Camera", "5G Connectivity"],
+      "rating": 4.6,
+      "region": "Global",
+      "quantity": 35,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 5,
+      "phone_name": "Xiaomi Mi 11",
+      "phone_storage": "128GB",
+      "price": 799,
+      "color": "Cosmic Black",
+      "facility": ["Snapdragon 888", "108MP Camera", "5G Connectivity", "Fast Charging"],
+      "rating": 4.4,
+      "region": "Asia",
+      "quantity": 25,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 6,
+      "phone_name": "Sony Xperia 1 III",
+      "phone_storage": "256GB",
+      "price": 1099,
+      "color": "Frosted Black",
+      "facility": ["4K HDR OLED Display", "Triple Camera System", "Snapdragon 888", "Water Resistant"],
+      "rating": 4.8,
+      "region": "Global",
+      "quantity": 15,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 7,
+      "phone_name": "LG Velvet",
+      "phone_storage": "128GB",
+      "price": 699,
+      "color": "Aurora Gray",
+      "facility": ["Dual Screen", "48MP Triple Camera", "5G Connectivity", "AI Sound"],
+      "rating": 4.3,
+      "region": "North America",
+      "quantity": 40,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 8,
+      "phone_name": "Motorola Edge+",
+      "phone_storage": "256GB",
+      "price": 999,
+      "color": "Thunder Grey",
+      "facility": ["90Hz Endless Edge Display", "5G Connectivity", "108MP Camera", "TurboPower Charging"],
+      "rating": 4.2,
+      "region": "Global",
+      "quantity": 30,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 9,
+      "phone_name": "Huawei P40 Pro",
+      "phone_storage": "256GB",
+      "price": 899,
+      "color": "Silver Frost",
+      "facility": ["50MP Ultra Vision Camera", "5G Connectivity", "Ultra Vision Leica Quad Camera", "Water Resistant"],
+      "rating": 4.0,
+      "region": "Global",
+      "quantity": 20,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 10,
+      "phone_name": "Nokia 8.3 5G",
+      "phone_storage": "128GB",
+      "price": 599,
+      "color": "Polar Night",
+      "facility": ["PureDisplay", "Quad Camera with ZEISS Optics", "5G Connectivity", "Android One"],
+      "rating": 4.1,
+      "region": "Europe",
+      "quantity": 25,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    }
+  ]
+  
