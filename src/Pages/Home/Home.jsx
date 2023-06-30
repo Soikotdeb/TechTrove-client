@@ -2,6 +2,7 @@ import Banner from "../Banner/Banner";
 import Facility from "../Facility/Facility";
 import Message from "../Message/Message";
 import TechTroveProducts from "../TechTroveProducts/TechTroveProducts";
+import PartnarBrands from './../PartnersBrand/PartnarBrands';
 
 const Home = () => {
   return (
@@ -15,6 +16,9 @@ const Home = () => {
       </div>
       <div className="lg:p-8">
       <Facility></Facility>
+      </div>
+      <div className="lg:p-8">
+      <PartnarBrands></PartnarBrands>
       </div>
      
     </div>
