@@ -3,7 +3,7 @@ import image from '../../assets/image/galaxy-fold_highlight_kv_silver_end.png';
 
 const Message = () => {
   return (
-    <div className='mb-40 relative items-center'> 
+    <div className='mb-14 relative items-center'> 
       <div>
         <div className='ml-4 absolute mt-28'> 
           <img className='w-96 h-60 hidden md:block' src={image} alt="" />

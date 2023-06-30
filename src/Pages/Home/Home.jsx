@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import Facility from "../Facility/Facility";
 import Message from "../Message/Message";
 import TechTroveProducts from "../TechTroveProducts/TechTroveProducts";
 
@@ -12,6 +13,10 @@ const Home = () => {
       <div className="lg:p-8">
       <Message></Message>
       </div>
+      <div className="lg:p-8">
+      <Facility></Facility>
+      </div>
+     
     </div>
   );
 };

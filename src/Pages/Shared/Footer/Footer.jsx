@@ -68,40 +68,38 @@ const Footer = () => {
         </div>
         <div className="mt-4 flex items-center justify-center">
        Pay With:   <img className='w-34 h-14' src={pay} alt="" />
-        
-
-          <div>
+        </div>
+        <div>
             
             <ul className="flex">
-            <p className="text-sm text-gray-400 mr-2">Follow us: </p>
-              <li className="mr-2">
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                  <FaFacebook className="h-5 w-5" />
-                </a>
-              </li>
-              <li className="mr-2">
-                <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                  <FaTwitter className="h-5 w-5" />
-                </a>
-              </li>
-              <li className="mr-2">
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                  <FaInstagram className="h-5 w-5" />
-                </a>
-              </li>
-              <li className="mr-2">
-                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                  <FaLinkedin className="h-5 w-5" />
-                </a>
-              </li>
-              <li className="mr-2">
-                <a href="https://www.github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                  <FaGithub className="h-5 w-5" />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+              <p className="text-sm text-gray-400 mr-2">Follow us: </p>
+                <li className="mr-2">
+                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                    <FaFacebook className="h-5 w-5" />
+                  </a>
+                </li>
+                <li className="mr-2">
+                  <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                    <FaTwitter className="h-5 w-5" />
+                  </a>
+                </li>
+                <li className="mr-2">
+                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                    <FaInstagram className="h-5 w-5" />
+                  </a>
+                </li>
+                <li className="mr-2">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                    <FaLinkedin className="h-5 w-5" />
+                  </a>
+                </li>
+                <li className="mr-2">
+                  <a href="https://www.github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                    <FaGithub className="h-5 w-5" />
+                  </a>
+                </li>
+              </ul>
+            </div>
       </div>
     </footer>
   );
