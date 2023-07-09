@@ -5,6 +5,7 @@ import TechTroveProducts from "../TechTroveProducts/TechTroveProducts";
 import PartnarBrands from './../PartnersBrand/PartnarBrands';
 import ShopBySection from './../ShopBySection/ShopBySection';
 
+
 const Home = () => {
   return (
     <div>
@@ -26,8 +27,6 @@ const Home = () => {
       <div className="lg:p-8 bg-slate-200 mt-2">
       <PartnarBrands></PartnarBrands>
       </div>
-      
-     
     </div>
   );
 };

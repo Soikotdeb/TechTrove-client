@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import "./ShopBySection.css";
 import image from "../../assets/image/section.jpeg";
 
 const ShopBySection = () => {
@@ -19,7 +18,7 @@ const ShopBySection = () => {
             transition: "background-size 0.3s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundSize = "117%";
+            e.currentTarget.style.backgroundSize = "110%";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundSize = "cover";
@@ -46,7 +45,7 @@ const ShopBySection = () => {
         {/* Tabbed Content Column */}
         <div className="flex-1">
           <Tabs forceRenderTabPanel defaultIndex={0}>
-            <div className="flex font-semibold">
+            <div className="flex  justify-between font-semibold">
               <TabList className="flex">
                 <div className="">
                   <div className="font-bold text-3xl mr-2">
@@ -58,6 +57,10 @@ const ShopBySection = () => {
                 <Tab>Macbook Collection</Tab>
                 <Tab>Premium Gadget</Tab>
               </TabList>
+              <div className="text-2xl flex   gap-5 mr-3">
+              <p className="hidden md:block">❮</p>
+             <p className="hidden md:block">❯</p>
+              </div>
             </div>
 
             {/* tabpanal  */}
@@ -75,31 +78,10 @@ const ShopBySection = () => {
                         }}
                         className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
                       >
-                        <figure></figure>
+                     
                         <div className="card-body">
-                          <h2
-                            className="card-title text-4xl font-bold text-red-300"
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                          ></h2>
-                          <p
-                            className="font-bold text-3xl"
-                            data-aos="zoom-in"
-                            data-aos-duration="1000"
-                          ></p>
-                          <div
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                          ></div>
-                          <div
-                            className="card-actions justify-end"
-                            data-aos="fade-left"
-                            data-aos-duration="1000"
-                          >
-                            <Link to="/" className="btn btn-primary">
-                              View Details
-                            </Link>
-                          </div>
+                          {/* contant */}
+
                         </div>
                       </div>
                     </TabPanel>
@@ -119,31 +101,9 @@ const ShopBySection = () => {
                         }}
                         className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
                       >
-                        <figure></figure>
+                       
                         <div className="card-body">
-                          <h2
-                            className="card-title text-4xl font-bold text-red-300"
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                          ></h2>
-                          <p
-                            className="font-bold text-3xl"
-                            data-aos="zoom-in"
-                            data-aos-duration="1000"
-                          ></p>
-                          <div
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                          ></div>
-                          <div
-                            className="card-actions justify-end"
-                            data-aos="fade-left"
-                            data-aos-duration="1000"
-                          >
-                            <Link to="/" className="btn btn-primary">
-                              View Details
-                            </Link>
-                          </div>
+                          {/* contant */}
                         </div>
                       </div>
                     </TabPanel>
@@ -155,7 +115,7 @@ const ShopBySection = () => {
                 <div style={{ height: "100%", width: "100%" }}>
                   <Tabs forceRenderTabPanel defaultIndex={0}>
                     <TabPanel>
-                      <div
+                    <div
                         style={{
                           height: "100%",
                           width: "100%",
@@ -163,31 +123,11 @@ const ShopBySection = () => {
                         }}
                         className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
                       >
-                        <figure></figure>
+                   
                         <div className="card-body">
-                          <h2
-                            className="card-title text-4xl font-bold text-red-300"
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                          ></h2>
-                          <p
-                            className="font-bold text-3xl"
-                            data-aos="zoom-in"
-                            data-aos-duration="1000"
-                          ></p>
-                          <div
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                          ></div>
-                          <div
-                            className="card-actions justify-end"
-                            data-aos="fade-left"
-                            data-aos-duration="1000"
-                          >
-                            <Link to="/" className="btn btn-primary">
-                              View Details
-                            </Link>
-                          </div>
+                          
+                          {/* contant */}
+                         
                         </div>
                       </div>
                     </TabPanel>
