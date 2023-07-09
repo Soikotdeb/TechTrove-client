@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import './Partner.css'
- import MacBook from '../../assets/image/Apple-MacBook-15-inch-e1600416371601.jpeg';
  import huawei from '../../assets/image/huawei-logo-communication-13-e1593284031516.png';
  import nokia from '../../assets/image/nokia-logo.png';
  import vivo from '../../assets/image/vivo.png';
@@ -32,16 +31,16 @@ export default function App() {
 
   return (
     <>
+    <div>
+    <h1 className="text-3xl font-semibold text-center">OUR PARTNERS BRAND </h1>
+    </div>
      <Swiper
         pagination={pagination}
         modules={[Pagination]}
-        className="mySwiper"
+        className="mySwiper mt-4"
       >
         <SwiperSlide>
-          <img src={huawei} alt="" style={{ width: "200px", height: "200px" }} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={MacBook} alt="" style={{ width: "200px", height: "200px" }} />
+          <img src={huawei} alt="" style={{ width: "200px", height: "200px",marginBottom:'35px' }} />
         </SwiperSlide>
         <SwiperSlide>
           <img src={nokia} alt="" style={{ width: "200px", height: "200px" }} />

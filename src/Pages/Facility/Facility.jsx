@@ -23,7 +23,7 @@ const Facility = () => {
           e.currentTarget.style.backgroundSize = 'cover'; // Reset the background image size on mouse leave
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="font-extrabold text-white z-10 text-center">
           <p>Trade in at TechTrove</p>
           <p className="text-3xl text-white">Exchange Facility</p>
