@@ -3,6 +3,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import image from "../../assets/image/section.jpeg";
 
+
 const ShopBySection = () => {
   return (
     <div className="bg-gray-200 py-10 mt-2">
@@ -58,8 +59,8 @@ const ShopBySection = () => {
                 <Tab>Premium Gadget</Tab>
               </TabList>
               <div className="text-2xl flex   gap-5 mr-3">
-              <p className="hidden md:block">❮</p>
-             <p className="hidden md:block">❯</p>
+              <Link className="hidden md:block">❮</Link>
+             <Link className="hidden md:block">❯</Link>
               </div>
             </div>
 
@@ -127,6 +128,7 @@ const ShopBySection = () => {
                         <div className="card-body">
                           
                           {/* contant */}
+                        
                          
                         </div>
                       </div>
@@ -169,3 +171,4 @@ const ShopBySection = () => {
 };
 
 export default ShopBySection;
+
