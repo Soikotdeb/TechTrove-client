@@ -7,7 +7,7 @@ import { useState } from 'react';
 import logo from '../../../assets/image/company logo.png'
 
 const MainNav = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -106,7 +106,7 @@ const MainNav = () => {
         </div>
         <div className="navbar-end">
           {loggedIn ? (
-            <Link onClick={handleLogin} className="btn">
+            <Link to="/logIn" onClick={handleLogin} className="btn">
               LogIn <HiOutlineLogin className="ml-1 w-5 h-5" />
             </Link>
           ) : (
