@@ -3,18 +3,21 @@ import { FaExchangeAlt, FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { HiOutlineLogin } from 'react-icons/hi';
 import { HiOutlineLogout } from 'react-icons/hi';
-import { useState } from 'react';
+import { useContext} from 'react';
 import logo from '../../../assets/image/company logo.png'
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const MainNav = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const { user, logOut } = useContext(AuthContext);
 
-  const handleLogin = () => {
-    setLoggedIn(true);
-  };
 
   const handleLogout = () => {
-    setLoggedIn(false);
+    logOut()
+    .then(()=>{
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
@@ -105,14 +108,15 @@ const MainNav = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {loggedIn ? (
-            <Link to="/logIn" onClick={handleLogin} className="btn">
-              LogIn <HiOutlineLogin className="ml-1 w-5 h-5" />
-            </Link>
-          ) : (
+          {user ? (
+            
             <Link onClick={handleLogout} className="btn">
-              LogOut <HiOutlineLogout className="ml-1 w-5 h-5" />
-            </Link>
+            LogOut <HiOutlineLogout className="ml-1 w-5 h-5" />
+          </Link>
+          ) : (
+            <Link to="/logIn" className="btn">
+            LogIn <HiOutlineLogin className="ml-1 w-5 h-5" />
+          </Link>
           )}
         </div>
       </div>

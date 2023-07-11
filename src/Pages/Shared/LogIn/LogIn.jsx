@@ -1,22 +1,49 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
 import { FaEye,FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const {SignIn}= useContext(AuthContext)
 
   const onSubmit = (data) => {
     if (!passwordMatch) {
       return; // Prevent form submission if passwords don't match
     }
+    
     console.log(data); // Handle form submission here
-  };
+    
+    SignIn(data.email, data.password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        
+        // Show success alert
+        Swal.fire({
+          icon: 'success',
+          title: 'Sign In Successful',
+          text: 'You have been signed in successfully.',
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        
+        // Show error alert
+        Swal.fire({
+          icon: 'error',
+          title: 'Sign In Failed',
+          text: 'An error occurred during sign-in.',
+        });
+      });
+  }
 
   return (
     <div 
@@ -37,7 +64,7 @@ const LogIn = () => {
       <div className="flex justify-center items-center h-full text-white">
         <div style={{backgroundImage: `url(${background})`,  backgroundPosition: "center",backgroundSize: "cover"}} className=" p-11   rounded shadow-md h-80 ">
           <div className="-mt-8">
-            <h2 className="text-2xl font-bold mb-2">Sign In</h2>
+            <h2 className="text-2xl font-bold mb-2 text-orange-600">Sign In</h2>
             <form className="w-auto" onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
                 <label htmlFor="name" className="block text-white font-extrabold">Name</label>
