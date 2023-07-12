@@ -68,7 +68,7 @@ const Registration = () => {
                   type="text"
                   name='name'
                   id="name"
-                  className={`form-input text-black mt-1 block w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("name", { required: true })}
                 />
               </div>
@@ -79,7 +79,7 @@ const Registration = () => {
                   type="email"
                   id="email"
                   name='email'
-                  className={`form-input text-black mt-1 block w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("email", { required: true })}
                 />
               </div>
@@ -91,7 +91,7 @@ const Registration = () => {
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     name='password'
-                    className={`form-input text-black mt-1 block w-full ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                     {...register("password", { required: true })}
                   />
                   <span
@@ -114,7 +114,7 @@ const Registration = () => {
                   type="password"
                   id="confirmPassword"
                   name='confirmPassword'
-                  className={`form-input mt-1 text-black block w-full ${errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`form-input mt-1 bg-gray-500 text-current block w-full ${errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("confirmPassword", { required: true })}
                   onChange={(e) => setPasswordMatch(e.target.value === watch('password'))}
                 />

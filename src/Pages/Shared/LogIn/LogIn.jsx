@@ -1,9 +1,9 @@
 
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
-import { FaEye,FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
+import { FaEye,FaEyeSlash, FaFacebook, FaGoogle, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
@@ -13,6 +13,8 @@ const LogIn = () => {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const {SignIn}= useContext(AuthContext)
+  const emailRef = useRef()
+  
 
   const onSubmit = (data) => {
     if (!passwordMatch) {
@@ -72,7 +74,7 @@ const LogIn = () => {
                   required
                   type="text"
                   id="name"
-                  className={`form-input text-black mt-1 block w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("name", { required: true })}
                 />
               </div>
@@ -80,12 +82,13 @@ const LogIn = () => {
                 <label htmlFor="email" className="block text-white font-extrabold">Email</label>
                 <input
                   required
+                  ref={emailRef}
                   type="email"
                   id="email"
-                  className={`form-input text-black mt-1 block w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("email", { required: true })}
                 />
-              </div>
+              </div> 
               <div className="mb-4">
                 <label htmlFor="password" className="block text-white font-extrabold">Password</label>
                 <div className="relative">
@@ -93,7 +96,7 @@ const LogIn = () => {
                     required
                     type={showPassword ? 'text' : 'password'}
                     id="password"
-                    className={`form-input text-black mt-1 block w-full ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                     {...register("password", { required: true })}
                   />
                   <span
@@ -115,7 +118,7 @@ const LogIn = () => {
                   required
                   type="password"
                   id="confirmPassword"
-                  className={`form-input mt-1 text-black block w-full ${errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`form-input mt-1 bg-gray-500 text-current block w-full ${errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("confirmPassword", { required: true })}
                   onChange={(e) => setPasswordMatch(e.target.value === watch('password'))}
                 />
@@ -132,7 +135,10 @@ const LogIn = () => {
                   />
                   <span className="ml-2  text-white">I agree to the terms and conditions</span>
                 </label>
+               <div className='flex gap-12'>
                <p>New User? <span className='text-green-400'> <Link to="/registration">Register Now </Link></span></p>
+               <p className='text-purple-600'><Link className='flex  items-center gap-1'> <span><FaKey size={10} /> </span> Reset Password</Link></p>
+               </div>
               </div>
               <div className="mb-4 mt-5">
                 <button
