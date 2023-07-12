@@ -13,7 +13,7 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch,reset } = useForm();
-  const {createUser}=useContext(AuthContext)
+  const {createUser,googleSIgnIn}=useContext(AuthContext)
 
   const onSubmit = (data) => {
     if (!passwordMatch) {
@@ -64,7 +64,24 @@ const Registration = () => {
   };
   
   
-  
+  const handleGoogleSignIn = () => {
+    googleSIgnIn()
+    .then(result=>{
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+
+      })
+      .then(res=>res.json())
+      .then(()=>{
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'LogIn Successful',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+  };
 
 
   return (
@@ -185,6 +202,7 @@ const Registration = () => {
     </p>
   </Link>
   <Link
+  onClick={handleGoogleSignIn}
     type="button"
     className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4"
   >

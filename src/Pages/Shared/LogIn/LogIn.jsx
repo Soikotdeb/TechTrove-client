@@ -19,7 +19,7 @@ const LogIn = () => {
     watch,
     reset
   } = useForm();
-  const { SignIn, resetPassword } = useContext(AuthContext);
+  const { SignIn, resetPassword,googleSIgnIn } = useContext(AuthContext);
   const emailRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
@@ -65,6 +65,29 @@ const LogIn = () => {
       });
     }
   };
+
+
+  const handleGoogleSignIn = () => {
+    googleSIgnIn()
+    .then(result=>{
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+
+      })
+      .then(res=>res.json())
+      .then(()=>{
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'LogIn Successful',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+  };
+
+
+
 
   const handleForgotPassword = (data) => {
     resetPassword(data.email)
@@ -263,6 +286,7 @@ const LogIn = () => {
               </p>
             </Link>
             <Link
+            onClick={handleGoogleSignIn}
               type='button'
               className='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4'
             >
