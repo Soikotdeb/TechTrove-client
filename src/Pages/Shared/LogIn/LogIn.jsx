@@ -11,12 +11,11 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [passwordMatch,] = useState(true);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     reset
   } = useForm();
   const { SignIn, resetPassword,googleSIgnIn } = useContext(AuthContext);
@@ -85,8 +84,6 @@ const LogIn = () => {
         })
       })
   };
-
-
 
 
   const handleForgotPassword = (data) => {
@@ -202,23 +199,6 @@ const LogIn = () => {
                   </span>
                 </div>
               </div>
-              <div className='mb-1'>
-                <label htmlFor='confirmPassword' className='block text-white font-extrabold'>
-                  Confirm Password
-                </label>
-                <input
-                  required
-                  type='password'
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  className={`form-input font-semibold mt-1 bg-gray-500 text-current block w-full ${
-                    errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                  {...register('confirmPassword', )}
-                  onChange={(e) => setPasswordMatch(e.target.value === watch('password'))}
-                />
-                {!passwordMatch && <span className='text-red-500 text-sm'>Passwords do not match</span>}
-              </div>
               <div className='mb-3 ml-12 mt-4'>
                 <label htmlFor='terms' className='flex items-center'>
                   <input
@@ -231,7 +211,7 @@ const LogIn = () => {
                   />
                   <span className='ml-2  text-white'>I agree to the <Link to="/terms" className='text-orange-400'> terms and conditions</Link></span>
                 </label>
-                <div className='flex gap-12'>
+                <div className='flex gap-12 mt-4'>
                   <p>
                     New User?{' '}
                     <span className='text-green-400'>
@@ -250,7 +230,7 @@ const LogIn = () => {
                   </p>
                 </div>
               </div>
-              <div className='mb-4 mt-5'>
+              <div className='mb-4 mt-14'>
                 <button
                   className='bg-blue-500  hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
                   onClick={() => {
@@ -294,6 +274,7 @@ const LogIn = () => {
                 <FaGoogle className='mt-1 text-2xl' /> Sign in with Google
               </p>
             </Link>
+            
           </div>
         </div>
       </div>
