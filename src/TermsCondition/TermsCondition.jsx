@@ -1,7 +1,6 @@
 
 import html2pdf from 'html2pdf.js';
 import { Link } from 'react-router-dom';
-import Condition from '../assets/image/termCondition_banner.webp'
 
 const TermsCondition = () => {
   const handleDownloadPDF = () => {
@@ -27,12 +26,12 @@ const TermsCondition = () => {
     <div
       id="terms-condition"
       className="p-4 border font-extrabold  mt-2 rounded shadow-lg transition duration-300 ease-in-out hover:border-blue-500 hover:bg-blue-50"
-      style={{
-        backgroundImage: `url(${Condition})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
+      // style={{
+      //   backgroundImage: `url(${Condition})`,
+      //   backgroundSize: 'cover',
+      //   backgroundRepeat: 'no-repeat',
         
-      }}
+      // }}
     >
 <div className="absolute bg-black bg-opacity-70"></div>
       <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
