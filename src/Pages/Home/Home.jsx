@@ -57,7 +57,7 @@ const ScrollToTop = () => {
           className="bg-gray-800  text-white rounded-full p-3 focus:outline-none hover:opacity-70"
         >
           <Link onClick={scrollToTop}>
-            <FaArrowCircleUp size={30} />
+            <FaArrowCircleUp title='Click To Go Page Top' size={30} />
           </Link>
         </button>
       </div>
@@ -65,7 +65,7 @@ const ScrollToTop = () => {
       <div className={`fixed bottom-20 right-4 z-50 ${isMessengerVisible ? 'block' : 'hidden'}`}>
         <button className="bg-blue-500 text-white rounded-full p-3 focus:outline-none hover:opacity-70">
           <Link onClick={openMessenger}>
-            <FaFacebookMessenger size={30} />
+            <FaFacebookMessenger title='Support TechTrove Team' size={30} />
           </Link>
         </button>
       </div>
