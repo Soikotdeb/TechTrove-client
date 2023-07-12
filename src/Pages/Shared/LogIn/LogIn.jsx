@@ -1,5 +1,5 @@
 
-import { useContext, useRef, useState } from 'react';
+import { useContext,useRef,useState } from 'react';
 import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
@@ -12,8 +12,9 @@ const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
-  const {SignIn}= useContext(AuthContext)
-  const emailRef = useRef()
+  const {SignIn,resetPassword}= useContext(AuthContext);
+  const emailRef = useRef();
+
   
 
   const onSubmit = (data) => {
@@ -47,6 +48,27 @@ const LogIn = () => {
       });
   }
 
+
+  const handleForgotPassword = (data) => {
+    resetPassword(data.email)
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Password Reset Email Send',
+          text: 'Please check your email to reset your password.',
+        });
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Password Reset Failed',
+          text: error.message,
+        });
+        console.log(error.message);
+      });
+  };
+
+
   return (
     <div 
       style={{
@@ -74,7 +96,8 @@ const LogIn = () => {
                   required
                   type="text"
                   id="name"
-                  className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                  name='name'
+                  className={`form-input bg-gray-500 font-semibold text-current mt-1 block w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("name", { required: true })}
                 />
               </div>
@@ -82,10 +105,11 @@ const LogIn = () => {
                 <label htmlFor="email" className="block text-white font-extrabold">Email</label>
                 <input
                   required
-                  ref={emailRef}
                   type="email"
                   id="email"
-                  className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                  name='email'
+                  ref={emailRef}
+                  className={`form-input  font-semibold bg-gray-500 text-current mt-1 block w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("email", { required: true })}
                 />
               </div> 
@@ -96,7 +120,8 @@ const LogIn = () => {
                     required
                     type={showPassword ? 'text' : 'password'}
                     id="password"
-                    className={`form-input bg-gray-500 text-current mt-1 block w-full ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                    name='password'
+                    className={`form-input font-semibold bg-gray-500 text-current mt-1 block w-full ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                     {...register("password", { required: true })}
                   />
                   <span
@@ -118,7 +143,8 @@ const LogIn = () => {
                   required
                   type="password"
                   id="confirmPassword"
-                  className={`form-input mt-1 bg-gray-500 text-current block w-full ${errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'}`}
+                  name='confirmPassword'
+                  className={`form-input font-semibold mt-1 bg-gray-500 text-current block w-full ${errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'}`}
                   {...register("confirmPassword", { required: true })}
                   onChange={(e) => setPasswordMatch(e.target.value === watch('password'))}
                 />
@@ -137,13 +163,13 @@ const LogIn = () => {
                 </label>
                <div className='flex gap-12'>
                <p>New User? <span className='text-green-400'> <Link to="/registration">Register Now </Link></span></p>
-               <p className='text-purple-600'><Link className='flex  items-center gap-1'> <span><FaKey size={10} /> </span> Reset Password</Link></p>
+               <p className='text-purple-600'><Link    onClick={handleSubmit(handleForgotPassword)} className='flex  items-center gap-1'> <span><FaKey size={10} /> </span> Reset Password</Link></p>
                </div>
               </div>
               <div className="mb-4 mt-5">
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                  className="bg-blue-500  hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                 >
                   Sign In
                 </button>
