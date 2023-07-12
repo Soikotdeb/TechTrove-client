@@ -7,28 +7,51 @@ import { FaEye,FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import {  sendEmailVerification } from 'firebase/auth';
 
 const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const { register, handleSubmit, formState: { errors }, watch,reset } = useForm();
   const {createUser}=useContext(AuthContext)
 
   const onSubmit = (data) => {
     if (!passwordMatch) {
       return; // Prevent form submission if passwords don't match
     }
+  
     console.log(data); // Handle form submission here
+  
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
         console.log(user);
-        Swal.fire({
-          icon: 'success',
-          title: 'Registration Successful',
-          text: 'You have successfully registered.',
-        });
-
+  
+        if (!user.emailVerified) {
+          sendEmailVerification(user)
+            .then(() => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Registration Successful',
+                text: 'You have successfully registered. Please check your email for verification.',
+              });
+              reset()
+            })
+            .catch(error => {
+              console.log(error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Email Verification Failed',
+                text: 'There was an error sending the email verification.',
+              });
+            });
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Email Already Verified',
+            text: 'Your email is already verified. No further action is required.',
+          });
+        }
       })
       .catch(error => {
         console.log(error);
@@ -39,6 +62,10 @@ const Registration = () => {
         });
       });
   };
+  
+  
+  
+
 
   return (
     <div 
