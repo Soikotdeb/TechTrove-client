@@ -169,7 +169,7 @@ const LogIn = () => {
                     className={`form-input font-semibold bg-gray-500 text-current mt-1 block w-full ${
                       errors.password ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    {...register('password', { required: true })}
+                    {...register('password', )}
                   />
                   <span
                     className='absolute inset-y-0 right-0 pr-3 flex items-center text-purple-700 cursor-pointer'
@@ -191,7 +191,7 @@ const LogIn = () => {
                   className={`form-input font-semibold mt-1 bg-gray-500 text-current block w-full ${
                     errors.confirmPassword || !passwordMatch ? 'border-red-500' : 'border-gray-300'
                   }`}
-                  {...register('confirmPassword', { required: true })}
+                  {...register('confirmPassword', )}
                   onChange={(e) => setPasswordMatch(e.target.value === watch('password'))}
                 />
                 {!passwordMatch && <span className='text-red-500 text-sm'>Passwords do not match</span>}
@@ -206,7 +206,7 @@ const LogIn = () => {
                     {...register('terms', { required: true })}
                     onChange={() => setAcceptedTerms(!acceptedTerms)}
                   />
-                  <span className='ml-2  text-white'>I agree to the terms and conditions</span>
+                  <span className='ml-2  text-white'>I agree to the <Link to="/terms" className='text-orange-400'> terms and conditions</Link></span>
                 </label>
                 <div className='flex gap-12'>
                   <p>
@@ -217,7 +217,7 @@ const LogIn = () => {
                     </span>
                   </p>
                   <p className='text-purple-600'>
-                    <Link onClick={handleSubmit(handleForgotPassword)} className='flex  items-center gap-1'>
+                    <Link title='Must Agree to Terms and Conditions' onClick={handleSubmit(handleForgotPassword)} className='flex  items-center gap-1'>
                       {' '}
                       <span>
                         <FaKey size={10} />{' '}
