@@ -26,24 +26,24 @@ const ContactUs = () => {
   
   return (
     <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-gradient-to-r from-blue-500 to-purple-500">
-      <div className="w-2/3 mx-auto p-10 bg-white rounded-lg shadow-lg">
-        <div className="flex">
-          <div className="w-1/2 pr-4">
+      <div className="w-full sm:w-2/3 mx-auto p-4 sm:p-10 bg-white rounded-lg shadow-lg">
+        <div className="flex flex-col sm:flex-row">
+          <div className="sm:w-1/2 pr-0 sm:pr-4">
             <div className="col-lg-5 d-flex align-items-stretch">
               <div className="info">
-                <div className="address">
+                <div className="address mb-4">
                   <i className="bi bi-geo-alt"></i>
                   <h4>Location:</h4>
                   <p>Bangladesh, Sylhet, Moulvibazar</p>
                 </div>
 
-                <div className="email">
+                <div className="email mb-4">
                   <i className="bi bi-envelope"></i>
                   <h4>Email:</h4>
                   <p>sdsoikot424@gmail.com</p>
                 </div>
 
-                <div className="phone mb-2">
+                <div className="phone mb-4">
                   <i className="bi bi-phone"></i>
                   <h4>Call:</h4>
                   <p>+88 01795474430</p>
@@ -55,6 +55,7 @@ const ContactUs = () => {
                     frameBorder="0"
                     style={{ border: '0', width: '100%', height: '290px' }}
                     allowFullScreen
+                    title="Google Maps"
                   ></iframe>
                 </div>
               </div>
@@ -62,7 +63,7 @@ const ContactUs = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="w-1/2 pl-4">
+          <div className="sm:w-1/2 pl-0 sm:pl-4">
             <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
             <form ref={form}>
               <div className="mb-4">
@@ -105,12 +106,19 @@ const ContactUs = () => {
               </div>
 
               <div className="flex justify-end">
-                <Link onClick={sendEmail} className="bg-blue-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform hover:scale-110 transition duration-300" type="button">
+                <Link
+                  onClick={sendEmail}
+                  className="bg-blue-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform hover:scale-110 transition duration-300"
+                  type="button"
+                >
                   <FaPaperPlane className="inline-block mr-1" />Send
                 </Link>
               </div>
             </form>
-            <Link to="/" className="bg-blue-500 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform hover:scale-110 transition duration-300">
+            <Link
+              to="/"
+              className="mt-4 bg-blue-500 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform hover:scale-110 transition duration-300"
+            >
               <FaArrowLeft className="inline-block mr-1" />GO BACK
             </Link>
           </div>
