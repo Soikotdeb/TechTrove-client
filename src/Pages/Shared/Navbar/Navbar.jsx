@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div>
       <div className="navbar bg-orange-700 text-white font-bold px-5 rounded">
-        <div className="flex-1">
+        <div className="flex-1 hidden md:block">
           A leading Smartphone Shop in Bangladesh 
         </div>
         <div className="flex-none flex items-center">
@@ -30,7 +30,7 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <div className="hidden md:flex">
+          <div className=" md:flex">
             <p className="mr-4"><Link>TRACK ORDER |</Link></p>
             <p className="mr-4 hover:text-purple-300"><Link to="/contactUs">CONTACT US |</Link></p>
             <p><Link className="hover:text-purple-300" to="/AskedQuestions">FAQS</Link></p>

@@ -60,7 +60,7 @@ const MainNav = () => {
             </ul>
           </div>
           <img className='w-9 h-12 rounded' src={logo} alt="" />
-          <a className="btn btn-ghost normal-case text-4xl hover:text-purple-600">TechTrove</a>
+          <a className="btn btn-ghost hidden md:block normal-case text-4xl hover:text-purple-600">TechTrove</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <div className='border py-1 px-1 border-gray-200 bg-white rounded'>

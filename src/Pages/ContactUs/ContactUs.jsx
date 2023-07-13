@@ -8,11 +8,24 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ContactUs = () => {
   const form = useRef();
-  
+
   const sendEmail = (e) => {
     e.preventDefault();
-
-    emailjs.sendForm('service_6d23e9z', 'template_ezdnv6i', form.current, 'A1Zs33WiuGDuR3oV-')
+  
+    // Get the form fields' values
+    const name = form.current.user_name.value;
+    const email = form.current.user_email.value;
+    const message = form.current.message.value;
+  
+    // Check if any of the fields is empty
+    if (!name || !email || !message) {
+      toast.error('Please fill out all the fields!', { autoClose: 3000 });
+      return;
+    }
+  
+    // Send the email
+    emailjs
+      .sendForm('service_6d23e9z', 'template_ezdnv6i', form.current, 'A1Zs33WiuGDuR3oV-')
       .then((result) => {
         console.log(result.text);
         toast.success('Message sent successfully!', { autoClose: 3000 });
@@ -71,6 +84,7 @@ const ContactUs = () => {
                   Name
                 </label>
                 <input
+                required
                   className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   name="user_name"
@@ -84,6 +98,7 @@ const ContactUs = () => {
                   Email
                 </label>
                 <input
+                required
                   className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   type="email"
@@ -97,6 +112,7 @@ const ContactUs = () => {
                   Message
                 </label>
                 <textarea
+                required
                   className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="message"
                   name="message"
