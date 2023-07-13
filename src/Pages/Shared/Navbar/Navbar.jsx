@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="hidden md:flex">
             <p className="mr-4"><Link>TRACK ORDER |</Link></p>
             <p className="mr-4 hover:text-purple-300"><Link to="/contactUs">CONTACT US |</Link></p>
-            <p><Link>FAQS</Link></p>
+            <p><Link className="hover:text-purple-300" to="/AskedQuestions">FAQS</Link></p>
           </div>
         </div>
       </div>

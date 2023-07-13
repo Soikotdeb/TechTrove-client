@@ -8,6 +8,7 @@ import LogIn from "../Pages/Shared/LogIn/LogIn";
 import Registration from "../Pages/Shared/Registration/Registration";
 import TermsCondition from "../TermsCondition/TermsCondition";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import AskedQuestions from "../Pages/AskedQuestions/AskedQuestions";
 
 
 
@@ -40,5 +41,9 @@ element:<TermsCondition></TermsCondition>
   {
     path:'contactUs',
     element:<ContactUs></ContactUs>
+  },
+  {
+    path:'AskedQuestions',
+    element:<AskedQuestions></AskedQuestions>
   }
   ]);
