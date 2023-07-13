@@ -25,13 +25,7 @@ const TermsCondition = () => {
     
     <div
       id="terms-condition"
-      className="p-4 border font-extrabold  mt-2 rounded shadow-lg transition duration-300 ease-in-out hover:border-blue-500 hover:bg-blue-50"
-      // style={{
-      //   backgroundImage: `url(${Condition})`,
-      //   backgroundSize: 'cover',
-      //   backgroundRepeat: 'no-repeat',
-        
-      // }}
+      className="p-4 border font-extrabold text-white  mt-2 rounded shadow-lg transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-500"
     >
 <div className="absolute bg-black bg-opacity-70"></div>
       <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
@@ -98,14 +92,14 @@ const TermsCondition = () => {
       </p>
 
       <button
-        className="mt-4 mr-3 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded shadow"
+        className="mt-4 mr-3 py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded shadow"
         onClick={handleDownloadPDF}
       >
         Download PDF
       </button>
       <Link to="/logIn">
       <button
-        className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded shadow"
+        className="mt-4 py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded shadow"
       >
         GO BACK
       </button>

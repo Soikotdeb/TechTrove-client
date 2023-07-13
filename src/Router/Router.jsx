@@ -7,6 +7,7 @@ import NotFoundPage from "../Pages/Shared/NotFoundPage/NotFoundPage";
 import LogIn from "../Pages/Shared/LogIn/LogIn";
 import Registration from "../Pages/Shared/Registration/Registration";
 import TermsCondition from "../TermsCondition/TermsCondition";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 
 
@@ -35,5 +36,9 @@ export const router = createBrowserRouter([
   {
 path:'terms',
 element:<TermsCondition></TermsCondition>
+  },
+  {
+    path:'contactUs',
+    element:<ContactUs></ContactUs>
   }
   ]);
