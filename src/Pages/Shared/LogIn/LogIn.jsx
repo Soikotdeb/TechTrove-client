@@ -98,7 +98,7 @@ const LogIn = () => {
         });
 
         // Navigate to a new route after successful Google Sign-In
-        navigate('/', { replace: true });
+        navigate(from, { replace: true });
       })
       .catch(error => {
         // Handle any errors that occur during Google Sign-In

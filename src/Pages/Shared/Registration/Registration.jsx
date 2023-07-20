@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
 import { FaEye,FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import {  sendEmailVerification } from 'firebase/auth';
@@ -14,6 +14,9 @@ const Registration = () => {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch,reset } = useForm();
   const {createUser,googleSIgnIn}=useContext(AuthContext)
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     if (!passwordMatch) {
@@ -65,23 +68,46 @@ const Registration = () => {
   
   
   const handleGoogleSignIn = () => {
+    if (!acceptedTerms) {
+      // Show error alert if terms and conditions are not accepted
+      Swal.fire({
+        icon: 'error',
+        title: 'Terms and Conditions',
+        text: 'Please accept the terms and conditions before signing in with Google.',
+      });
+      return;
+    }
+  
     googleSIgnIn()
-    .then(result=>{
-      const loggedInUser = result.user;
-      console.log(loggedInUser);
-
-      })
-      .then(res=>res.json())
-      .then(()=>{
+      .then((result) => {
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+  
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           title: 'LogIn Successful',
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
+  
+        // Assuming navigate is a function for navigation, move it inside the chain
+        navigate(from, { replace: true });
       })
+      .catch((error) => {
+        // Handle any errors that occur during Google Sign-In
+        console.error('Error during Google Sign-In:', error);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'LogIn Failed',
+          text: 'An error occurred during Google Sign-In',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
+  
 
 
   return (
@@ -172,6 +198,7 @@ const Registration = () => {
                     id="terms"
                     className="form-checkbox"
                     {...register("terms", { required: true })}
+                    onChange={() => setAcceptedTerms(!acceptedTerms)}
                   />
                   <span className="ml-2  text-white">I agree to the terms and conditions</span>
                 </label>
