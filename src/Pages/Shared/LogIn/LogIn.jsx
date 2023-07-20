@@ -75,6 +75,15 @@ const LogIn = () => {
 // google LogIn added------------
 
   function handleGoogleSignIn() {
+    if (!acceptedTerms) {
+      // Show error alert if terms and conditions are not accepted
+      Swal.fire({
+        icon: 'error',
+        title: 'Terms and Conditions',
+        text: 'Please accept the terms and conditions before signing in with Google.',
+      });
+      return;
+    }
     googleSIgnIn()
       .then(result => {
         const loggedInUser = result.user;
@@ -104,6 +113,50 @@ const LogIn = () => {
         });
       });
   }
+
+ // facebook LogIn added ------------
+ // TUDO
+
+//  function handleFacebookSignIn() {
+//   if (!acceptedTerms) {
+//     // Show error alert if terms and conditions are not accepted
+//     Swal.fire({
+//       icon: 'error',
+//       title: 'Terms and Conditions',
+//       text: 'Please accept the terms and conditions before signing in with Facebook.',
+//     });
+//     return;
+//   }
+
+//   facebookSignIn()
+//   .then(result => {
+//     const loggedInUser = result.user;
+//     console.log(loggedInUser);
+
+//     Swal.fire({
+//       position: 'top-end',
+//       icon: 'success',
+//       title: 'LogIn Successful',
+//       showConfirmButton: false,
+//       timer: 1500
+//     });
+
+//     // Navigate to a new route after successful Google Sign-In
+//     navigate('/', { replace: true });
+//   })
+//     .catch((error) => {
+//       // Handle any errors that occur during Facebook Sign-In
+//       console.error('Error during Facebook Sign-In:', error);
+//       Swal.fire({
+//         position: 'top-end',
+//         icon: 'error',
+//         title: 'LogIn Failed',
+//         text: 'An error occurred during Facebook Sign-In',
+//         showConfirmButton: false,
+//         timer: 1500
+//       });
+//     });
+// }
 
 
 
@@ -279,6 +332,7 @@ const LogIn = () => {
           </div>
           <div className='flex justify-center mt-2'>
             <Link
+            // onClick={handleFacebookSignIn}
               type='button'
               className='bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             >
