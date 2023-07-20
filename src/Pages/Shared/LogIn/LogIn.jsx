@@ -26,6 +26,9 @@ const LogIn = () => {
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
+
+// email password LogIn added------------
+
   const onSubmit = (data) => {
     if (!passwordMatch) {
       return; // Prevent form submission if passwords don't match
@@ -69,24 +72,39 @@ const LogIn = () => {
   };
 
 
-  const handleGoogleSignIn = () => {
-    googleSIgnIn()
-    .then(result=>{
-      const loggedInUser = result.user;
-      console.log(loggedInUser);
+// google LogIn added------------
 
-      })
-      .then(res=>res.json())
-      .then(()=>{
+  function handleGoogleSignIn() {
+    googleSIgnIn()
+      .then(result => {
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           title: 'LogIn Successful',
           showConfirmButton: false,
           timer: 1500
-        })
+        });
+
+        // Navigate to a new route after successful Google Sign-In
+        navigate('/', { replace: true });
       })
-  };
+      .catch(error => {
+        // Handle any errors that occur during Google Sign-In
+        console.error('Error during Google Sign-In:', error);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'LogIn Failed',
+          text: 'An error occurred during Google Sign-In',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      });
+  }
+
 
 
   const handleForgotPassword = (data) => {
