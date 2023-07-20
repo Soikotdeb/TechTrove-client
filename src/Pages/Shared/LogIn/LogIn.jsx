@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle, FaKey } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -12,6 +12,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch,] = useState(true);
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -44,6 +46,7 @@ const LogIn = () => {
             text: 'You have been signed in successfully.',
           });
           reset()
+          navigate(from, { replace: true });
         })
         .catch((error) => {
           console.log(error);
