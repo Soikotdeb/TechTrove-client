@@ -8,6 +8,7 @@ import Facility from './../Facility/Facility';
 import ShopBySection from './../ShopBySection/ShopBySection';
 import PartnarBrands from './../PartnersBrand/PartnarBrands';
 import { Link } from 'react-router-dom';
+import FeedbackApp from '../FeedbackApp/FeedbackApp';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -95,6 +96,9 @@ const Home = () => {
       <div className="lg:p-8 bg-slate-200 mt-2">
         <PartnarBrands></PartnarBrands>
       </div>
+      <div className="container mx-auto p-4  bg-slate-100">
+      <FeedbackApp></FeedbackApp>
+    </div>
     </div>
   );
 };
