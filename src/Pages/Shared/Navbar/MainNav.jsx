@@ -1,27 +1,26 @@
-import { BiSearch } from 'react-icons/bi';
-import { FaExchangeAlt, FaHeart, FaShoppingCart } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { HiOutlineLogin } from 'react-icons/hi';
-import { HiOutlineLogout } from 'react-icons/hi';
-import { useContext} from 'react';
-import logo from '../../../assets/image/company logo.png'
-import { AuthContext } from '../../../Provider/AuthProvider';
+import { BiSearch } from "react-icons/bi";
+import { FaExchangeAlt, FaHeart, FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { HiOutlineLogin } from "react-icons/hi";
+import { HiOutlineLogout } from "react-icons/hi";
+import { useContext } from "react";
+import logo from "../../../assets/image/company logo.png";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { RiDashboardFill } from "react-icons/ri"; // Remix Icon icons
 
 const MainNav = () => {
   const { user, logOut } = useContext(AuthContext);
 
-
   const handleLogout = () => {
     logOut()
-    .then(()=>{
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
-    <div className='font-semibold'>
+    <div className="font-semibold">
       <div className="navbar bg-gray-100 ">
         <div className="navbar-start">
           <div className="dropdown">
@@ -59,11 +58,13 @@ const MainNav = () => {
               </li>
             </ul>
           </div>
-          <img className='w-9 h-12 rounded' src={logo} alt="" />
-          <a className="btn btn-ghost hidden md:block normal-case text-4xl hover:text-purple-600">TechTrove</a>
+          <img className="w-9 h-12 rounded" src={logo} alt="" />
+          <a className="btn btn-ghost hidden md:block normal-case text-4xl hover:text-purple-600">
+            TechTrove
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div className='border py-1 px-1 border-gray-200 bg-white rounded'>
+          <div className="border py-1 px-1 border-gray-200 bg-white rounded">
             <input
               type="text"
               placeholder="Type here"
@@ -84,7 +85,7 @@ const MainNav = () => {
               <option>OnePlus</option>
               <option>Oppo</option>
             </select>
-            <button className="btn   ml-1 px-4 py-3">
+            <button className="btn ml-1 px-2 py-3">
               <BiSearch className="w-6 h-6" />
             </button>
           </div>
@@ -108,29 +109,34 @@ const MainNav = () => {
           </ul>
         </div>
 
-         {
-          user &&
-          <div title={user.displayName || 'Not Available User Name' } className="avatar online">
-          <div className="w-9 rounded-full">
-         <img src={user?.photoURL} alt="" />
-         </div>
-         </div>
-         }
-         
-
-         
-        
+        <div>
+          {user && (
+            <div
+              title={user.displayName || "Not Available User Name"}
+              className="avatar online"
+            >
+              <div className="w-9 rounded-full">
+                <img src={user?.photoURL} alt="" />
+              </div>
+            </div>
+          )}
+        </div>
+        <div>
+          <Link className="items-center flex ml-3 font-bold hover:text-purple-500">
+            <RiDashboardFill />
+            Dashboard
+          </Link>
+        </div>
 
         <div className="navbar-end">
           {user ? (
-            
             <Link onClick={handleLogout} className="btn hover:text-purple-500">
-            LogOut <HiOutlineLogout className="ml-1 w-5 h-5" />
-          </Link>
+              LogOut <HiOutlineLogout className="ml-1 w-5 h-5" />
+            </Link>
           ) : (
             <Link to="/logIn" className="btn hover:text-purple-500">
-            LogIn <HiOutlineLogin className="ml-1 w-5 h-5" />
-          </Link>
+              LogIn <HiOutlineLogin className="ml-1 w-5 h-5" />
+            </Link>
           )}
         </div>
       </div>
