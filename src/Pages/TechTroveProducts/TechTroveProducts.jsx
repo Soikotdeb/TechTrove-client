@@ -209,8 +209,8 @@ const TechTroveProducts = () => {
             <div>
             {numCardsToShow < featured.length && (
               <div className="flex justify-center mt-2 ">
-              <Link className="bg-green-500 flex items-center hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2" onClick={handleSeeMore}>
-              <FaEye className="mr-1" /> See More
+              <Link className="bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2" onClick={handleSeeMore}>
+              <FaEye className="mr-1" /> SEE MORE
             </Link>
 
               </div>
