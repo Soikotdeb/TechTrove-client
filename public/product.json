@@ -118,6 +118,42 @@
       "region": "Europe",
       "quantity": 25,
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 11,
+      "phone_name": "Nokia 8.3 5G",
+      "phone_storage": "128GB",
+      "price": 599,
+      "color": "Polar Night",
+      "facility": ["PureDisplay", "Quad Camera with ZEISS Optics", "5G Connectivity", "Android One"],
+      "rating": 4.1,
+      "region": "Europe",
+      "quantity": 25,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 12,
+      "phone_name": "Nokia 8.3 5G",
+      "phone_storage": "128GB",
+      "price": 599,
+      "color": "Polar Night",
+      "facility": ["PureDisplay", "Quad Camera with ZEISS Optics", "5G Connectivity", "Android One"],
+      "rating": 4.1,
+      "region": "Europe",
+      "quantity": 25,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
+    },
+    {
+      "id": 13,
+      "phone_name": "Nokia 8.3 5G",
+      "phone_storage": "128GB",
+      "price": 599,
+      "color": "Polar Night",
+      "facility": ["PureDisplay", "Quad Camera with ZEISS Optics", "5G Connectivity", "Android One"],
+      "rating": 4.1,
+      "region": "Europe",
+      "quantity": 25,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAb53MqR98k43THONa6FG-79E1PbZDhVeIA&usqp=CAU"
     }
   ]
   
