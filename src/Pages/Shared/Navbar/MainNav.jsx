@@ -1,6 +1,6 @@
 
 import { BiSearch } from "react-icons/bi";
-import { FaExchangeAlt, FaFileAlt, FaHeart, FaShare, FaShoppingCart } from "react-icons/fa";
+import { FaExchangeAlt, FaFileAlt, FaHeart, FaShare, FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { HiOutlineLogin } from "react-icons/hi";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -147,14 +147,21 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="text-white rounded-lg p-8 transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-500">
             <ul className="grid gap-4">
+              <div>
+              <li>
+                <p className="text-center">--------- All Account ---------</p>
+                <p className="flex items-center gap-1"><FaUserCircle/> {user.displayName } <Link className= " ms-4 hover:text-green-400 border p-y-2 text-green-300"><small>Switch</small></Link> </p>
+              </li>
+              <hr className="border-t-4 border-white mt-2" />
+              </div>
+              <li>
+                <Link to="/add-account"> <p className="flex items-center gap-1 hover:text-purple-200"><FiUserPlus className="w-6 h-6" />Add More Account</p> </Link>
+              </li>
               <li>
                 <Link to="/profile"> <p className="flex items-center gap-1 hover:text-purple-200"> <AiOutlineUser className="w-4 h-4" />Update Profile</p> </Link>
               </li>
               <li>
                 <Link to="/settings"> <p className="flex items-center gap-1 hover:text-purple-200"><FiSettings className="w-4 h-4 " /> Settings</p></Link>
-              </li>
-              <li>
-                <Link to="/add-account"> <p className="flex items-center gap-1 hover:text-purple-200"><FiUserPlus className="w-6 h-6" />Add More Account</p> </Link>
               </li>
               <li>
                 <Link to="/invite"> <p className="flex items-center gap-1 hover:text-purple-200"><FaShare></FaShare>Invite Friend </p></Link>
@@ -190,3 +197,4 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
 };
 
 export default MainNav;
+
