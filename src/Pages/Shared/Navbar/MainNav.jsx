@@ -1,15 +1,21 @@
+
 import { BiSearch } from "react-icons/bi";
-import { FaExchangeAlt, FaHeart, FaShoppingCart } from "react-icons/fa";
+import { FaExchangeAlt, FaHeart, FaShare, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { HiOutlineLogin } from "react-icons/hi";
 import { HiOutlineLogout } from "react-icons/hi";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import logo from "../../../assets/image/company logo.png";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { RiDashboardFill } from "react-icons/ri"; // Remix Icon icons
+import { FiSettings, FiUserPlus } from "react-icons/fi";
+import { AiOutlineCloseCircle, AiOutlineUser } from "react-icons/ai";
+
 
 const MainNav = () => {
   const { user, logOut } = useContext(AuthContext);
+const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the modal visibility
+
 
   const handleLogout = () => {
     logOut()
@@ -17,6 +23,13 @@ const MainNav = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -116,7 +129,8 @@ const MainNav = () => {
           </Link>
         </div>}
 
-        <div  className="lg:ml-5 ">
+
+        <Link onClick={openModal}  className="lg:ml-3 ">
           {user && (
             <div
               title={user.displayName || "Not Available User Name"}
@@ -127,10 +141,34 @@ const MainNav = () => {
               </div>
             </div>
           )}
+        </Link>
+
+        {isModalOpen && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-8">
+            <ul className="grid gap-4">
+              <li>
+                <Link to="/profile"> <p className="flex items-center gap-1 hover:text-purple-700"> <AiOutlineUser className="w-4 h-4" />Update Profile</p> </Link>
+              </li>
+              <li>
+                <Link to="/settings"> <p className="flex items-center gap-1 hover:text-purple-700"><FiSettings className="w-4 h-4 " /> Settings</p></Link>
+              </li>
+              <li>
+                <Link to="/add-account"> <p className="flex items-center gap-1 hover:text-purple-700"><FiUserPlus className="w-6 h-6" />Add More Account</p> </Link>
+              </li>
+              <li>
+                <Link to="/invite"> <p className="flex items-center gap-1 hover:text-purple-700"><FaShare></FaShare>Invite Friend </p></Link>
+              </li>
+            </ul>
+            <button onClick={closeModal} className="btn bg-red-100 mt-4 w-full hover:bg-red-300">
+            <AiOutlineCloseCircle className="w-6 h-6 text-red-400 hover:text-red-800" />
+            </button>
+          </div>
         </div>
+      )}
         
 
-        <div className="navbar-end">
+        <div className="navbar-end ms-10">
           {user ? (
             <Link onClick={handleLogout} className="btn hover:text-purple-500">
               LogOut <HiOutlineLogout className="ml-1 w-5 h-5" />
@@ -147,4 +185,3 @@ const MainNav = () => {
 };
 
 export default MainNav;
-
