@@ -9,6 +9,7 @@ import ShopBySection from './../ShopBySection/ShopBySection';
 import PartnarBrands from './../PartnersBrand/PartnarBrands';
 import { Link } from 'react-router-dom';
 import FeedbackApp from '../FeedbackApp/FeedbackApp';
+import NewOffer from '../NewOffer/NewOffer';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -89,6 +90,9 @@ const Home = () => {
       </div>
       <div className="lg:p-8 bg-slate-200">
         <Facility></Facility>
+      </div>
+      <div className="lg:p-8 bg-slate-200 mt-2">
+        <NewOffer></NewOffer>
       </div>
       <div className="lg:p-8 bg-slate-200 mt-2">
         <ShopBySection></ShopBySection>

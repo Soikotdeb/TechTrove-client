@@ -14,6 +14,7 @@
     "aos": "^3.0.0-beta.6",
     "file-saver": "^2.0.5",
     "firebase": "^10.0.0",
+    "framer-motion": "^10.15.0",
     "html2pdf.js": "^0.10.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
@@ -21,7 +22,7 @@
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.45.1",
-    "react-icons": "^4.9.0",
+    "react-icons": "^4.10.1",
     "react-rating": "^2.0.5",
     "react-router-dom": "^6.13.0",
     "react-tabs": "^6.0.1",
@@ -41,7 +42,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2",
+    "tailwindcss": "^3.3.3",
     "vite": "^4.3.9"
   }
 }

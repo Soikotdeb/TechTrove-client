@@ -21,7 +21,7 @@ const MainNav = () => {
 
   return (
     <div className="font-semibold">
-      <div className="navbar bg-gray-100 ">
+      <div className="navbar bg-gray-200 ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -40,7 +40,7 @@ const MainNav = () => {
                 />
               </svg>
             </label>
-            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 ">
               <li>
                 <a>
                   <FaHeart className="w-6 h-6" />
@@ -64,13 +64,13 @@ const MainNav = () => {
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div className="border py-1 px-1 border-gray-200 bg-white rounded">
+          <div className="flex items-center bg-white rounded overflow-hidden">
             <input
               type="text"
               placeholder="Type here"
-              className="max-w-md border px-4 py-3 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border-none px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
-            <select className="max-w-xs px-4 py-3 ml-1 bg-white rounded-none focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <select className="px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
               <option disabled selected>
                 Category?
               </option>
@@ -85,31 +85,38 @@ const MainNav = () => {
               <option>OnePlus</option>
               <option>Oppo</option>
             </select>
-            <button className="btn ml-1 px-2 py-3">
-              <BiSearch className="w-6 h-6" />
+            <button className="btn px-2 py-3 bg-indigo-500 hover:bg-indigo-600 transition-colors duration-300">
+              <BiSearch className="w-6 h-6 text-white" />
             </button>
           </div>
-          <ul className="menu menu-horizontal px-1">
+            <ul className="menu menu-horizontal flex items-center gap-4">
             <li>
               <Link>
-                <FaHeart className="w-6 h-6 hover:text-purple-700" />
+                <FaHeart className="w-6 h-6  hover:text-purple-700 transition-colors duration-300" />
               </Link>
             </li>
-            <li tabIndex={0}></li>
             <li>
-              <a>
-                <FaShoppingCart className="w-6 h-6 hover:text-purple-700" />
-              </a>
+              <Link>
+                <FaShoppingCart className="w-6 h-6  hover:text-purple-700 transition-colors duration-300" />
+              </Link>
             </li>
             <li>
-              <a>
-                <FaExchangeAlt className="w-6 h-6 hover:text-purple-700" />
-              </a>
+              <Link>
+                <FaExchangeAlt className="w-6 h-6  hover:text-purple-700 transition-colors duration-300" />
+              </Link>
             </li>
           </ul>
+
         </div>
 
-        <div>
+        {user&& <div className="me-2">
+          <Link to={'dashboard/welcome'} className="lg:text-lg items-center flex ml-3 font-bold hover:text-purple-500">
+            <RiDashboardFill />
+           <p className="text-lg"> Dashboard</p>
+          </Link>
+        </div>}
+
+        <div  className="lg:ml-5 ">
           {user && (
             <div
               title={user.displayName || "Not Available User Name"}
@@ -121,12 +128,7 @@ const MainNav = () => {
             </div>
           )}
         </div>
-        <div>
-          <Link className="items-center flex ml-3 font-bold hover:text-purple-500">
-            <RiDashboardFill />
-            Dashboard
-          </Link>
-        </div>
+        
 
         <div className="navbar-end">
           {user ? (
@@ -145,3 +147,4 @@ const MainNav = () => {
 };
 
 export default MainNav;
+

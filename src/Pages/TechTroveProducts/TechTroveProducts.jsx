@@ -162,7 +162,7 @@ const TechTroveProducts = () => {
 
         <div>
           <TabPanel>
-            <div className="grid grid-cols-1 mt-4 py-3 px-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-x-1">
+            <div className="grid grid-cols-1 mt-4 py-3 px-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-x-1 bg-gray-100">
               {featured.slice(0, numCardsToShow).map((feature) => (
                 <div
                   key={feature.id}

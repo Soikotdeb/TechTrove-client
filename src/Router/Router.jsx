@@ -9,6 +9,8 @@ import Registration from "../Pages/Shared/Registration/Registration";
 import TermsCondition from "../TermsCondition/TermsCondition";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import AskedQuestions from "../Pages/AskedQuestions/AskedQuestions";
+import Dashboard from "../Pages/Shared/Dashboard/Dashboard";
+import WelcomePage from "../Pages/Dashboard/WelcomePage";
 
 
 
@@ -45,5 +47,15 @@ element:<TermsCondition></TermsCondition>
   {
     path:'AskedQuestions',
     element:<AskedQuestions></AskedQuestions>
-  }
+  },
+{
+  path:'dashboard',
+  element:<Dashboard></Dashboard>,
+  children:[
+    {
+      path:'welcome',
+      element:<WelcomePage></WelcomePage>
+    }
+  ]
+}
   ]);
