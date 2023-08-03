@@ -1,6 +1,6 @@
 
 import { BiSearch } from "react-icons/bi";
-import { FaExchangeAlt, FaHeart, FaShare, FaShoppingCart } from "react-icons/fa";
+import { FaExchangeAlt, FaFileAlt, FaHeart, FaShare, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { HiOutlineLogin } from "react-icons/hi";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -145,20 +145,25 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
 
         {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-8">
+          <div className="text-white rounded-lg p-8 transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-500">
             <ul className="grid gap-4">
               <li>
-                <Link to="/profile"> <p className="flex items-center gap-1 hover:text-purple-700"> <AiOutlineUser className="w-4 h-4" />Update Profile</p> </Link>
+                <Link to="/profile"> <p className="flex items-center gap-1 hover:text-purple-200"> <AiOutlineUser className="w-4 h-4" />Update Profile</p> </Link>
               </li>
               <li>
-                <Link to="/settings"> <p className="flex items-center gap-1 hover:text-purple-700"><FiSettings className="w-4 h-4 " /> Settings</p></Link>
+                <Link to="/settings"> <p className="flex items-center gap-1 hover:text-purple-200"><FiSettings className="w-4 h-4 " /> Settings</p></Link>
               </li>
               <li>
-                <Link to="/add-account"> <p className="flex items-center gap-1 hover:text-purple-700"><FiUserPlus className="w-6 h-6" />Add More Account</p> </Link>
+                <Link to="/add-account"> <p className="flex items-center gap-1 hover:text-purple-200"><FiUserPlus className="w-6 h-6" />Add More Account</p> </Link>
               </li>
               <li>
-                <Link to="/invite"> <p className="flex items-center gap-1 hover:text-purple-700"><FaShare></FaShare>Invite Friend </p></Link>
+                <Link to="/invite"> <p className="flex items-center gap-1 hover:text-purple-200"><FaShare></FaShare>Invite Friend </p></Link>
               </li>
+
+              <li>
+                <Link to="/terms"> <p className="flex items-center gap-1 hover:text-purple-200"> <FaFileAlt className="w-4 h-4" /> terms and conditions</p></Link>
+              </li>
+
             </ul>
             <button onClick={closeModal} className="btn bg-red-100 mt-4 w-full hover:bg-red-300">
             <AiOutlineCloseCircle className="w-6 h-6 text-red-400 hover:text-red-800" />
