@@ -22,10 +22,11 @@ const Registration = () => {
     if (!passwordMatch) {
       return; // Prevent form submission if passwords don't match
     }
+    data.role='user'
   
     console.log(data); // Handle form submission here
   
-    createUser(data.email, data.password)
+    createUser(data.email, data.password,data.role)
       .then(result => {
         const user = result.user;
         console.log(user);
