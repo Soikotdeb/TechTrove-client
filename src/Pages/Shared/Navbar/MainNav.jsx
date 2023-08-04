@@ -10,6 +10,8 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { RiDashboardFill } from "react-icons/ri"; // Remix Icon icons
 import { FiSettings, FiUserPlus } from "react-icons/fi";
 import { AiOutlineCloseCircle, AiOutlineUser } from "react-icons/ai";
+import { MdLocalAtm,MdNotificationsActive,MdLiveHelp } from 'react-icons/md';
+
 
 
 const MainNav = () => {
@@ -122,12 +124,9 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
 
         </div>
 
-        {user&& <div className="me-2">
-          <Link to={'dashboard/welcome'} className="lg:text-lg items-center flex ml-3 font-bold hover:text-purple-500">
-            <RiDashboardFill />
-           <p className="text-lg"> Dashboard</p>
-          </Link>
-        </div>}
+        <div>
+         <Link to="" title="Notifications"> <MdNotificationsActive className="w-6 h-6 me-4 lg:ms-5 hover:text-purple-700 transition-colors duration-300" /> </Link> 
+        </div>
 
 
         <Link onClick={openModal}  className="lg:ml-3 ">
@@ -147,7 +146,7 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="text-white rounded-lg p-8 transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-500">
             <ul className="grid gap-4">
-              <div>
+              <div>           
               <li>
                 <p className="text-center">--------- All Account ---------</p>
                 <p className="flex items-center gap-1"><FaUserCircle/> {user.displayName } <Link className= " ms-4 hover:text-green-400 border p-y-2 text-green-300"><small>Switch</small></Link> </p>
@@ -155,10 +154,19 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
               <hr className="border-t-4 border-white mt-2" />
               </div>
               <li>
+                <Link to="dashboard/welcome"> <p className="flex items-center gap-1 hover:text-purple-200"><RiDashboardFill className="w-6 h-6" />Dashboard</p> </Link>
+              </li>
+              <li>
                 <Link to="/add-account"> <p className="flex items-center gap-1 hover:text-purple-200"><FiUserPlus className="w-6 h-6" />Add More Account</p> </Link>
               </li>
               <li>
                 <Link to="/profile"> <p className="flex items-center gap-1 hover:text-purple-200"> <AiOutlineUser className="w-4 h-4" />Update Profile</p> </Link>
+              </li>
+              <li>
+                <Link to="/profile"> <p className="flex items-center gap-1 hover:text-purple-200"> <MdLiveHelp className="w-4 h-4" />Live Support</p> </Link>
+              </li>
+              <li>
+                <Link title="We offer a 30-day money-back guarantee" to="/"> <p className="flex items-center gap-1 hover:text-purple-200"> <MdLocalAtm  className="w-4 h-4" />Refund Policy</p> </Link>
               </li>
               <li>
                 <Link to="/settings"> <p className="flex items-center gap-1 hover:text-purple-200"><FiSettings className="w-4 h-4 " /> Settings</p></Link>

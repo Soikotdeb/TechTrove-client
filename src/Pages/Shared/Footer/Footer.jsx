@@ -8,14 +8,14 @@ import {
 import logo from "../../../assets/image/company logo.png";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import pay from "../../../assets/image/SSL-Commerz-Pay-With-logo-All-Size-01-004.png";
-import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   const handleLinkClick = () => {
     window.scrollTo(0, 0); // Scroll to the top of the page (x, y)
   };
   return (
-    <footer className="bg-gray-800 text-white">
+    <footer className="bg-gray-800 text-white rounded-md">
       <div className="container mx-auto  py-8 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex items-center">
