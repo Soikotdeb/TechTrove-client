@@ -64,7 +64,7 @@ const Dashboard = () => {
                 src={logo}
                 alt=""
               />{" "}
-              <p className="text-3xl ml-2">Dashboard</p>
+              <p className="text-3xl ml-2">Tech <p className="text-red-300">Trove</p> </p>
             </div>
           <li>
             <NavLink to="/">
@@ -102,7 +102,7 @@ const Dashboard = () => {
                 src={logo}
                 alt=""
               />{" "}
-              <p className="text-3xl ml-2">Dashboard</p>
+              <p className="text-red-500 text-3xl ml-2 hover:text-red-600 flex">Tech <p className="text-red-600 hover:text-red-700">Trove</p> </p>
             </div>
           </p>
           <Link to="/dashboard/selectedClass">

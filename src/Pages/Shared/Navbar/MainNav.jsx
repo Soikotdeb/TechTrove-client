@@ -73,7 +73,7 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
           </div>
           <img className="w-9 h-12 rounded" src={logo} alt="" />
           <a className="btn btn-ghost hidden md:block normal-case text-4xl hover:text-purple-600">
-            TechTrove
+            <p className="text-red-500 hover:text-red-600 flex">Tech <p className="text-red-600 hover:text-red-700">Trove</p> </p>
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
