@@ -16,7 +16,7 @@ const Dashboard = () => {
         <Outlet />
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className=" btn btn-primary drawer-button lg:hidden bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2 mt-2"
         >
           Open drawer
         </label>
@@ -56,7 +56,7 @@ const Dashboard = () => {
 
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-gray-300 text-base-content font-bold text-1xl">
+        <ul className="menu p-4 w-80 h-full text-white bg-gray-900  font-bold text-1xl">
         <div className="flex items-center">
               <img
                 className="w-9 h-12 rounded-2xl"
@@ -91,9 +91,9 @@ const Dashboard = () => {
 
       {/* user dashboard */}
 
-      <div className="drawer-side">
+      <div className="drawer-side text-white">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-gray-300 text-base-content font-bold text-1xl">
+        <ul className="menu p-4 w-80 h-full text-white bg-gray-900  font-bold text-1xl">
           <p className="text-orange-600 font-bold text-2xl mb-4">
             <div className="flex items-center">
               <img
@@ -117,33 +117,33 @@ const Dashboard = () => {
 
               <li>
                 {" "}
-                <p className="font-bold inline-block">My Cart</p>
+                <p className="font-bold inline-block hover:text-red-400">My Cart</p>
               </li>
             </div>
           </Link>
           <li>
-            <NavLink to="/">
+            <NavLink className="hover:text-red-400" to="/">
               {" "}
               <AiOutlineHome size={24} />
               Back To User Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/">
+            <NavLink  className="hover:text-red-400" to="/dashboard/">
               {" "}
               <IoIosSchool size={24} />
               My Selected Classes
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/">
+            <NavLink  className="hover:text-red-400" to="/dashboard/">
               {" "}
               <IoIosCash size={24} />
               payment history{" "}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/">
+            <NavLink  className="hover:text-red-400" to="/dashboard/">
               {" "}
               <FaChalkboardTeacher size={24} />
               My Enrolled Classes
