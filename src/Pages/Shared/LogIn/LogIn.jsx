@@ -74,7 +74,7 @@ const LogIn = () => {
 
 // google LogIn added------------
 
-  function handleGoogleSignIn() {
+  const handleGoogleSignIn = () => {
     if (!acceptedTerms) {
       // Show error alert if terms and conditions are not accepted
       Swal.fire({
@@ -84,23 +84,50 @@ const LogIn = () => {
       });
       return;
     }
+  
     googleSIgnIn()
-      .then(result => {
+      .then((result) => {
         const loggedInUser = result.user;
         console.log(loggedInUser);
-
+  
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           title: 'LogIn Successful',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-
-        // Navigate to a new route after successful Google Sign-In
+  
+        // Assuming navigate is a function for navigation, move it inside the chain
         navigate(from, { replace: true });
+  
+        // Prepare data for POST request
+        const saveUser = {
+          name: loggedInUser.displayName,
+          email: loggedInUser.email,
+          role: 'user', // Set the role property to 'user'
+          image: loggedInUser.photoURL,
+        };
+  
+        // Perform POST request to the server
+        fetch('http://localhost:5000/GoogleUsers', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(saveUser),
+        })
+          .then((res) => res.json())
+          .then((responseData) => {
+            if (responseData.insertedId) {
+              console.log('User data saved on the server');
+            }
+          })
+          .catch((error) => {
+            console.error('Error sending user data to the server:', error);
+          });
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle any errors that occur during Google Sign-In
         console.error('Error during Google Sign-In:', error);
         Swal.fire({
@@ -109,11 +136,15 @@ const LogIn = () => {
           title: 'LogIn Failed',
           text: 'An error occurred during Google Sign-In',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       });
-  }
+  };
 
+
+
+
+// TUDO
  // facebook LogIn added ------------
  // TUDO
 

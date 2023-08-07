@@ -84,6 +84,7 @@ const Registration = () => {
     }
   };
   
+// Google SignIn----------
 
   const handleGoogleSignIn = () => {
     if (!acceptedTerms) {
@@ -152,6 +153,7 @@ const Registration = () => {
       });
   };
   
+
 
 
   return (
