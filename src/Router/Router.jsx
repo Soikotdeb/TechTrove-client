@@ -11,6 +11,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import AskedQuestions from "../Pages/AskedQuestions/AskedQuestions";
 import Dashboard from "../Pages/Shared/Dashboard/Dashboard";
 import WelcomePage from "../Pages/Dashboard/WelcomePage";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -50,11 +51,11 @@ element:<TermsCondition></TermsCondition>
   },
 {
   path:'dashboard',
-  element:<Dashboard></Dashboard>,
+  element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
   children:[
     {
       path:'welcome',
-      element:<WelcomePage></WelcomePage>
+      element:<PrivateRoute><WelcomePage></WelcomePage></PrivateRoute>
     }
   ]
 }

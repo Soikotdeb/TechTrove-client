@@ -24,13 +24,13 @@ const Registration = () => {
     }
     data.role='user'
   
-    console.log(data); // Handle form submission here
+    console.log("user data",data); // Handle form submission here
   
     createUser(data.email, data.password,data.role)
       .then(result => {
         const user = result.user;
         console.log(user);
-  
+
         if (!user.emailVerified) {
           sendEmailVerification(user)
             .then(() => {
@@ -66,6 +66,7 @@ const Registration = () => {
         });
       });
   };
+
   
   
   const handleGoogleSignIn = () => {
