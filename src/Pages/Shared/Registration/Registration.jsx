@@ -13,62 +13,78 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const { register, handleSubmit, formState: { errors }, watch,reset } = useForm();
-  const {createUser,googleSIgnIn}=useContext(AuthContext)
+  const {createUser,googleSIgnIn,updateUserProfile}=useContext(AuthContext)
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (!passwordMatch) {
       return; // Prevent form submission if passwords don't match
     }
-    data.role='user'
   
-    console.log("user data",data); // Handle form submission here
+    // Set the role property to 'user'
+    data.role = 'user';
   
-    createUser(data.email, data.password,data.role)
-      .then(result => {
-        const user = result.user;
-        console.log(user);
-
-        if (!user.emailVerified) {
-          sendEmailVerification(user)
-            .then(() => {
-              Swal.fire({
-                icon: 'success',
-                title: 'Registration Successful',
-                text: 'You have successfully registered. Please check your email for verification.',
-              });
-              reset()
-            })
-            .catch(error => {
-              console.log(error);
-              Swal.fire({
-                icon: 'error',
-                title: 'Email Verification Failed',
-                text: 'There was an error sending the email verification.',
-              });
-            });
-        } else {
-          Swal.fire({
-            icon: 'info',
-            title: 'Email Already Verified',
-            text: 'Your email is already verified. No further action is required.',
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error);
+    console.log("user data", data); // Handle form submission here
+  
+    try {
+      const result = await createUser(data.email, data.password, data.role);
+      const user = result.user;
+      console.log("created user", user);
+  
+      await updateUserProfile(data.name, data.photoURL); // Await for updateUserProfile
+  
+      if (!user.emailVerified) {
+        await sendEmailVerification(user); // Await for sendEmailVerification
+  
         Swal.fire({
-          icon: 'error',
-          title: 'Registration Failed',
-          text: 'There was an error during registration.',
+          icon: 'success',
+          title: 'Registration Successful',
+          text: 'You have successfully registered. Please check your email for verification.',
         });
+  
+        // Prepare data for POST request
+        const saveUser = {
+          name: data.name,
+          email: data.email,
+          role: 'user',
+          image: data.photoURL,
+        };
+  
+        // Perform POST request to the server
+        const response = await fetch('http://localhost:5000/manualUsers', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(saveUser),
+        });
+  
+        const responseData = await response.json();
+  
+        if (responseData.insertedId) {
+          reset(); // Reset the form fields
+          navigate(from, { replace: true }); // Navigate to a different route
+        }
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'Email Already Verified',
+          text: 'Your email is already verified. No further action is required.',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Failed',
+        text: 'There was an error during registration.',
       });
+    }
   };
+  
 
-  
-  
   const handleGoogleSignIn = () => {
     if (!acceptedTerms) {
       // Show error alert if terms and conditions are not accepted
@@ -95,6 +111,32 @@ const Registration = () => {
   
         // Assuming navigate is a function for navigation, move it inside the chain
         navigate(from, { replace: true });
+  
+        // Prepare data for POST request
+        const saveUser = {
+          name: loggedInUser.displayName,
+          email: loggedInUser.email,
+          role: 'user', // Set the role property to 'user'
+          image: loggedInUser.photoURL,
+        };
+  
+        // Perform POST request to the server
+        fetch('http://localhost:5000/GoogleUsers', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(saveUser),
+        })
+          .then((res) => res.json())
+          .then((responseData) => {
+            if (responseData.insertedId) {
+              console.log('User data saved on the server');
+            }
+          })
+          .catch((error) => {
+            console.error('Error sending user data to the server:', error);
+          });
       })
       .catch((error) => {
         // Handle any errors that occur during Google Sign-In

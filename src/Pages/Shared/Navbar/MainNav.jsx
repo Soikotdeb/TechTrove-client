@@ -136,7 +136,7 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
               className="avatar online"
             >
               <div className="w-9 rounded-full">
-                <img src={user?.photoURL} alt="" />
+                <img src={user?.photoURL} alt="User Profile" /> 
               </div>
             </div>
           )}

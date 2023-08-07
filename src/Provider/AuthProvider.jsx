@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../Firebase/Firebase.config";
 
 
@@ -56,7 +56,12 @@ const resetPassword = (email) => {
     return sendPasswordResetEmail(auth, email);
   };
 
-
+//   UpdateUser Profile
+  const updateUserProfile =(name,photo)=>{
+    return updateProfile(auth.currentUser,{
+        displayName:name, photoURL:photo
+      })
+}
 
 
 useEffect(()=>{
@@ -79,6 +84,7 @@ const authInfo = {
     logOut,
     resetPassword,
     googleSIgnIn,
+    updateUserProfile 
 
 }
 
