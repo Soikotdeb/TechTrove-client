@@ -12,6 +12,7 @@ import AskedQuestions from "../Pages/AskedQuestions/AskedQuestions";
 import Dashboard from "../Pages/Shared/Dashboard/Dashboard";
 import WelcomePage from "../Pages/Dashboard/WelcomePage";
 import PrivateRoute from "./PrivateRoute";
+import ManageUsers from "../Pages/Dashboard/ManageUsers";
 
 
 
@@ -56,6 +57,10 @@ element:<TermsCondition></TermsCondition>
     {
       path:'welcome',
       element:<PrivateRoute><WelcomePage></WelcomePage></PrivateRoute>
+    },
+    {
+      path:'ManageUsers',
+      element:<ManageUsers></ManageUsers>
     }
   ]
 }

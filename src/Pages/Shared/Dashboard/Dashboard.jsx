@@ -123,13 +123,14 @@ const Dashboard = () => {
                 {currentTime.toLocaleString()} ({dayOfWeek})
               </p>
               <p className="text-center text-gray-400">
+              
                 <span className="text-orange-500 hover:text-orange-600">
-                  tech
+                &copy;  tech 
                 </span>
                 <span className="text-orange-700 hover:text-orange-800">
                   Trove
                 </span>{" "}
-                All rights reserved
+                 All rights reserved
               </p>
             </div>
 
@@ -183,12 +184,12 @@ const Dashboard = () => {
               </p>
               <p className="text-center text-gray-400">
                 <span className="text-orange-500 hover:text-orange-600">
-                  tech
+                &copy;  tech
                 </span>
                 <span className="text-orange-700 hover:text-orange-800">
                   Trove
                 </span>{" "}
-                All rights reserved
+                 All rights reserved
               </p>
             </div>
 
@@ -266,15 +267,15 @@ const Dashboard = () => {
               </p>
               <p className="text-center text-gray-400">
                 <span className="text-orange-500 hover:text-orange-600">
-                  tech
+                &copy;  tech
                 </span>
                 <span className="text-orange-700 hover:text-orange-800">
                   Trove
                 </span>{" "}
-                All rights reserved
+                 All rights reserved
               </p>
             </div>
-            
+
           </ul>
         </div>
       )}
