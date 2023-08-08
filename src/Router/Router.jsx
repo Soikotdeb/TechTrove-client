@@ -13,6 +13,7 @@ import Dashboard from "../Pages/Shared/Dashboard/Dashboard";
 import WelcomePage from "../Pages/Dashboard/WelcomePage";
 import PrivateRoute from "./PrivateRoute";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
+import AddProducts from "../Pages/Dashboard/AddProducts";
 
 
 
@@ -61,6 +62,10 @@ element:<TermsCondition></TermsCondition>
     {
       path:'ManageUsers',
       element:<PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
+    },
+    {
+      path:'AddProducts',
+      element:<PrivateRoute><AddProducts></AddProducts></PrivateRoute>
     }
   ]
 }

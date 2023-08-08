@@ -49,7 +49,7 @@ const Dashboard = () => {
       //     </p>
       //   </div>
       // </div>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-slate-300">
         <div className="flex flex-col items-center">
           <div className="border-t-4 border-red-500 w-12 h-12 animate-spin rounded-full"></div>
           <p className="mt-4 text-red-400 font-semibold">
@@ -143,15 +143,19 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full text-white bg-gray-900  font-bold text-1xl">
             <div className="flex items-center">
-              <img
-                className="w-9 h-12 rounded-2xl"
-                title="TechTrove GadgetBazar"
-                src={logo}
-                alt=""
-              />{" "}
-              <p className="text-3xl ml-2">
-                Tech <p className="text-red-300">Trove</p>{" "}
-              </p>
+            <p className="text-orange-600 font-bold text-2xl mb-4">
+              <div className="flex items-center">
+                <img
+                  className="w-9 h-12 rounded-2xl"
+                  title="TechTrove GadgetBazar"
+                  src={logo}
+                  alt=""
+                />{" "}
+                <p className="text-red-500 text-3xl ml-2 hover:text-red-600 flex">
+                  Tech <p className="text-red-600 hover:text-red-700">Trove</p>{" "}
+                </p>
+              </div>
+            </p>
             </div>
             <li>
               <NavLink className="hover:text-red-400" to="/">
@@ -161,10 +165,10 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink className="hover:text-red-400" to="/dashboard/AddClass">
+              <NavLink className="hover:text-red-400" to="/dashboard/AddProducts">
                 {" "}
                 <BiPlus size={24} />
-                Add a Class
+                Add a Products
               </NavLink>
             </li>
             <li>
