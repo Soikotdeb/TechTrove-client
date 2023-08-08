@@ -60,7 +60,7 @@ element:<TermsCondition></TermsCondition>
     },
     {
       path:'ManageUsers',
-      element:<ManageUsers></ManageUsers>
+      element:<PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
     }
   ]
 }
