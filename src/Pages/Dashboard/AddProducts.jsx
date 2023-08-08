@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { FaUndoAlt } from 'react-icons/fa';
 
 
 const ProductAddForm = () => {
@@ -44,30 +45,18 @@ const ProductAddForm = () => {
         <div className="bg-gray-800 w-full min-h-screen flex justify-center items-center">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="bg-gray-900 p-4 rounded-lg shadow-lg grid grid-cols-2 gap-4"
+                className="bg-gray-900 p-4 rounded-lg shadow-lg grid grid-cols-2 gap-4 lg:w-[900px]"
             >
                 <div className="col-span-2">
-                <div className="col-span-2 flex justify-end">
+                <div className="col-span-2 flex gap-2 justify-end">
+                <p className='text-green-500'>reset Form</p>
                     <button
                         type="button"
-                        title='Reset Form'
+                        title='Click To Reset Form'
                         onClick={resetForm}
-                        className="text-red-500 hover:text-red-700"
+                        className="text-red-600 hover:text-red-800"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
+                        <FaUndoAlt size={20} />
                     </button>
                 </div>
                 </div>
@@ -119,7 +108,7 @@ const ProductAddForm = () => {
                     </label>
                     <select
                         {...register('category')}
-                        className="px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full rounded-sm"
+                        className="px-4 py-3 bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full rounded-sm"
                     >
                          <option disabled selected>
                          Select Your Products Category?
@@ -165,9 +154,9 @@ const ProductAddForm = () => {
                 <div>
                     <input
                         type="number"
-                        {...register('discountPercentage')}
+                        {...register('discountAmount')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
-                        placeholder=" Product Discount %"
+                        placeholder=" Product Discount Amount"
                     />
                 </div>
                 <div>
