@@ -1,23 +1,66 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { FaUndoAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../Provider/AuthProvider';
+
 
 
 const ProductAddForm = () => {
+    
+    const { user } = useContext(AuthContext); // Make sure you have your user data in context
+  
     const {
-        handleSubmit,
-        control,
-        register,
-        reset,
-        setValue,
-        getValues,
+      handleSubmit,
+      control,
+      register,
+      reset,
+      setValue,
+      getValues,
     } = useForm();
-
-    const onSubmit = (data) => {
-        // Handle form submission here
-        console.log(data);
+  
+    const onSubmit = (data, e) => {
+      e.preventDefault(); // Prevent the default form submission behavior
+      const form = e.target;
+  
+      const instructorInfo = {
+        instructorEmail: user.email,
+        instructorName: user.displayName,
+      };
+  
+      // Combine form data with instructorInfo
+      const postData = { ...data, ...instructorInfo };
+  
+      // Perform POST request to the server AddProducts to Instructor
+      fetch('http://localhost:5000/AddProducts', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          // Handle successful response here
+          console.log('Response:', response);
+  
+          // Check if the 'acknowledged' property is true in the response
+          if (response.acknowledged === true) {
+            // Show success notification
+            toast.success('Product added successfully!');
+            // Reset the form fields using e.target.reset()
+            form.reset();
+          }
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error('Error:', error);
+          // Show toast error notification
+          toast.error('An error occurred while adding the product.');
+        });
     };
+      
 
     const [showAdditionalImages, setShowAdditionalImages] = useState(false);
 
@@ -62,6 +105,7 @@ const ProductAddForm = () => {
                 </div>
                 <div>
                     <input
+                    required
                         type="text"
                         {...register('productName')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
@@ -70,6 +114,7 @@ const ProductAddForm = () => {
                 </div>
                 <div>
                     <input
+                    required
                         type="number"
                         {...register('price')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
@@ -101,12 +146,15 @@ const ProductAddForm = () => {
                         rows={4}
                     />
                 </div>
+              
+              
 
                 <div className="col-span-2">
                     <label htmlFor="category" className="text-white">
                         Select Category:
                     </label>
                     <select
+                    required
                         {...register('category')}
                         className="px-4 py-3 bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full rounded-sm"
                     >
@@ -130,6 +178,7 @@ const ProductAddForm = () => {
                 </div>
                 <div>
                     <input
+                    required
                         type="text"
                         {...register('madeIn')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
@@ -161,6 +210,7 @@ const ProductAddForm = () => {
                 </div>
                 <div>
                     <input
+                    required
                         type="number"
                         {...register('productQuantity')}
                         className="bg-gray-700 text-white p-2 w-full rounded"

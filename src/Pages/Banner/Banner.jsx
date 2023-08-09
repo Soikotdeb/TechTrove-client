@@ -1,8 +1,8 @@
 
 import { FaFire, FaGripVertical, FaSuitcase } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import image1 from '../../assets/image/shopping mall.jpg';
-import image2 from '../../assets/image/Mall_kiosk.jpg';
+// import image1 from '../../assets/image/shopping mall.jpg';
+// import image2 from '../../assets/image/Mall_kiosk.jpg';
 import MacBook from '../../assets/image/Apple-MacBook-15-inch-e1600416371601.jpeg';
 import huawei from '../../assets/image/huawei-logo-communication-13-e1593284031516.png';
 import nokia from '../../assets/image/nokia-logo.png';
