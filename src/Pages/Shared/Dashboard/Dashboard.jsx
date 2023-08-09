@@ -1,10 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { AiOutlineHome } from "react-icons/ai";
-import { IoMdSchool, IoIosSchool, IoIosCash } from "react-icons/io";
+import {  IoIosSchool, IoIosCash } from "react-icons/io";
 import { BiPlus, BiCog } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
-import { FaChalkboardTeacher } from "react-icons/fa";
+import { FaChalkboardTeacher, FaListAlt } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import logo from "../../../assets/image/company logo.png";
 import UseAdmin from "../../../Hook/UseAdmin";
@@ -174,11 +174,11 @@ const Dashboard = () => {
             <li>
               <NavLink
                 className="hover:text-red-400"
-                to="/dashboard/MyClasses"
+                to="/dashboard/MyAddedProducts"
                 activeClassName="active"
               >
-                <IoMdSchool size={24} />
-                My Classes
+                <FaListAlt size={20} />
+                My Added Products
               </NavLink>
             </li>
 

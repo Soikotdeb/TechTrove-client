@@ -15,15 +15,40 @@ import onePlus from '../../assets/image/oneplus-logo-B6703954CF-seeklogo.com_-1.
 import iPhone from '../../assets/image/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4-2-e1593283971693.png';
 import { AiOutlineMobile } from 'react-icons/ai';
 import './Banner.css'
+import { useEffect, useState } from 'react';
 
 
 
 const Banner = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const images = [
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQseeTBMYOzC6Q8soKo5slWc488st9XVObl6g&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbr3QSxl1QTyeZoqpN1TCA3cfYjCGdXFF4cw&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkkHwZlVOHYpdGTPT8h1sK6wC6wb-9Zf4Sww&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQylDqV0cSWYneAVAH3_FHyuZyAz3vbIntaYQ&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdNkVj3bjRrQE_bG54KJloCWh_qJumUwSiGA&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS41Py2O7fKIIvmPHCfRAHu-wrDRte34cja0g&usqp=CAU'
+
+
+
+    // Add more image URLs if needed
+  ];
+  
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) =>
+        prevSlide === images.length - 1 ? 0 : prevSlide + 1
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
  
   return (
 <div className='banner'>
 <div className="flex flex-col lg:flex-row-reverse">
-      <div className="flex-1 mt-2 ml-4 mr-2">
+      <div className="flex-1 mt-1 ml-2 mr-2">
       <div className="navbar bg-base-100 flex flex-col sm:flex-row sm:justify-between sm:items-center font-semibold">
   <div className="flex items-center mb-3 sm:mb-0 relative hover:text-purple-500 ">
     <p className='mb-12 absolute'>
@@ -51,7 +76,7 @@ const Banner = () => {
 
 
 
-        <div className="carousel h-1/2 w-full border">
+        {/* <div className="carousel h-1/2 w-full border">
           <div id="slide1" className="carousel-item relative w-full">
          
           <img src={image2} className="w-full" alt="" />
@@ -77,7 +102,22 @@ const Banner = () => {
               </a>
             </div>
           </div>
+        </div> */}
+
+{/* banner */}
+   <div className="relative w-full h-[478px] overflow-hidden">
+      {images.map((image, index) => (
+        <div
+          key={index}
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <img src={image} alt={`Slide ${index}`} className="w-full h-full object-cover" />
         </div>
+      ))}
+    </div>
+
       </div>
 
       <div className="lg:w-96 border h-1/2 border-gray-200  p-3">
