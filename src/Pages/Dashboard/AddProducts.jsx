@@ -62,6 +62,7 @@ const ProductAddForm = () => {
     };
       
 
+    
     const [showAdditionalImages, setShowAdditionalImages] = useState(false);
 
     const toggleAdditionalImages = () => {
@@ -231,3 +232,4 @@ const ProductAddForm = () => {
 };
 
 export default ProductAddForm;
+
