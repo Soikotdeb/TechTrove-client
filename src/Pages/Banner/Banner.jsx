@@ -43,13 +43,13 @@ const Banner = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
  
   return (
 <div className='banner'>
 <div className="flex flex-col lg:flex-row-reverse">
       <div className="flex-1 mt-1 ml-2 mr-2">
-      <div className="navbar bg-base-100 flex flex-col sm:flex-row sm:justify-between sm:items-center font-semibold">
+      <div className="navbar bg-base-100 flex flex-col sm:flex-row sm:justify-between sm:items-center font-semibold rounded-sm">
   <div className="flex items-center mb-3 sm:mb-0 relative hover:text-purple-500 ">
     <p className='mb-12 absolute'>
       <small className='bg-red-500 text-white font-bold p-1  rounded-sm'>BEST</small>
