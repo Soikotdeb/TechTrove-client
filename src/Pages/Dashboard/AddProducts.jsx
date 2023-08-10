@@ -1,68 +1,81 @@
 
 import React, { useContext, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FaUndoAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Provider/AuthProvider';
 
-
+const img_hosting_token = import.meta.env.VITE_image_upload_token;
+const img_hosting_url = `https://api.imgbb.com/1/upload?expiration=600&key=${img_hosting_token}`;
 
 const ProductAddForm = () => {
-    
     const { user } = useContext(AuthContext); // Make sure you have your user data in context
   
     const {
       handleSubmit,
-      control,
       register,
       reset,
-      setValue,
-      getValues,
     } = useForm();
   
-    const onSubmit = (data, e) => {
-      e.preventDefault(); // Prevent the default form submission behavior
-      const form = e.target;
-  
-      const instructorInfo = {
-        instructorEmail: user.email,
-        instructorName: user.displayName,
-      };
-  
-      // Combine form data with instructorInfo
-      const postData = { ...data, ...instructorInfo };
-  
-      // Perform POST request to the server AddProducts to Instructor
-      fetch('http://localhost:5000/AddProducts', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      })
-        .then((res) => res.json())
-        .then((response) => {
-          // Handle successful response here
-          console.log('Response:', response);
-  
-          // Check if the 'acknowledged' property is true in the response
-          if (response.acknowledged === true) {
-            // Show success notification
-            toast.success('Product added successfully!');
-            // Reset the form fields using e.target.reset()
-            form.reset();
-          }
-        })
-        .catch((error) => {
-          // Handle errors here
-          console.error('Error:', error);
-          // Show toast error notification
-          toast.error('An error occurred while adding the product.');
-        });
-    };
-      
+    const onSubmit = async (data, e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
 
-    
+        try {
+            const imageUploadPromises = data.productImages.map(async (image) => {
+                const formData = new FormData();
+                formData.append('image', image[0]);
+
+                const response = await fetch(img_hosting_url, {
+                    method: 'POST',
+                    body: formData,
+                });
+                const imgResponse = await response.json();
+
+                if (imgResponse.success) {
+                    return imgResponse.data.display_url;
+                } else {
+                    throw new Error('Image upload error');
+                }
+            });
+
+            const uploadedImageUrls = await Promise.all(imageUploadPromises);
+
+            // Combine form data with uploaded image URLs
+            const productData = {
+                ...data,
+                productImages: uploadedImageUrls,
+                instructorEmail: user.email,
+                instructorName: user.displayName,
+            };
+
+            // Perform your POST request to the server with productData
+            const serverResponse = await fetch('http://localhost:5000/AddProducts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(productData),
+            });
+
+            const serverData = await serverResponse.json();
+
+            if (serverData.acknowledged) {
+                // Reset the form fields using reset()
+                reset();
+                // Show success notification
+                toast.success('Product added successfully!');
+            } else {
+                // Show error notification
+                toast.error('An error occurred while adding the product.');
+            }
+        } catch (error) {
+            // Handle errors here
+            console.error('Error:', error);
+            // Show toast error notification
+            toast.error('An error occurred while adding the product.');
+        }
+    };
+
     const [showAdditionalImages, setShowAdditionalImages] = useState(false);
 
     const toggleAdditionalImages = () => {
@@ -77,6 +90,7 @@ const ProductAddForm = () => {
                 type="file"
                 {...register(`productImages[${index}]`)}
                 className="bg-gray-700 text-white p-2 w-full rounded"
+                multiple
             />
         </div>
     ));
@@ -92,17 +106,17 @@ const ProductAddForm = () => {
                 className="bg-gray-900 p-4 rounded-lg shadow-lg grid grid-cols-2 gap-4 lg:w-[900px]"
             >
                 <div className="col-span-2">
-                <div className="col-span-2 flex gap-2 justify-end">
-                <p className='text-green-500'>reset Form</p>
-                    <button
-                        type="button"
-                        title='Click To Reset Form'
-                        onClick={resetForm}
-                        className="text-red-600 hover:text-red-800"
-                    >
-                        <FaUndoAlt size={20} />
-                    </button>
-                </div>
+                    <div className="col-span-2 flex gap-2 justify-end">
+                        <p className='text-green-500'>reset Form</p>
+                        <button
+                            type="button"
+                            title='Click To Reset Form'
+                            onClick={resetForm}
+                            className="text-red-600 hover:text-red-800"
+                        >
+                            <FaUndoAlt size={20} />
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <input
@@ -148,8 +162,6 @@ const ProductAddForm = () => {
                     />
                 </div>
               
-              
-
                 <div className="col-span-2">
                     <label htmlFor="category" className="text-white">
                         Select Category:
@@ -174,7 +186,6 @@ const ProductAddForm = () => {
                         <option>OnePlus</option>
                         <option>Oppo</option>
                         <option>accessories</option>
-                        
                     </select>
                 </div>
                 <div>
@@ -187,7 +198,7 @@ const ProductAddForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="productImages" className="text-white">
+                    <label htmlFor="" className="text-white">
                         Product Images:
                     </label>
                     {productImages}
@@ -200,13 +211,12 @@ const ProductAddForm = () => {
                     </button>
                 </div>
 
-
                 <div>
                     <input
                         type="number"
                         {...register('discountAmount')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
-                        placeholder=" Product Discount Amount"
+                        placeholder="Product Discount Amount"
                     />
                 </div>
                 <div>
