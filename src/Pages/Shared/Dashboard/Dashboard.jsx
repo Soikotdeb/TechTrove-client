@@ -49,11 +49,16 @@ const Dashboard = () => {
       //     </p>
       //   </div>
       // </div>
-      <div className="flex justify-center items-center h-screen bg-slate-300">
+      <div className="flex justify-center items-center h-screen bg-gray-800">
         <div className="flex flex-col items-center">
           <div className="border-t-4 border-red-500 w-12 h-12 animate-spin rounded-full"></div>
           <p className="mt-4 text-red-400 font-semibold">
-            Content is loading...
+          Content is loading Please Wait Few Seconds... <br />
+          <hr className="mt-1"/>
+          <p className=" text-center align-middle mt-2">OR</p>
+          <div className=" text-center align-middle ">
+          <Link to="/" className="text-red-600 hover:underline font-extrabold hover:text-red-700">Go Home</Link>
+          </div>
           </p>
         </div>
       </div>
