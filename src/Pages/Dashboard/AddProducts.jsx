@@ -5,7 +5,7 @@ import { FaUndoAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Provider/AuthProvider';
 
-const img_hosting_token = import.meta.env.VITE_image_upload_token;
+const img_hosting_token = import.meta.env.VITE_image_upload_token; // Replace with your actual image upload token
 const img_hosting_url = `https://api.imgbb.com/1/upload?expiration=600&key=${img_hosting_token}`;
 
 const ProductAddForm = () => {
@@ -22,28 +22,33 @@ const ProductAddForm = () => {
 
         try {
             const imageUploadPromises = data.productImages.map(async (image) => {
-                const formData = new FormData();
-                formData.append('image', image[0]);
+                if (image[0]) {
+                    const formData = new FormData();
+                    formData.append('image', image[0]);
 
-                const response = await fetch(img_hosting_url, {
-                    method: 'POST',
-                    body: formData,
-                });
-                const imgResponse = await response.json();
+                    const response = await fetch(img_hosting_url, {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const imgResponse = await response.json();
 
-                if (imgResponse.success) {
-                    return imgResponse.data.display_url;
-                } else {
-                    throw new Error('Image upload error');
+                    if (imgResponse.success) {
+                        return imgResponse.data.display_url;
+                    } else {
+                        throw new Error('Image upload error');
+                    }
                 }
             });
 
             const uploadedImageUrls = await Promise.all(imageUploadPromises);
 
+            // Remove any undefined URLs (images that were not uploaded)
+            const filteredImageUrls = uploadedImageUrls.filter(url => url);
+
             // Combine form data with uploaded image URLs
             const productData = {
                 ...data,
-                productImages: uploadedImageUrls,
+                productImages: filteredImageUrls,
                 instructorEmail: user.email,
                 instructorName: user.displayName,
             };
@@ -198,7 +203,7 @@ const ProductAddForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="" className="text-white">
+                    <label htmlFor="productImages" className="text-white">
                         Product Images:
                     </label>
                     {productImages}
@@ -216,7 +221,7 @@ const ProductAddForm = () => {
                         type="number"
                         {...register('discountAmount')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
-                        placeholder="Product Discount Amount"
+                        placeholder=" Product Discount Amount"
                     />
                 </div>
                 <div>
@@ -242,4 +247,3 @@ const ProductAddForm = () => {
 };
 
 export default ProductAddForm;
-
