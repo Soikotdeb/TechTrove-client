@@ -22,12 +22,17 @@ import { useEffect, useState } from 'react';
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQseeTBMYOzC6Q8soKo5slWc488st9XVObl6g&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbr3QSxl1QTyeZoqpN1TCA3cfYjCGdXFF4cw&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkkHwZlVOHYpdGTPT8h1sK6wC6wb-9Zf4Sww&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQylDqV0cSWYneAVAH3_FHyuZyAz3vbIntaYQ&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdNkVj3bjRrQE_bG54KJloCWh_qJumUwSiGA&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS41Py2O7fKIIvmPHCfRAHu-wrDRte34cja0g&usqp=CAU'
+    'https://img.freepik.com/free-photo/sales-promotion-fashion-shopping-discount_53876-123615.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-photo/online-fashion-shopping-with-computer_23-2150400628.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-photo/beautiful-woman-sitting-home-with-electronic-devices-shopping-bags-credit-card-hand_23-2148101678.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-vector/online-shop-cartoon-poster-hand-give-shopping-bag_107791-7042.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-vector/online-shopping-concept-illustration-with-words-people_613284-2431.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-vector/online-shopping-banner-mobile-app-templates-concept-flat-design_1150-34865.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-vector/gradient-omnichannel-illustration_23-2149333190.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+    'https://img.freepik.com/free-photo/online-payment-purchase-e-commerce-buy-icon_53876-133903.jpg?size=626&ext=jpg&ga=GA1.2.2087522418.1672577037&semt=ais',
+
+
+
 
 
 
