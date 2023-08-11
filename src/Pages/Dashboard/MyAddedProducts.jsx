@@ -27,6 +27,7 @@ const MyAddedProducts = () => {
     }, [user.email]);
 
     const handleDelete = async (id) => {
+        const fetchUserData = async () => {
         try {
           const result = await Swal.fire({
             title: 'Are you sure you want to delete?',
@@ -43,10 +44,14 @@ const MyAddedProducts = () => {
     
 
           }
+          
         } catch (error) {
           console.log(error);
         }
+    }
+    fetchUserData();
       };
+    
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
