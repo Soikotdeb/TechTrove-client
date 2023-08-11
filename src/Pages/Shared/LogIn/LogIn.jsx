@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { toast } from 'react-toastify';
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,11 +44,7 @@ const LogIn = () => {
           console.log(user);
 
           // Show success alert
-          Swal.fire({
-            icon: 'success',
-            title: 'Sign In Successful',
-            text: 'You have been signed in successfully.',
-          });
+          toast.success('You have been signed in successfully.!');
           reset()
           navigate(from, { replace: true });
         })
@@ -89,14 +86,7 @@ const LogIn = () => {
       .then((result) => {
         const loggedInUser = result.user;
         console.log(loggedInUser);
-  
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'LogIn Successful',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        toast.success('You have been signed in successfully.!');
   
         // Assuming navigate is a function for navigation, move it inside the chain
         navigate(from, { replace: true });

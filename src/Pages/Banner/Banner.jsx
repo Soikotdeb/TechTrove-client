@@ -45,7 +45,7 @@ const Banner = () => {
       setCurrentSlide((prevSlide) =>
         prevSlide === images.length - 1 ? 0 : prevSlide + 1
       );
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [images.length]);
