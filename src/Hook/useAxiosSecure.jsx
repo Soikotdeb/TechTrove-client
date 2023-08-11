@@ -14,7 +14,7 @@ import { AuthContext } from "../Provider/AuthProvider";
    const navigate = useNavigate(); 
    useEffect(() => {
      axiosSecure.interceptors.request.use((config) => {
-       const token = localStorage.getItem('canvas-access-token');
+       const token = localStorage.getItem('TechTrove-Access-token');
        if (token) {
          config.headers.Authorization = `${token}`;
        }

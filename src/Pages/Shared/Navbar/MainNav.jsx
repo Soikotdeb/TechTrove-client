@@ -21,7 +21,9 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
 
   const handleLogout = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        localStorage.removeItem('TechTrove-Access-token')
+      })
       .catch((error) => {
         console.log(error);
       });

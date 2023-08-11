@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle, FaKey } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, json, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -35,18 +35,33 @@ const LogIn = () => {
       return; // Prevent form submission if passwords don't match
     }
 
-    console.log(data); // Handle form submission here
 
     if (isCaptchaVerified) {
       SignIn(data.email, data.password)
         .then((result) => {
           const user = result.user;
-          console.log(user);
-
+          const loggedUser ={
+            email:user.email
+          
+          }
+          console.log(loggedUser);
+          fetch('http://localhost:5000/jwt',{
+            method:'POST',
+            headers:{
+              'content-type' : 'application/json'
+            },
+            body:JSON.stringify(loggedUser)
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            console.log('jwt response',data);
+            // localStorage is the not a best place
+            localStorage.setItem('TechTrove-Access-token',data.token)
+            reset()
+            navigate(from, { replace: true });
+          })
           // Show success alert
           toast.success('You have been signed in successfully.!');
-          reset()
-          navigate(from, { replace: true });
         })
         .catch((error) => {
           console.log(error);
