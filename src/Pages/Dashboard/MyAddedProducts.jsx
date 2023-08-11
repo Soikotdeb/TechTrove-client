@@ -44,18 +44,19 @@ const MyAddedProducts = () => {
                         <img
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
-                            src={hoveredIndex === index ? product.productImages[2] : product.productImages[1]}
+                            src={hoveredIndex === index ? product.productImages[0] : product.productImages[1] ||'There was 1 images in this product' }
                             alt={product.productName}
                             className="w-full h-48 object-cover mb-2 rounded-lg"
                         />
-                           <p className="text-lg font-semibold">productName: {product.productName}</p>
+                           <p className="text-lg font-semibold">{product.productName}</p>
                         <div className="text-gray-600 text-base" >
                         <p><span className="font-bold text-gray-700 hover:underline">Color: </span> {product.productColor}</p>
+                        <p><span className="font-bold text-gray-700 hover:underline">Product Price: </span>$ {product.price}</p>
                         <p><span className="font-bold text-gray-700 hover:underline">Storage: </span> {product.storage}</p>
                         <p><span className="font-bold text-gray-700 hover:underline">Category: </span> {product.category}</p>
                         <p><span className="font-bold text-gray-700 hover:underline">MadeIn</span> : {product.madeIn}</p>
-                        <p><span className="font-bold text-gray-700 hover:underline">DiscountAmount</span> : {product.discountAmount}</p>
-                        <p><span className="font-bold text-gray-700 hover:underline">Quantity: </span> {product.productQuantity}</p>
+                        <p><span className="font-bold text-gray-700 hover:underline">DiscountAmount</span> $ {product.discountAmount}</p>
+                        <p><span className="font-bold text-gray-700 hover:underline">Available Product: </span> {product.productQuantity}</p>
                         <p><span className="font-bold text-gray-700 hover:underline">Description: </span> {product.description}</p>
                         </div>
                         <div className="flex justify-between mt-2">

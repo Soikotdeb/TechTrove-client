@@ -135,7 +135,7 @@ const ProductAddForm = () => {
                 <div>
                     <input
                     required
-                        type="number"
+                        type="text"
                         {...register('price')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
                         placeholder="Price"
@@ -218,7 +218,7 @@ const ProductAddForm = () => {
 
                 <div>
                     <input
-                        type="number"
+                        type="text"
                         {...register('discountAmount')}
                         className="bg-gray-700 text-white p-2 w-full rounded"
                         placeholder=" Product Discount Amount"
