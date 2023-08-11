@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from './../../Provider/AuthProvider';
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import Swal from "sweetalert2";
 
 const MyAddedProducts = () => {
     const { user } = useContext(AuthContext);
@@ -24,6 +25,28 @@ const MyAddedProducts = () => {
         };
         fetchUserData();
     }, [user.email]);
+
+    const handleDelete = async (id) => {
+        try {
+          const result = await Swal.fire({
+            title: 'Are you sure you want to delete?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+          });
+    
+          if (result.isConfirmed) {
+            await fetch(`http://localhost:5000/MyAddedProduct/${id}`, {
+              method: 'DELETE'
+            });
+    
+
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -61,7 +84,7 @@ const MyAddedProducts = () => {
                         </div>
                         <div className="flex justify-between mt-2">
                         <Link className="bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2"> <FaEdit title="Click To Edit" /></Link>
-                        <Link className="bg-red-500 flex items-center font-semibold hover:text-purple-300 hover:bg-red-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2"> <FaTrash title="Click To Delete" /></Link>
+                        <Link onClick={() => handleDelete(product._id)}  className="bg-red-500 flex items-center font-semibold hover:text-purple-300 hover:bg-red-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2"> <FaTrash title="Click To Delete" /></Link>
                         </div>
                     </div>
                 ))}
