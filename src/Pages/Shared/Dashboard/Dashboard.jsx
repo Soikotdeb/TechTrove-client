@@ -4,7 +4,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import {  IoIosSchool, IoIosCash } from "react-icons/io";
 import { BiPlus, BiCog } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
-import { FaChalkboardTeacher, FaListAlt } from "react-icons/fa";
+import {  FaChalkboardTeacher, FaListAlt } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import logo from "../../../assets/image/company logo.png";
 import UseAdmin from "../../../Hook/UseAdmin";
@@ -79,7 +79,7 @@ const Dashboard = () => {
       </div>
       {/* Admin Dashboard */}
       {isAdminOrInstructor === "admin" && (
-        <div className="drawer-side">
+        <div className="drawer-side bg-gray-800">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full text-white bg-gray-900  font-bold text-1xl">
             <p className="text-orange-600 font-bold text-2xl mb-4">
