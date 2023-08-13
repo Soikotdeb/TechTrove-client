@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { RiSearchLine } from 'react-icons/ri';
 
 
 const MyAddedProducts = () => {
@@ -47,15 +48,33 @@ const MyAddedProducts = () => {
             console.log(error);
         }
     };
+
+    const handleSearch = () => {
+console.log('search');
+    };
+
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
     return (
         <div className="p-4 bg-gray-800 w-full h-full">
-           <div className="border border-green-400 text-white mb-2">
-             <marquee behavior="alternate" direction="left">
-                <p className="text-purple-300"> {user.displayName} - Your All Added Products Here</p>
+           <div className="border border-green-400 text-white mb-1">
+             <marquee behavior="scroll" direction="left">
+                <p className="text-purple-300"> {user.displayName} - Your All Added Products Here. You are already added {products.length} Products </p>
              </marquee>
              </div>
+             <div className="align-middle flex justify-center text-center items-center mb-2">
+                <input
+                    type="text"
+                    placeholder="Search Your Products"
+                    className="input input-bordered input-error w-full max-w-xs mr-1"
+                />
+                <button
+                    className="btn btn-primary"
+                    onClick={handleSearch}
+                >
+                    <RiSearchLine className="hover:text-red-400" />
+                </button>
+            </div> 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products && products.map((product, index) => (
                      <div

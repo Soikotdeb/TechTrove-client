@@ -68,11 +68,11 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col items-center justify-center bg-gray-800">
         <Outlet />
         <label
           htmlFor="my-drawer-2"
-          className=" btn btn-primary drawer-button lg:hidden bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2 mt-2"
+          className=" btn btn-primary drawer-button lg:hidden bg-green-500 flex items-center font-semibold hover:text-purple-700 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2 mt-2"
         >
           Open drawer
         </label>
