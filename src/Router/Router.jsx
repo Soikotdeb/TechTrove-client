@@ -15,6 +15,7 @@ import PrivateRoute from "./PrivateRoute";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import AddProducts from "../Pages/Dashboard/AddProducts";
 import MyAddedProducts from "../Pages/Dashboard/MyAddedProducts";
+import UsersQuestions from "../Pages/Dashboard/UsersQuestions";
 
 
 
@@ -70,7 +71,11 @@ element:<TermsCondition></TermsCondition>
     },
     {
       path:'MyAddedProducts',
-      element:<MyAddedProducts></MyAddedProducts>
+      element:<PrivateRoute><MyAddedProducts></MyAddedProducts></PrivateRoute>
+    },
+    {
+      path:'usersQuestions',
+      element:<PrivateRoute><UsersQuestions></UsersQuestions></PrivateRoute>
     }
   ]
 }

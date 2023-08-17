@@ -4,7 +4,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import {  IoIosSchool, IoIosCash } from "react-icons/io";
 import { BiPlus, BiCog } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
-import {  FaChalkboardTeacher, FaListAlt } from "react-icons/fa";
+import {  FaChalkboardTeacher, FaListAlt, FaQuestionCircle } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import logo from "../../../assets/image/company logo.png";
 import UseAdmin from "../../../Hook/UseAdmin";
@@ -120,6 +120,16 @@ const Dashboard = () => {
               >
                 <BiCog size={24} />
                 Manage Classes
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                className="hover:text-red-400"
+                to="/dashboard/usersQuestions"
+              >
+                <FaQuestionCircle size={24} />
+                Users All Questions
               </NavLink>
             </li>
 
