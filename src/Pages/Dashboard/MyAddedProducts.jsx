@@ -4,7 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { RiSearchLine } from 'react-icons/ri';
 
 const MyAddedProducts = () => {
@@ -99,15 +99,17 @@ const MyAddedProducts = () => {
                             onChange={e => setSearchText(e.target.value)}
                         />
                         <button
-                            className="btn btn-primary"
+                        title="Click to Search Your Products"
+                            className="text-red-400 rounded text-4xl "
                             onClick={handleSearch}
                         >
-                            <RiSearchLine className="hover:text-red-400" />
+                            <RiSearchLine className="hover:text-red-500" />
                         </button>
                     </div>
                     <div>
                     {searchPerformed && (
                         <button
+                        title="Click To See All Products"
                             className="bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2 ml-5"
                             onClick={() => {
                                 setSearchResults([]);
@@ -115,7 +117,7 @@ const MyAddedProducts = () => {
                                 setSearchPerformed(false); // Reset searchPerformed to false
                             }}
                         >
-                            See All
+                        <FaEye className="text-[#FFD700] hover:text-red-400" />
                         </button>
                     )}
                     </div>
