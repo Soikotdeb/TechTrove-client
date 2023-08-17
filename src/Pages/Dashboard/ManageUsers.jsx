@@ -105,7 +105,7 @@ const ManageUsers = () => {
             <p className="text-sm font-semibold mb-1">Name: {user.name}</p>
             <p className="text-gray-400 mb-1">Gmail: {user.email}</p>
             <p className="text-blue-300 mb-3">Role: {user.role}</p>
-            <div className="flex justify-center space-x-9">
+            <div className="flex justify-center space-x-10 gap-5 ">
             {user.role === "admin" ? (
                     "admin"
                   ) : (
