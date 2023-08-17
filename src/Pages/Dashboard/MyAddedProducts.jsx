@@ -134,7 +134,7 @@ const MyAddedProducts = () => {
                          alt={product.productName}
                          className="w-full h-48 object-cover mb-2 rounded-lg"
                      />
-                        <p className="text-lg font-semibold">{product.productName}</p>
+                        <p className="text-lg font-semibold text-red-400 hover:font-extrabold">{product.productName}</p>
                      <div className="text-gray-600 text-base" >
                      <p><span className="font-bold text-gray-700 hover:underline">Color: </span> {product.productColor}</p>
                      <p><span className="font-bold text-gray-700 hover:underline">Product Price: </span>$ {product.price}</p>

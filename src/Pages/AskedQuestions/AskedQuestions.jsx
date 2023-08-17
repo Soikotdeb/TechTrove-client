@@ -1,15 +1,43 @@
 
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaArrowLeft, FaPaperPlane } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const AskedQuestions = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const {user}=useContext(AuthContext)
+  const UserProfile = user?.photoURL
 
-  const onSubmit = (data) => {
-    // Handle form submission here
-    console.log(data);
-  };
+  const onSubmit = (data,e) => {
+   // Merge the UserProfile into the data object
+   const formData = { ...data, UserProfile };
+
+   // Perform POST request to the server
+   fetch('http://localhost:5000/FrequentlyAskedQuestions', {
+     method: 'POST',
+     headers: {
+       'content-type': 'application/json',
+     },
+     body: JSON.stringify(formData),
+   })
+     .then((res) => res.json())
+     .then((responseData) => {
+       if (responseData.insertedId) {
+         Swal.fire({
+           icon: 'success',
+           title: 'Your Questions Send Successful',
+           text: `You have successfully sent your questions. Please Wait Few Time  & check your email for answers. Our management will reply to your questions shortly.`,
+         });
+         e.target.reset();
+       }
+     })
+     .catch((error) => {
+       console.error('Error sending user data to the server:', error);
+     });
+ };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-gradient-to-r from-teal-400 to-indigo-600">
@@ -21,6 +49,7 @@ const AskedQuestions = () => {
               Name
             </label>
             <input
+            defaultValue={user?.displayName}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.name ? 'border-red-500' : ''
               }`}
@@ -39,6 +68,7 @@ const AskedQuestions = () => {
               Email
             </label>
             <input
+            defaultValue={user?.email}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.email ? 'border-red-500' : ''
               }`}
@@ -105,24 +135,23 @@ const AskedQuestions = () => {
           </div>
 
 
-          <div>
+
+
+          <div className=''>
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
               Country
             </label>
-            <select
+            <input
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.country ? 'border-red-500' : ''
               }`}
+              type="text"
               id="country"
+              placeholder="Enter a country"
               {...register('country', { required: true })}
-            >
-              <option value="">Select a country</option>
-              <option value="usa">USA</option>
-              <option value="canada">Canada</option>
-              <option value="uk">UK</option>
-            </select>
+            />
             {errors.country && (
-              <p className="text-red-500 text-xs italic">Please select a country</p>
+              <p className="text-red-500 text-xs italic">Please enter a country</p>
             )}
           </div>
 
