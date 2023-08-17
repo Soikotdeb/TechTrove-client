@@ -13,6 +13,7 @@ const MyAddedProducts = () => {
     const [products, setProducts] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchPerformed, setSearchPerformed] = useState(false); // New state
 
     const fetchUserAddedProducts = async () => {
         try {
@@ -65,6 +66,7 @@ const MyAddedProducts = () => {
             product.productName.toLowerCase().includes(searchText.toLowerCase())
         );
         setSearchResults(filteredResults);
+        setSearchPerformed(true); // Set searchPerformed to true
     };
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -87,7 +89,8 @@ const MyAddedProducts = () => {
                             <p className="text-purple-300"> {user?.displayName} - Your All Added Products Here</p>
                         </marquee>
                     </div>
-                     <div className="align-middle flex justify-center text-center items-center mb-2">
+                    <div className="align-middle flex justify-center text-center items-center">
+                    <div className="align-middle flex justify-center text-center items-center mb-2">
                         <input
                             type="text"
                             placeholder="Search Your Products"
@@ -102,6 +105,23 @@ const MyAddedProducts = () => {
                             <RiSearchLine className="hover:text-red-400" />
                         </button>
                     </div>
+                    <div>
+                    {searchPerformed && (
+                        <button
+                            className="bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2 ml-5"
+                            onClick={() => {
+                                setSearchResults([]);
+                                setSearchText("");
+                                setSearchPerformed(false); // Reset searchPerformed to false
+                            }}
+                        >
+                            See All
+                        </button>
+                    )}
+                    </div>
+                    </div>
+                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {(searchResults.length > 0 ? searchResults : products).map((product, index) => (
                             <div key={product._id} className="bg-white shadow-md rounded-lg p-4 transition transform hover:-translate-y-2 hover:shadow-xl">
@@ -137,3 +157,5 @@ const MyAddedProducts = () => {
 };
 
 export default MyAddedProducts;
+
+
