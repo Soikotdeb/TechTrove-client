@@ -1,13 +1,15 @@
 
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaReplyAll, FaTrashAlt } from "react-icons/fa";
+import { FaEye, FaReplyAll, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 
 const UsersQuestions = () => {
+    const [numCardsToShow, setNumCardsToShow] = useState(12); // Number of cards to show initially
+    const incrementValue = 12; // Increment value for "See More" button
     const { data: Questions = [], refetch } = useQuery(
         ["Questions"],
         async () => {
@@ -22,7 +24,6 @@ const UsersQuestions = () => {
     });
     // Reverse the order of Questions array to show the last added card first
     const reversedQuestions = [...Questions].reverse();
-
 
     const handleDelete = async (id) => {
         try {
@@ -58,7 +59,9 @@ const UsersQuestions = () => {
         return text;
     };
 
+
     const [expandedQuestion, setExpandedQuestion] = useState(null);
+
     const handleReply = (Question) => {
         Swal.fire({
             title: "Replay to Users Question",
@@ -97,15 +100,21 @@ const UsersQuestions = () => {
     };
 
 
+    const handleSeeMore = () => {
+        setNumCardsToShow(numCardsToShow + incrementValue);
+    };
+
     return (
+        <div>
+
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-3 px-2">
-            {reversedQuestions.map((Question, index) => (
+            {reversedQuestions.slice(0, numCardsToShow).map((Question, index) => (
                 <motion.div
                     key={index}
                     className="bg-gradient-to-b from-blue-700 to-blue-900 rounded-lg p-8 text-white shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
                     whileHover={{ scale: 1.02 }}
                 >
-                    <div className="flex justify-center mb-4">
+                   <div className="flex justify-center mb-4">
                         <img
                             src={Question?.UserProfile}
                             alt="User Avatar"
@@ -164,8 +173,18 @@ const UsersQuestions = () => {
                 </motion.div>
             ))}
         </div>
+        <div className="flex justify-center mt-2 mb-3">
+         {numCardsToShow < reversedQuestions.length && (
+          <Link
+            className="  flex justify-center w-1/2 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-lg transition duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
+            onClick={handleSeeMore}
+          >
+           <span className="text-green-400 hover:text-green-500"> SEE MORE</span>
+          </Link>
+        )}
+         </div>
+        </div>
     );
 };
 
 export default UsersQuestions;
-
