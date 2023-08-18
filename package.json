@@ -21,7 +21,7 @@
     "emailjs-com": "^3.2.0",
     "file-saver": "^2.0.5",
     "firebase": "^10.0.0",
-    "framer-motion": "^10.15.0",
+    "framer-motion": "^10.16.0",
     "html2pdf.js": "^0.10.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

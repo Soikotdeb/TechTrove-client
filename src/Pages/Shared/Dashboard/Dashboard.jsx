@@ -79,7 +79,7 @@ const Dashboard = () => {
       </div>
       {/* Admin Dashboard */}
       {isAdminOrInstructor === "admin" && (
-        <div className="drawer-side bg-gray-800">
+        <div className="drawer-side ">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full text-white bg-gray-900  font-bold text-1xl">
             <p className="text-orange-600 font-bold text-2xl mb-4">
