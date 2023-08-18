@@ -96,7 +96,7 @@ const ManageUsers = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {users.map((user) => (
-          <div key={user._id} className="border rounded p-4 shadow-md bg-gray-700 hover:bg-gray-800 transition-colors duration-300">
+          <div key={user._id} className=" border-b border-l border-r border-t  border-red-400 rounded p-4 shadow-md bg-gray-700 hover:bg-gray-800 transition-colors duration-300">
             <img
               src={user?.image}
               alt={user.name}
