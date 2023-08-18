@@ -20,6 +20,8 @@ const UsersQuestions = () => {
         const storedReplies = JSON.parse(localStorage.getItem('repliesSent')) || {};
         return storedReplies;
     });
+    // Reverse the order of Questions array to show the last added card first
+    const reversedQuestions = [...Questions].reverse();
 
 
     const handleDelete = async (id) => {
@@ -97,7 +99,7 @@ const UsersQuestions = () => {
 
     return (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-3 px-2">
-            {Questions.map((Question, index) => (
+            {reversedQuestions.map((Question, index) => (
                 <motion.div
                     key={index}
                     className="bg-gradient-to-b from-blue-700 to-blue-900 rounded-lg p-8 text-white shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
