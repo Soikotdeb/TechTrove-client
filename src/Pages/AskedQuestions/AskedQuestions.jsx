@@ -30,7 +30,7 @@ const AskedQuestions = () => {
          Swal.fire({
            icon: 'success',
            title: 'Your Questions Send Successful',
-           text: `You have successfully sent your questions. Please Wait Few Time  & check your email for answers. Our management will reply to your questions shortly.`,
+           text: `You have successfully sent your questions. Please Wait Few Time . Our management will reply to your questions shortly.`,
          });
          e.target.reset();
        }

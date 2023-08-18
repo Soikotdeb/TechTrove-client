@@ -1,5 +1,4 @@
 
-
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaReplyAll, FaTrashAlt } from "react-icons/fa";
@@ -7,7 +6,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-
 
 const UsersQuestions = () => {
     const { data: Questions = [], refetch } = useQuery(
@@ -17,6 +15,12 @@ const UsersQuestions = () => {
             return res.json();
         }
     );
+
+    const [repliesSent, setRepliesSent] = useState(() => {
+        const storedReplies = JSON.parse(localStorage.getItem('repliesSent')) || {};
+        return storedReplies;
+    });
+
 
     const handleDelete = async (id) => {
         try {
@@ -53,6 +57,43 @@ const UsersQuestions = () => {
     };
 
     const [expandedQuestion, setExpandedQuestion] = useState(null);
+    const handleReply = (Question) => {
+        Swal.fire({
+            title: "Replay to Users Question",
+            text: `❓  ${Question.question}`,
+            input: "textarea",
+            showCancelButton: true,
+            confirmButtonText: "Submit"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const replay = result.value;
+                fetch(`http://localhost:5000/AdminReplayToUser/${Question._id}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ replay }),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    setRepliesSent(prevState => ({
+                        ...prevState,
+                        [Question._id]: true
+                    }));
+                    localStorage.setItem('repliesSent', JSON.stringify({
+                        ...repliesSent,
+                        [Question._id]: true
+                    }));
+                    toast.success('Your replay has been sent successfully');
+                    refetch();
+                })
+                .catch((error) => {
+                    toast.error('Error sending replay:', error);
+                });
+            }
+        });
+    };
+
 
     return (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-3 px-2">
@@ -99,53 +140,25 @@ const UsersQuestions = () => {
                             </button>
                         )}
                     </p>
-                    <div className="flex justify-between">
-                        <button
-                            title="Click To Reply"
-                            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            onClick={() => {
-                                Swal.fire({
-                                    title: "Replay to Users Question",
-                                    text:`❓  ${Question.question}`,
-                                    input: "textarea",
-                                    showCancelButton: true,
-                                    confirmButtonText: "Submit"
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        const replay = result.value;
-                                        // Send replay using PATCH request
-                                        fetch(`http://localhost:5000/AdminReplayToUser/${Question._id}`, {
-                                            method: "PATCH",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify({ replay }),
-                                        })
-                                        .then((response) => response.json())
-                                        .then((data) => {
-                                            // Handle success and show toast success message
-                                            toast.success('Your replay has been sent successfully');
-                                            // Refetch Question after sending replay
-                                            refetch();
-                                        })
-                                        .catch((error) => {
-                                            // console.error("Error sending replay:", error);
-                                            toast.error('Error sending replay:',error);
-                                        });
-                                    }
-                                });
-                            }}
-                        >
-                            <FaReplyAll />
-                        </button>
-                        <Link
+                    
+                   <div className="flex gap-4">
+                   <button
+                        title="Click To Reply"
+                        className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() => handleReply(Question)}
+                         hidden={repliesSent[Question._id]} // Disable the button if a reply has been sent
+                       
+                    >
+                        <FaReplyAll />
+                    </button>
+                   <Link
                             title="Click To Delete"
                             onClick={() => handleDelete(Question._id)}
                             className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
                             <FaTrashAlt />
                         </Link>
-                    </div>
+                   </div>
                 </motion.div>
             ))}
         </div>
@@ -153,3 +166,4 @@ const UsersQuestions = () => {
 };
 
 export default UsersQuestions;
+
