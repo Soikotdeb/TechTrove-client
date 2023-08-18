@@ -111,7 +111,7 @@ const UsersQuestions = () => {
             {reversedQuestions.slice(0, numCardsToShow).map((Question, index) => (
                 <motion.div
                     key={index}
-                    className="bg-gradient-to-b from-blue-700 to-blue-900 rounded-lg p-8 text-white shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
+                    className=" border-b border-l border-r border-t  border-red-400 pb-2 bg-gradient-to-b from-blue-700 to-blue-900 rounded-lg p-8 text-white shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
                     whileHover={{ scale: 1.02 }}
                 >
                    <div className="flex justify-center mb-4">
@@ -126,7 +126,7 @@ const UsersQuestions = () => {
                         <p className="text-sm text-gray-300">{Question.email}</p> 
                         <p className="text-sm text-gray-300">Age: {Question.age}</p>
                     </div>
-                    <div className="mb-2 border-b border-gray-700 pb-2">
+                    <div className="mb-2 border-b border-red-400 pb-2">
                         <p className="text-xs text-gray-400">Date: {Question.date}</p>
                         <p className="text-xs text-gray-400">Time: {Question.time}</p>
                         <p className="text-xs text-gray-400">Country: {Question.country}</p>
@@ -154,7 +154,7 @@ const UsersQuestions = () => {
                     
                    <div className="flex gap-4">
                    <button
-                        title="Click To Reply"
+                        title="Click To Send Reply"
                         className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => handleReply(Question)}
                          hidden={repliesSent[Question._id]} // Disable the button if a reply has been sent
