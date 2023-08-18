@@ -10,10 +10,11 @@ const AskedQuestions = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const {user}=useContext(AuthContext)
   const UserProfile = user?.photoURL
+  const AdminReplay= ''
 
   const onSubmit = (data,e) => {
    // Merge the UserProfile into the data object
-   const formData = { ...data, UserProfile };
+   const formData = { ...data, UserProfile,AdminReplay };
 
    // Perform POST request to the server
    fetch('http://localhost:5000/FrequentlyAskedQuestions', {
