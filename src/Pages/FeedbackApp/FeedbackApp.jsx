@@ -71,7 +71,7 @@ const FeedbackApp = () => {
               <FaStar
                 key={index}
                 className={`text-3xl cursor-pointer ${
-                  index + 1 <= rating ? 'text-yellow-400' : 'text-gray-300'
+                  index + 1 <= rating ? 'text-red-500' : 'text-gray-400'
                 }`}
                 onClick={() => handleRatingClick(index + 1)}
               />
