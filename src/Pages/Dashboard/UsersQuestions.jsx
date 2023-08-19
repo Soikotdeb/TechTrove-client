@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaEye, FaReplyAll, FaTrashAlt } from "react-icons/fa";
+import { FaReplyAll, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
@@ -188,3 +188,4 @@ const UsersQuestions = () => {
 };
 
 export default UsersQuestions;
+

@@ -10,6 +10,7 @@ import logo from "../../../assets/image/company logo.png";
 import UseAdmin from "../../../Hook/UseAdmin";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import {IoMdStar } from 'react-icons/io';
 
 const Dashboard = () => {
   const [isAdminOrInstructor, isAdminOrInstructorLoading] = UseAdmin();
@@ -130,6 +131,16 @@ const Dashboard = () => {
               >
                 <FaQuestionCircle size={24} />
                 Users All Questions
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                className="hover:text-red-400"
+                to="/dashboard/usersFeedback"
+              >
+                <IoMdStar size={24}/>
+                Users Feedback
               </NavLink>
             </li>
 
