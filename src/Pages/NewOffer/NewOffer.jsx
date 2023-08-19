@@ -43,7 +43,8 @@ const LatestOffers = () => {
                 alt={offer.productName}
                 className="w-full h-full object-contain"
               />
-              <p className="absolute top-3 right-3 bg-green-500 text-white p-2 rounded-lg" title='Discount Price'>
+              <p className="absolute top-3 right-3 bg-green-500 text-white p-2 rounded-lg flex items-center" title='Discount Price'>
+              <FaTags className="text-gray-100 mr-1" />
                 -${offer.discountAmount}
               </p>
               <img className='absolute top-14 left-3 w-10 rounded-lg' src={discount} alt="" />
@@ -53,7 +54,7 @@ const LatestOffers = () => {
             <div className="p-4">
               <h3 className="text-lg font-semibold mb-2">{offer.productName}</h3>
               <div className="flex items-center justify-between mt-3">
-                <p className="text-gray-600">Regular Price: {offer.price}</p>
+                <p className="text-gray-600"><span className='font-semibold'>Regular Price :</span>  {offer.price}</p>
                 <FaArrowAltCircleRight
                   className="text-gray-600"
                   size={24}
@@ -61,8 +62,7 @@ const LatestOffers = () => {
                 />
               </div>
               <div className="flex items-center mt-2">
-                <FaTags className="text-gray-400 mr-1" />
-                <p className="text-gray-500 text-sm">Category: {offer.category}</p>
+                <p className="text-gray-500 text-sm"><span className='font-semibold'>Color :</span> {offer.productColor}</p>
               </div>
             </div>
           </motion.div>
