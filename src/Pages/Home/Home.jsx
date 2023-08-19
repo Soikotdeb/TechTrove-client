@@ -10,6 +10,7 @@ import PartnarBrands from './../PartnersBrand/PartnarBrands';
 import { Link } from 'react-router-dom';
 import FeedbackApp from '../FeedbackApp/FeedbackApp';
 import NewOffer from '../NewOffer/NewOffer';
+import WebsiteInfo from '../WebsiteInfo/WebsiteInfo';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -100,6 +101,9 @@ const Home = () => {
       <div className="lg:p-8 bg-slate-200 mt-2">
         <PartnarBrands></PartnarBrands>
       </div>
+    <div className="container mx-auto p-4  bg-slate-100">
+      <WebsiteInfo></WebsiteInfo>
+    </div>
       <div className="container mx-auto p-4  bg-slate-100">
       <FeedbackApp></FeedbackApp>
     </div>
