@@ -13,31 +13,48 @@ const FeedbackApp = () => {
 
   const handleRatingClick = (selectedRating) => {
     setRating(selectedRating);
+
   };
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
+
   };
 
   const handleClearFeedback = () => {
     setFeedback('');
+
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Here, you can send the feedback and rating data to your server or perform any other actions.
-    // For this example, we'll just log the data.
-    console.log('Rating:', rating);
-    console.log('Feedback:', feedback);
-    // Show toast message for successful submission
-    toast.success('Thank You For Your Valuable Feedback!', {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    const UserProfile = user?.photoURL
+    const UserName = user?.displayName
+
+
+    fetch('http://localhost:5000/UserFeedback', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        rating: rating,
+        feedback: feedback,
+        UserProfile: UserProfile,
+        UserName: UserName
+      }),
+    })
+      .then((res) => res.json())
+      .then((responseData) => {
+        if (responseData.insertedId) {
+          // Show toast message for successful submission
+          toast.success('Thank You For Your Valuable Feedback!')
+        }
+      })
+      .catch((error) => {
+        toast.error('Error sending user data to the server:', error)
+      });
     // Reset the form
     setRating(0);
     setFeedback('');
@@ -97,5 +114,3 @@ const FeedbackApp = () => {
 };
 
 export default FeedbackApp;
-
-
