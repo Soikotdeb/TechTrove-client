@@ -52,7 +52,7 @@ const WebsiteInfo = () => {
 
     return (
         <div>
-          <div className='text-3xl font-bold mb-4 text-center text-purple-600 hover:text-purple-700'>
+          <div className='text-3xl font-bold mb-4 text-center text-gray-400 hover:text-purple-700'>
          <p>Our success</p>
          </div>
             <div className='flex justify-center gap-4'>

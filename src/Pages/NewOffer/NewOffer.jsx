@@ -19,7 +19,7 @@ const NewOffer = () => {
   
     return (
       <div className="container mx-auto py-8">
-        <h2 className="text-3xl font-bold mb-4 justify-center align-middle text-center text-purple-600 hover:text-purple-700">All Latest Offers</h2>
+        <h2 className="text-3xl font-bold mb-4 justify-center align-middle text-center text-gray-400 hover:text-purple-700">All Latest Offers</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {offers.map((offer, index) => (
             <motion.div

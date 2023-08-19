@@ -62,7 +62,7 @@ const FeedbackApp = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-4 text-center text-purple-600 hover:text-purple-700">Give Your Valuable Feedback & Rating</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center text-gray-400 hover:text-purple-700">Give Your Valuable Feedback & Rating</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Rating:</label>

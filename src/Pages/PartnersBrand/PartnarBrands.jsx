@@ -31,7 +31,7 @@ export default function App() {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-semibold text-center text-purple-600 hover:text-purple-700">OUR PARTNERS BRAND </h1>
+        <h1 className="text-3xl font-semibold text-center text-gray-400 hover:text-purple-700">OUR PARTNERS BRAND </h1>
       </div>
       <Swiper
         pagination={pagination}
