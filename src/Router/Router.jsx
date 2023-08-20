@@ -1,6 +1,4 @@
-import {
-    createBrowserRouter,
-  } from "react-router-dom";
+import {createBrowserRouter,} from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../Pages/Home/Home";
 import NotFoundPage from "../Pages/Shared/NotFoundPage/NotFoundPage";
@@ -17,6 +15,7 @@ import AddProducts from "../Pages/Dashboard/AddProducts";
 import MyAddedProducts from "../Pages/Dashboard/MyAddedProducts";
 import UsersQuestions from "../Pages/Dashboard/UsersQuestions";
 import UsersFeedback from "../Pages/Dashboard/UsersFeedback";
+import NewOfferDetails from "../Pages/NewOffer/NewOfferDetails";
 
 
 
@@ -30,13 +29,17 @@ export const router = createBrowserRouter([
         {
             path:'/',
             element:<Home></Home>
-        },
+        }
       
       ]
     },
   {
     path:"logIn",
     element:<LogIn></LogIn>
+  },
+  {
+    path: 'fullDetails/:id',
+    element: <NewOfferDetails />, 
   },
   {
     path:'registration',

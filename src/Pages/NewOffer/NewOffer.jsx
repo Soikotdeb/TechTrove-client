@@ -1,26 +1,28 @@
-
-import React, { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { motion } from 'framer-motion';
-import { FaArrowAltCircleRight, FaTags } from 'react-icons/fa';
-import discount from '../../assets/image/discount.png'
-import specialOffer from '../../assets/image/specialOffer.png'
-import limitedTime from '../../assets/image/limitedTime.png'
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import { FaArrowAltCircleRight, FaTags } from "react-icons/fa";
+import discount from "../../assets/image/discount.png";
+import specialOffer from "../../assets/image/specialOffer.png";
+import limitedTime from "../../assets/image/limitedTime.png";
+import { Link } from "react-router-dom";
 
 const LatestOffers = () => {
   const [latestOffers, setLatestOffers] = useState([]);
 
-  const { data: fetchedOffers = [] } = useQuery(
-    ['latestOffers'],
-    async () => {
-      const res = await fetch('http://localhost:5000/LatestOffers'); 
-      return res.json();
-    }
-  );
+  const { data: fetchedOffers = [] } = useQuery(["latestOffers"], async () => {
+    const res = await fetch("http://localhost:5000/LatestOffers");
+    return res.json();
+  });
 
   useEffect(() => {
     setLatestOffers(fetchedOffers);
   }, [fetchedOffers]);
+
+  const handleFullDetails = (offer) => {
+    // Store specific offer information in local storage
+    localStorage.setItem("OfferDetails", JSON.stringify(offer));
+  };
 
   return (
     <div className="container mx-auto py-8">
@@ -43,26 +45,53 @@ const LatestOffers = () => {
                 alt={offer.productName}
                 className="w-full h-full object-contain"
               />
-              <p className="absolute top-3 right-3 bg-green-500 text-white p-2 rounded-lg flex items-center" title='Discount Price'>
-              <FaTags className="text-gray-100 mr-1" />
+              <p
+                className="absolute top-3 right-3 bg-green-500 text-white p-2 rounded-lg flex items-center"
+                title="Discount Price"
+              >
+                <FaTags className="text-gray-100 mr-1" />
                 -${offer.discountAmount}
               </p>
-              <img className='absolute top-14 left-3 w-10 rounded-lg' src={discount} alt="" />
-              <img className='absolute top-3 left-3 w-10 rounded-lg' src={specialOffer} alt="" />
-              <img className='absolute top-24 left-3 w-10 rounded-lg' src={limitedTime} alt="" />
+              <img
+                className="absolute top-14 left-3 w-10 rounded-lg"
+                src={discount}
+                alt=""
+              />
+              <img
+                className="absolute top-3 left-3 w-10 rounded-lg"
+                src={specialOffer}
+                alt=""
+              />
+              <img
+                className="absolute top-24 left-3 w-10 rounded-lg"
+                src={limitedTime}
+                alt=""
+              />
             </div>
             <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2">{offer.productName}</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {offer.productName}
+              </h3>
               <div className="flex items-center justify-between mt-3">
-                <p className="text-gray-600"><span className='font-semibold'>Regular Price :</span>  {offer.price}</p>
-                <FaArrowAltCircleRight
-                  className="text-gray-600"
-                  size={24}
-                  title="Tap to See All Details"
-                />
+                <p className="text-gray-600">
+                  <span className="font-semibold">Regular Price :</span>{" "}
+                  {offer.price}
+                </p>
+                <Link to={`/fullDetails/${offer._id}`}
+                 onClick={() => handleFullDetails(offer)}
+                >
+                  <FaArrowAltCircleRight
+                    className="text-gray-600"
+                    size={24}
+                    title="Tap to See All Details"
+                  />
+                </Link>
               </div>
               <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm"><span className='font-semibold'>Color :</span> {offer.productColor}</p>
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">Color :</span>{" "}
+                  {offer.productColor}
+                </p>
               </div>
             </div>
           </motion.div>
