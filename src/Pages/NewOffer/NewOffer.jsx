@@ -70,11 +70,11 @@ const LatestOffers = () => {
             </div>
             <div className="p-4">
               <h3 className="text-lg font-semibold mb-2">
-                {offer.productName}
+              ➺ {offer.productName}
               </h3>
               <div className="flex items-center justify-between mt-3">
                 <p className="text-gray-600">
-                  <span className="font-semibold">Regular Price :</span>{" "}
+                  <span className="font-semibold">✪ Regular Price :</span>{" "}
                   {offer.price}
                 </p>
                 <Link to={`/fullDetails/${offer._id}`}
@@ -89,7 +89,7 @@ const LatestOffers = () => {
               </div>
               <div className="flex items-center mt-2">
                 <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">Color :</span>{" "}
+                  <span className="font-semibold">✪ Color :</span>{" "}
                   {offer.productColor}
                 </p>
               </div>

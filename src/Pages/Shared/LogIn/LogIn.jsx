@@ -3,7 +3,7 @@ import { useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import login from '../../../assets/image/login.webp';
 import background from '../../../assets/image/crop.jpg';
-import { FaEye, FaEyeSlash, FaFacebook, FaGoogle, FaKey } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebook, FaGoogle, FaHome, FaKey } from 'react-icons/fa';
 import { Link, json, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
@@ -243,7 +243,7 @@ const LogIn = () => {
             to='/'
             className='text-white  absolute mt-5 font-extrabold bg-green-500 hover:bg-green-600  px-2 py-2 rounded-full focus:outline-none shadow-md transition-shadow duration-300 '
           >
-            GO TO HOME
+            <FaHome size={28} title="GO HOME"/>
           </Link>
         </div>
       </div>

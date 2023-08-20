@@ -134,16 +134,16 @@ const MyAddedProducts = () => {
                          alt={product.productName}
                          className="w-full h-48 object-cover mb-2 rounded-lg"
                      />
-                        <p className="text-lg font-semibold text-red-400 hover:font-extrabold">{product.productName}</p>
+                        <p className="text-lg font-semibold text-red-400 hover:font-extrabold">➲ {product.productName}</p>
                      <div className="text-gray-600 text-base" >
-                     <p><span className="font-bold text-gray-700 hover:underline">Color: </span> {product.productColor}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">Product Price: </span>$ {product.price}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">Storage: </span> {product.storage}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">Category: </span> {product.category}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">MadeIn</span> : {product.madeIn}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">DiscountAmount</span> $ {product.discountAmount}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">Available Product: </span> {product.productQuantity}</p>
-                     <p><span className="font-bold text-gray-700 hover:underline">Description: </span> {product.description}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ Color: </span> {product.productColor}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ Product Price: </span>$ {product.price}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ Storage: </span> {product.storage}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ Category: </span> {product.category}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ MadeIn</span> : {product.madeIn}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ DiscountAmount</span> $ {product.discountAmount}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ Available Product: </span> {product.productQuantity}</p>
+                     <p><span className="font-bold text-gray-700 hover:underline">❂ Description: </span> {product.description}</p>
                      </div>
                      <div className="flex justify-between mt-2">
                      <Link className="bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2"> <FaEdit title="Click To Edit" /></Link>

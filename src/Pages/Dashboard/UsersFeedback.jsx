@@ -54,10 +54,10 @@ const UsersFeedback = () => {
                     <div key={feedback._id} className="bg-gradient-to-br from-gray-700 to-gray-800 border border-b border-l border-r border-t border-gray-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                         <div className="flex items-center mb-4">
                             <img src={feedback.UserProfile} alt={feedback.UserName} className="w-12 h-12 rounded-full mr-3" />
-                            <p className="text-white text-lg font-semibold">{feedback.UserName}</p>
+                            <p className="text-white text-lg font-semibold">⍟ {feedback.UserName}</p>
                         </div>
-                        <div className="mb-2">
-                            <Rating
+                        <div className="mb-2 flex gap-5">
+                        <p className="text-purple-500">➲</p>  <Rating
                                 readonly
                                 placeholderRating={feedback.rating}
                                 emptySymbol={<FaRegStar className="text-gray-600"></FaRegStar>}
@@ -68,7 +68,7 @@ const UsersFeedback = () => {
                         </div>
                             <hr className="mb-2 border-t-2 border-gray-700" />
                         <p className="text-gray-300 text-sm">
-                            {expandedFeedback.includes(feedback._id)
+                       <span className="text-purple-500"> ⟿</span>{' '}     {expandedFeedback.includes(feedback._id)
                                 ? feedback.feedback
                                 : feedback.feedback.slice(0, 20)}
                             {!expandedFeedback.includes(feedback._id) && feedback.feedback.length > 20 && (

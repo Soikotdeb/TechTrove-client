@@ -123,19 +123,19 @@ const UsersQuestions = () => {
                     </div>
                     <div className="mb-2">
                         <h3 className="text-xl font-semibold">{Question.name}</h3>
-                        <p className="text-sm text-gray-300">{Question.email}</p> 
-                        <p className="text-sm text-gray-300">Age: {Question.age}</p>
+                        <p className="text-sm text-gray-300">➻ {Question.email}</p> 
+                        <p className="text-sm text-gray-300">➻ Age: {Question.age}</p>
                     </div>
                     <div className="mb-2 border-b border-red-400 pb-2">
-                        <p className="text-xs text-gray-400">Date: {Question.date}</p>
-                        <p className="text-xs text-gray-400">Time: {Question.time}</p>
-                        <p className="text-xs text-gray-400">Country: {Question.country}</p>
+                        <p className="text-xs text-gray-400">❂ Date: {Question.date}</p>
+                        <p className="text-xs text-gray-400">❂ Time: {Question.time}</p>
+                        <p className="text-xs text-gray-400">❂ Country: {Question.country}</p>
                     </div>
                     <small className="flex justify-center text-red-300 hover:text-red-400 border border-green-400 hover:border-green-500">
                         <marquee>Users Question</marquee>
                     </small>
-                    <p className="text-sm text-gray-300 mb-4 mt-2">
-                        {expandedQuestion === index
+                       <p className="text-sm text-gray-300 mb-4 mt-2">
+                       ❓{' '}{expandedQuestion === index
                             ? Question.question
                             : truncateText(Question.question, 50)}{" "}
                         {Question.question.length > 50 && (
