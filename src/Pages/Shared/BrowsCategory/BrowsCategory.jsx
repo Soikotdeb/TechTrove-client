@@ -79,12 +79,12 @@ const BrowsCategory = () => {
                 alt=""
               />
               <img
-                className="absolute top-20 left-3 w-12 rounded-lg"
+                className="absolute top-20 left-3 w-12 rounded-lg "
                 src={Quality}
                 alt=""
               />
               <img
-                className="absolute top-32 left-4 w-10 rounded-lg"
+                className="absolute top-32 left-4 w-10 rounded-lg hover:w-20"
                 src={logo}
                 alt=""
               />
