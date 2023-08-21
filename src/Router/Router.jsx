@@ -17,6 +17,7 @@ import UsersQuestions from "../Pages/Dashboard/UsersQuestions";
 import UsersFeedback from "../Pages/Dashboard/UsersFeedback";
 import NewOfferDetails from "../Pages/NewOffer/NewOfferDetails";
 import BrowsCategory from "../Pages/Shared/BrowsCategory/BrowsCategory";
+import BrowsCategoryDetails from "../Pages/Shared/BrowsCategory/BrowsCategoryDetails";
 
 
 
@@ -40,7 +41,11 @@ export const router = createBrowserRouter([
   },
   {
     path: 'fullDetails/:id',
-    element: <NewOfferDetails />, 
+    element: <NewOfferDetails /> 
+  },
+  {
+    path: 'BrowsCategoryDetails/:id',
+    element: <BrowsCategoryDetails/> 
   },
   {
     path:'registration',

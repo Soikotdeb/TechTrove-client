@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaHome, FaTags } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaHome, FaTags } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -34,11 +34,18 @@ const BrowsCategory = () => {
       return () => clearInterval(interval);
     }, [id]);
 
+    const handleFullDetails = (product) => {
+        // Store specific offer information in local storage
+        localStorage.setItem("BrowsDetails", JSON.stringify(product));
+      };
+
   return (
     <div className="bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen text-gray-50">
       <div className="container mx-auto px-4 py-2">
-        <Link to="/" className="text-red-500 hover:text-red-600"><FaHome size={24} /></Link>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+      <Link to="/" className="  hover:underline mb-4 inline-block font-extrabold hover:text-red-600 text-white">
+     <FaHome size={28} title="GO HOME"/>
+      </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-1">
           {categoryData ? (
             categoryData.map((product, index) => (
               <motion.div
@@ -81,7 +88,7 @@ const BrowsCategory = () => {
               </div> */}
               <div className="flex items-center mt-2">
                 <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ Price :</span>{" "}
+                  <span className="font-semibold">✪ Regular Price :</span>{" "}
                   {product.price}
                 </p>
               </div>
@@ -109,17 +116,22 @@ const BrowsCategory = () => {
                 {product.storage}
                 </p>
               </div> */}
-              {/* <div className="flex items-center mt-2">
+               <div className="flex items-center mt-2">
                 <p className="text-gray-500 text-sm">
                   <span className="font-semibold">✪ Discount :</span>{" "}
                   {product.discountAmount}
                 </p>
-              </div> */}
+              </div> 
+              <div className='flex justify-between'>
               <div className="flex items-center mt-2">
                 <p className="text-gray-500 text-sm">
                   <span className="font-semibold">✪ AvailableProduct :</span>{" "}
                 {product.productQuantity}
                 </p>
+              </div>
+              <div>
+                    <Link   onClick={() => handleFullDetails(product)} to={`/BrowsCategoryDetails/${product._id}`} className='text-gray-600 hover:text-purple-600' title='Details'> <FaArrowAltCircleRight size={24}/></Link>
+               </div>
               </div>
             </div>
               </motion.div>
