@@ -137,7 +137,7 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
               title={user.displayName || "Not Available User Name"}
               className="avatar online"
             >
-              <div className="w-9 rounded-full">
+              <div className="w-9 rounded-full border border-red-800">
                 <img src={user?.photoURL} alt="User Profile" /> 
               </div>
             </div>
