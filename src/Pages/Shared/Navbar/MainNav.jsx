@@ -81,31 +81,16 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div className="flex items-center bg-white rounded overflow-hidden">
-            <input
-              type="text"
-              placeholder="Type here"
-              className="border-none px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-            <select className="px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              <option disabled selected>
-                Category?
-              </option>
-              <option>Nokia</option>
-              <option>Huawei</option>
-              <option>iPhone</option>
-              <option>MacBook</option>
-              <option>Google</option>
-              <option>Xiaomi</option>
-              <option>Vivo</option>
-              <option>Samsung</option>
-              <option>OnePlus</option>
-              <option>Oppo</option>
-            </select>
-            <button className="btn px-2 py-3 bg-indigo-500 hover:bg-indigo-600 transition-colors duration-300">
-              <BiSearch className="w-6 h-6 text-white" />
-            </button>
-          </div>
+        <div className="flex items-center space-x-2">
+         <input
+           type="text"
+           placeholder="Search..."
+           className="py-2 px-3 rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
+         />
+         <Link to="/HomeSearch" className="py-2 px-4 rounded-lg bg-gradient-to-r from-gray-300 to-gray-500 hover:from-gray-500 hover:to-gray-700 text-white hover:text-gray-100 transition duration-300">
+           SEARCH
+         </Link>
+         </div>
             <ul className="menu menu-horizontal flex items-center gap-4">
             <li>
               <Link>

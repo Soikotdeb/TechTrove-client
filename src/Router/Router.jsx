@@ -18,6 +18,7 @@ import UsersFeedback from "../Pages/Dashboard/UsersFeedback";
 import NewOfferDetails from "../Pages/NewOffer/NewOfferDetails";
 import BrowsCategory from "../Pages/Shared/BrowsCategory/BrowsCategory";
 import BrowsCategoryDetails from "../Pages/Shared/BrowsCategory/BrowsCategoryDetails";
+import SearchResults from "../Pages/Shared/SearchResults/SearchResults";
 
 
 
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
   {
     path: 'BrowsCategoryDetails/:id',
     element: <BrowsCategoryDetails/> 
+  },
+  {
+    path: '/HomeSearch',
+    element: <SearchResults/>
   },
   {
     path:'registration',
