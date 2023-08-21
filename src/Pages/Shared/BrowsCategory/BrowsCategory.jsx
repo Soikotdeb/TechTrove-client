@@ -1,0 +1,145 @@
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaHome, FaTags } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+const BrowsCategory = () => {
+    const { id } = useParams();
+    const [categoryData, setCategoryData] = useState(null);
+  
+    useEffect(() => {
+      // Initialize AOS animations
+      AOS.init();
+  
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/categoryProducts/${id}`);
+          setCategoryData(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      // Initial fetch of data
+      fetchData();
+  
+      // Setup interval to periodically fetch data
+      const interval = setInterval(fetchData, 1000); // Adjust the interval as needed
+  
+      // Cleanup interval on unmount
+      return () => clearInterval(interval);
+    }, [id]);
+
+  return (
+    <div className="bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen text-gray-50">
+      <div className="container mx-auto px-4 py-2">
+        <Link to="/" className="text-red-500 hover:text-red-600"><FaHome size={24} /></Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          {categoryData ? (
+            categoryData.map((product, index) => (
+              <motion.div
+                key={product._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                 <div className="relative overflow-hidden h-52">
+              <img
+                src={product.productImages[0]}
+                alt={product.productName}
+                className="w-full h-full object-contain"
+              />
+              <p
+                className="absolute top-3 right-3 bg-green-500 text-white p-2 rounded-lg flex items-center"
+                title="Discount Price"
+              >
+                <FaTags className="text-gray-100 mr-1" />
+                -${product.discountAmount}
+              </p>
+
+
+            </div>
+            <div className="p-4">
+              <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-lg font-semibold mb-1">
+                  <span className="font-semibold">✪ ➺  :</span>{" "}
+                  {product.productName}
+                </p>
+              </div>
+              {/* <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ Color :</span>{" "}
+                  {product.productColor}
+                </p>
+              </div> */}
+              <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ Price :</span>{" "}
+                  {product.price}
+                </p>
+              </div>
+              {/* <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ MadIn :</span>{" "}
+                  {product.madeIn}
+                </p>
+              </div> */}
+              {/* <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ Category :</span>{" "}
+                  {product.category}
+                </p>
+              </div> */}
+              {/* <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ Description :</span>{" "}
+                  {product.description}
+                </p>
+              </div> */}
+              {/* <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ Storage :</span>{" "}
+                {product.storage}
+                </p>
+              </div> */}
+              {/* <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ Discount :</span>{" "}
+                  {product.discountAmount}
+                </p>
+              </div> */}
+              <div className="flex items-center mt-2">
+                <p className="text-gray-500 text-sm">
+                  <span className="font-semibold">✪ AvailableProduct :</span>{" "}
+                {product.productQuantity}
+                </p>
+              </div>
+            </div>
+              </motion.div>
+            ))
+          ) : (
+            <div className="flex justify-center items-center h-screen">
+              <div className="flex flex-col items-center justify-center content-center align-middle">
+                <div className="animate-pulse rounded-full p-8 border-8 border-red-400">
+                  <div className="border-4 border-green-200 h-16 w-16 rounded-full"></div>
+                </div>
+                <p className="mt-4 text-red-400 font-semibold">
+                  Content is loading...
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BrowsCategory;

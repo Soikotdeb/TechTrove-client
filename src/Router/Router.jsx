@@ -16,6 +16,7 @@ import MyAddedProducts from "../Pages/Dashboard/MyAddedProducts";
 import UsersQuestions from "../Pages/Dashboard/UsersQuestions";
 import UsersFeedback from "../Pages/Dashboard/UsersFeedback";
 import NewOfferDetails from "../Pages/NewOffer/NewOfferDetails";
+import BrowsCategory from "../Pages/Shared/BrowsCategory/BrowsCategory";
 
 
 
@@ -56,6 +57,10 @@ element:<TermsCondition></TermsCondition>
   {
     path:'AskedQuestions',
     element:<AskedQuestions></AskedQuestions>
+  },
+  {
+    path:'/BrowsCategory/:id',
+    element:<BrowsCategory></BrowsCategory>
   },
 {
   path:'dashboard',

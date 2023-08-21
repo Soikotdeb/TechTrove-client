@@ -1,8 +1,6 @@
 
 import { FaFire, FaGripVertical, FaSuitcase } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-// import image1 from '../../assets/image/shopping mall.jpg';
-// import image2 from '../../assets/image/Mall_kiosk.jpg';
 import MacBook from '../../assets/image/Apple-MacBook-15-inch-e1600416371601.jpeg';
 import huawei from '../../assets/image/huawei-logo-communication-13-e1593284031516.png';
 import nokia from '../../assets/image/nokia-logo.png';
@@ -78,37 +76,6 @@ const Banner = () => {
   </div>
 </div>
 
-
-
-
-        {/* <div className="carousel h-1/2 w-full border">
-          <div id="slide1" className="carousel-item relative w-full">
-         
-          <img src={image2} className="w-full" alt="" />
-           
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide4" className="btn btn-circle">
-                ❮
-              </a>
-              <a href="#slide2" className="btn btn-circle">
-                ❯
-              </a>
-            </div>
-          </div>
-          <div id="slide2" className="carousel-item relative w-full">
-         
-          <img src={image1} className="w-full" alt="" />
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide1" className="btn btn-circle">
-                ❮
-              </a>
-              <a href="#slide3" className="btn btn-circle">
-                ❯
-              </a>
-            </div>
-          </div>
-        </div> */}
-
 {/* banner */}
    <div className="relative w-full h-[478px] overflow-hidden">
       {images.map((image, index) => (
@@ -133,76 +100,89 @@ const Banner = () => {
           </div>
 
           <div className="p-4">
-            <Link className="flex items-center  border gap-1 p-1 hover:bg-gray-100">
-              <img className="w-8 h-9" src={MacBook} alt="" />
-              <p className="ml-2">MacBook</p>
-            </Link>
+          <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'MacBook'}`}>
+    <img className="w-8 h-9" src={MacBook} alt="" />
+    <p className="ml-2">MacBook</p>
+</Link>
+{/* 
+                        <option>Nokia</option>
+                        <option>Huawei</option>
+                        <option>iPhone</option>
+                        <option>MacBook</option>
+                        <option>Google</option>
+                        <option>Xiaomi</option>
+                        <option>Vivo</option>
+                        <option>Samsung</option>
+                        <option>OnePlus</option>
+                        <option>Oppo</option>
+                        <option>accessories</option> */}
+
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'iPhone'}`}>
                 <img className="w-8 h-9" src={iPhone} alt="" />
                 <p className="ml-2">iPhone</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Huawei'}`}>
                 <img className="w-8 h-9" src={huawei} alt="" />
                 <p className="ml-2">Huawei</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Nokia'}`}>
                 <img className="w-8 h-9" src={nokia} alt="" />
                 <p className="ml-2">Nokia</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'OnePlus'}`}>
                 <img className="w-8 h-9" src={onePlus} alt="" />
                 <p className="ml-2">OnePlus</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Samsung'}`}>
                 <img className="w-8 h-9" src={samsung} alt="" />
                 <p className="ml-2">Samsung</p>
               </Link>
             </div>
 
             <div> 
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Vivo'}`}>
                 <img className="w-8 h-9" src={vivo} alt="" />
                 <p className="ml-2">Vivo</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Xiaomi'}`}>
                 <img className="w-8 h-9" src={xiaomi} alt="" />
                 <p className="ml-2">Xiaomi</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Google'}`}>
                 <img className="w-8 h-9" src={google} alt="" />
                 <p className="ml-2">Google</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'Oppo'}`}>
                 <img className="w-8 h-9" src={oppo} alt="" />
                 <p className="ml-2">Oppo</p>
               </Link>
             </div>
 
             <div>
-              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100">
+              <Link className="flex items-center border gap-1 p-1 hover:bg-gray-100" to={`/BrowsCategory/${'accessories'}`}>
                 <FaSuitcase />
                 <p className="ml-2">Accessories</p>
               </Link>
