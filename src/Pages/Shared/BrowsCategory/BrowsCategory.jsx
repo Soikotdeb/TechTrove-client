@@ -80,42 +80,12 @@ const BrowsCategory = () => {
                   {product.productName}
                 </p>
               </div>
-              {/* <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ Color :</span>{" "}
-                  {product.productColor}
-                </p>
-              </div> */}
               <div className="flex items-center mt-2">
                 <p className="text-gray-500 text-sm">
                   <span className="font-semibold">✪ Regular Price :</span>{" "}
                   {product.price}
                 </p>
               </div>
-              {/* <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ MadIn :</span>{" "}
-                  {product.madeIn}
-                </p>
-              </div> */}
-              {/* <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ Category :</span>{" "}
-                  {product.category}
-                </p>
-              </div> */}
-              {/* <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ Description :</span>{" "}
-                  {product.description}
-                </p>
-              </div> */}
-              {/* <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ Storage :</span>{" "}
-                {product.storage}
-                </p>
-              </div> */}
                <div className="flex items-center mt-2">
                 <p className="text-gray-500 text-sm">
                   <span className="font-semibold">✪ Discount :</span>{" "}
@@ -137,16 +107,7 @@ const BrowsCategory = () => {
               </motion.div>
             ))
           ) : (
-            <div className="flex justify-center items-center h-screen">
-              <div className="flex flex-col items-center justify-center content-center align-middle">
-                <div className="animate-pulse rounded-full p-8 border-8 border-red-400">
-                  <div className="border-4 border-green-200 h-16 w-16 rounded-full"></div>
-                </div>
-                <p className="mt-4 text-red-400 font-semibold">
-                  Content is loading...
-                </p>
-              </div>
-            </div>
+            <div className="border-t-4 border-red-500 w-12 h-12 animate-spin rounded-full"></div>
           )}
         </div>
       </div>
