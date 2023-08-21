@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import { FaArrowAltCircleRight, FaHome, FaTags } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import pending from '../../../assets/image//pendingSale.jpeg'
+import Quality from '../../../assets/image//QualityGurrented.png'
+import logo from "../../../assets/image/company logo.png";
 
 const BrowsCategory = () => {
     const { id } = useParams();
@@ -70,6 +73,21 @@ const BrowsCategory = () => {
                 <FaTags className="text-gray-100 mr-1" />
                 -${product.discountAmount}
               </p>
+              <img
+                className="absolute top-4 left-3 w-12 rounded-lg"
+                src={pending}
+                alt=""
+              />
+              <img
+                className="absolute top-20 left-3 w-12 rounded-lg"
+                src={Quality}
+                alt=""
+              />
+              <img
+                className="absolute top-32 left-4 w-10 rounded-lg"
+                src={logo}
+                alt=""
+              />
 
 
             </div>
