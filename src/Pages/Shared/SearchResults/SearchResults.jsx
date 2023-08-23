@@ -6,7 +6,7 @@ const SearchResults = () => {
         <div>
             <Link to="/">GO Home</Link>
             <div>
-                this is search result
+                search result here
             </div>
         </div>
     );

@@ -77,7 +77,7 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
           </div>
           <img className="w-9 h-12 rounded" src={logo} alt="" />
           <a className="btn btn-ghost hidden md:block normal-case text-4xl hover:text-purple-600">
-            <p className="text-red-500 hover:text-red-600 flex">Tech <p className="text-red-600 hover:text-red-700">Trove</p> </p>
+            <p className="text-gray-500 hover:text-red-600 flex">Tech <p className="text-gray-600 hover:text-red-700">Trove</p> </p>
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -94,17 +94,17 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
             <ul className="menu menu-horizontal flex items-center gap-4">
             <li>
               <Link>
-                <FaHeart className="w-6 h-6  hover:text-purple-700 transition-colors duration-300" />
+                <FaHeart className="w-6 h-6 text-gray-500 hover:text-purple-700 transition-colors duration-300" />
               </Link>
             </li>
             <li>
               <Link>
-                <FaShoppingCart className="w-6 h-6  hover:text-purple-700 transition-colors duration-300" />
+                <FaShoppingCart className="w-6 h-6 text-gray-500 hover:text-purple-700 transition-colors duration-300" />
               </Link>
             </li>
             <li>
               <Link>
-                <FaExchangeAlt className="w-6 h-6  hover:text-purple-700 transition-colors duration-300" />
+                <FaExchangeAlt className="w-6 h-6 text-gray-500 hover:text-purple-700 transition-colors duration-300" />
               </Link>
             </li>
           </ul>
@@ -112,7 +112,7 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
         </div>
 
         <div>
-         <Link to="" title="Notifications"> <MdNotificationsActive className="w-6 h-6 me-4 lg:ms-5 hover:text-purple-700 transition-colors duration-300" /> </Link> 
+         <Link to="" title="Notifications"> <MdNotificationsActive className="w-6 h-6 me-4 lg:ms-5 text-gray-500 hover:text-purple-700 transition-colors duration-300" /> </Link> 
         </div>
 
 
@@ -177,11 +177,11 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
 
         <div className="navbar-end ms-10">
           {user ? (
-            <Link onClick={handleLogout} className="btn hover:text-purple-500">
+            <Link onClick={handleLogout} className="btn hover:text-purple-500 text-gray-500 font-extrabold">
               LogOut <HiOutlineLogout className="ml-1 w-5 h-5" />
             </Link>
           ) : (
-            <Link to="/logIn" className="btn hover:text-purple-500">
+            <Link to="/logIn" className="btn hover:text-purple-500 text-gray-500 font-extrabold">
               LogIn <HiOutlineLogin className="ml-1 w-5 h-5" />
             </Link>
           )}
