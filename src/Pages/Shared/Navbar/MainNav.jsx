@@ -1,5 +1,5 @@
 
-import { FaExchangeAlt, FaFileAlt, FaHeart, FaShare, FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import { FaExchangeAlt, FaFileAlt, FaHeart, FaSearch, FaShare, FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { HiOutlineLogin } from "react-icons/hi";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -10,6 +10,7 @@ import { RiDashboardFill } from "react-icons/ri"; // Remix Icon icons
 import { FiSettings, FiUserPlus } from "react-icons/fi";
 import { AiOutlineCloseCircle, AiOutlineUser } from "react-icons/ai";
 import { MdLocalAtm,MdNotificationsActive,MdLiveHelp } from 'react-icons/md';
+
 
 
 
@@ -87,7 +88,8 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
            className="py-2 px-3 rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
          /> */}
          <Link to="/HomeSearch" className="py-2 px-4 rounded-lg bg-gradient-to-r from-gray-300 to-gray-500 hover:from-gray-500 hover:to-gray-700 text-white hover:text-gray-100 transition duration-300">
-           SEARCH YOUR PRODUCTS
+           {/* SEARCH YOUR PRODUCTS */}
+           <FaSearch/>
          </Link>
          </div>
             <ul className="menu menu-horizontal flex items-center gap-4">
