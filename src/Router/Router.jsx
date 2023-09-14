@@ -19,6 +19,7 @@ import NewOfferDetails from "../Pages/NewOffer/NewOfferDetails";
 import BrowsCategory from "../Pages/Shared/BrowsCategory/BrowsCategory";
 import BrowsCategoryDetails from "../Pages/Shared/BrowsCategory/BrowsCategoryDetails";
 import SearchResults from "../Pages/Shared/SearchResults/SearchResults";
+import AllFeaturedProducts from "../Pages/AllFeaturedProducts/AllFeaturedProducts";
 
 
 
@@ -67,6 +68,10 @@ element:<TermsCondition></TermsCondition>
   {
     path:'AskedQuestions',
     element:<AskedQuestions></AskedQuestions>
+  },
+  {
+    path:'AllFeaturedProducts',
+    element:<AllFeaturedProducts></AllFeaturedProducts>
   },
   {
     path:'/BrowsCategory/:id',
