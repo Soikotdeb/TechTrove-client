@@ -81,17 +81,21 @@ const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the mo
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-        <div className="flex items-center space-x-2">
-         {/* <input
-           type="text"
-           placeholder="Search..."
-           className="py-2 px-3 rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
-         /> */}
-         <Link to="/HomeSearch" className="py-2 px-4 rounded-lg bg-gradient-to-r from-gray-300 to-gray-500 hover:from-gray-500 hover:to-gray-700 text-white hover:text-gray-100 transition duration-300">
-           {/* SEARCH YOUR PRODUCTS */}
-           <FaSearch/>
-         </Link>
-         </div>
+
+<div className="relative">
+      <input
+        type="text"
+        placeholder="Search..."
+        className="py-2 pr-10 pl-4 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+
+      />
+      <Link 
+      className="absolute top-1/2 right-4 transform -translate-y-1/2">
+        <FaSearch className="text-gray-900" />
+      </Link>
+    </div>
+
+ 
             <ul className="menu menu-horizontal flex items-center gap-4">
             <li>
               <Link>
