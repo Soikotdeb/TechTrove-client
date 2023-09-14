@@ -180,6 +180,7 @@ const ProductAddForm = () => {
                          Select Your Products Category?
                          </option>
                         <option>Latest Offers</option>
+                        <option>Featured Products</option>
                         <option>Nokia</option>
                         <option>Huawei</option>
                         <option>iPhone</option>
