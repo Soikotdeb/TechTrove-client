@@ -188,6 +188,7 @@ const ShopBySection = () => {
                           alt={macBook.productName}
                           className="w-full h-52 object-cover"
                         />
+                        <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
                       </div>
                       <div className="product-info bg-white p-4">
                         <h2 className="text-sm font-semibold mb-2">
@@ -211,12 +212,11 @@ const ShopBySection = () => {
                           Storage: {macBook?.storage}
                         </p>
                         <p className="text-gray-800 text-base">
-                          Quantity: {macBook.productQuantity}
+                          Available Product: {macBook.productQuantity}
                         </p>
                         <p className="text-gray-800 text-base">
                           Discount: ${macBook.discountAmount}
                         </p>
-
                         <a
                           title="Tap to Add Cart"
                           className="bg-green-400 p-2 rounded-lg"
@@ -269,7 +269,7 @@ const ShopBySection = () => {
                           Storage: {gadget?.storage}
                         </p>
                         <p className="text-gray-800 text-base">
-                          Quantity: {gadget.productQuantity}
+                        Available Product: {gadget.productQuantity}
                         </p>
                         <p className="text-gray-800 text-base">
                           Discount: ${gadget.discountAmount}
