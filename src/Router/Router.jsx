@@ -1,4 +1,4 @@
-import {createBrowserRouter,} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../Pages/Home/Home";
 import NotFoundPage from "../Pages/Shared/NotFoundPage/NotFoundPage";
@@ -21,90 +21,114 @@ import BrowsCategoryDetails from "../Pages/Shared/BrowsCategory/BrowsCategoryDet
 import SearchResults from "../Pages/Shared/SearchResults/SearchResults";
 import AllFeaturedProducts from "../Pages/AllFeaturedProducts/AllFeaturedProducts";
 
-
-
-
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      errorElement:<NotFoundPage></NotFoundPage>,
-      children:[
-        {
-            path:'/',
-            element:<Home></Home>
-        }
-      
-      ]
-    },
   {
-    path:"logIn",
-    element:<LogIn></LogIn>
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <NotFoundPage></NotFoundPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+    ],
   },
   {
-    path: 'fullDetails/:id',
-    element: <NewOfferDetails /> 
+    path: "logIn",
+    element: <LogIn></LogIn>,
   },
   {
-    path: 'BrowsCategoryDetails/:id',
-    element: <BrowsCategoryDetails/> 
+    path: "fullDetails/:id",
+    element: <NewOfferDetails />,
   },
   {
-    path: '/HomeSearch',
-    element: <SearchResults/>
+    path: "BrowsCategoryDetails/:id",
+    element: <BrowsCategoryDetails />,
   },
   {
-    path:'registration',
-    element:<Registration></Registration>
+    path: "/HomeSearch",
+    element: <SearchResults />,
   },
   {
-path:'terms',
-element:<TermsCondition></TermsCondition>
+    path: "registration",
+    element: <Registration></Registration>,
   },
   {
-    path:'contactUs',
-    element:<ContactUs></ContactUs>
+    path: "terms",
+    element: <TermsCondition></TermsCondition>,
   },
   {
-    path:'AskedQuestions',
-    element:<AskedQuestions></AskedQuestions>
+    path: "contactUs",
+    element: <ContactUs></ContactUs>,
   },
   {
-    path:'AllFeaturedProducts',
-    element:<AllFeaturedProducts></AllFeaturedProducts>
+    path: "AskedQuestions",
+    element: <AskedQuestions></AskedQuestions>,
   },
   {
-    path:'/BrowsCategory/:id',
-    element:<BrowsCategory></BrowsCategory>
+    path: "AllFeaturedProducts",
+    element: <AllFeaturedProducts></AllFeaturedProducts>,
   },
-{
-  path:'dashboard',
-  element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-  children:[
-    {
-      path:'welcome',
-      element:<PrivateRoute><WelcomePage></WelcomePage></PrivateRoute>
-    },
-    {
-      path:'ManageUsers',
-      element:<PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
-    },
-    {
-      path:'AddProducts',
-      element:<PrivateRoute><AddProducts></AddProducts></PrivateRoute>
-    },
-    {
-      path:'MyAddedProducts',
-      element:<PrivateRoute><MyAddedProducts></MyAddedProducts></PrivateRoute>
-    },
-    {
-      path:'usersQuestions',
-      element:<PrivateRoute><UsersQuestions></UsersQuestions></PrivateRoute>
-    },
-    {
-      path:'usersFeedback',
-      element:<PrivateRoute><UsersFeedback></UsersFeedback></PrivateRoute>
-    }
-  ]
-}
-  ]);
+  {
+    path: "/BrowsCategory/:id",
+    element: <BrowsCategory></BrowsCategory>,
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "welcome",
+        element: (
+          <PrivateRoute>
+            <WelcomePage></WelcomePage>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "ManageUsers",
+        element: (
+          <PrivateRoute>
+            <ManageUsers></ManageUsers>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "AddProducts",
+        element: (
+          <PrivateRoute>
+            <AddProducts></AddProducts>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "MyAddedProducts",
+        element: (
+          <PrivateRoute>
+            <MyAddedProducts></MyAddedProducts>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "usersQuestions",
+        element: (
+          <PrivateRoute>
+            <UsersQuestions></UsersQuestions>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "usersFeedback",
+        element: (
+          <PrivateRoute>
+            <UsersFeedback></UsersFeedback>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+]);

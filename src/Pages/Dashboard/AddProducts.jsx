@@ -192,6 +192,7 @@ const ProductAddForm = () => {
                         <option>OnePlus</option>
                         <option>Oppo</option>
                         <option>accessories</option>
+                        <option>Premium Gadget</option>
                     </select>
                 </div>
                 <div>
