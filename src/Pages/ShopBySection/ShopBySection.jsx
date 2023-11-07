@@ -47,6 +47,31 @@ const ShopBySection = () => {
     setFetchedPremiumGadget(fetchedPremiumGadget);
   }, [fetchedPremiumGadget]);
 
+
+
+// All Premium Gadget  offer data Load to the homepage only category=Premium Gadget
+
+  const [macbookData, setMacbookData] = useState([]);
+
+
+  const { data: fetchedMacbookData = [] } = useQuery(
+    ["MacBook"],
+    async () => {
+      const res = await fetch("http://localhost:5000/MacBook"); // Replace with the correct endpoint
+      if (!res.ok) {
+        throw new Error("Failed to fetch MacBook data");
+      }
+      return res.json();
+    }
+  );
+  
+  useEffect(() => {
+    setMacbookData(fetchedMacbookData);
+  }, [fetchedMacbookData]);
+  
+
+
+
   return (
     <div className="bg-gray-200 py-10 mt-2">
       <div className="flex gap-4">
@@ -148,22 +173,61 @@ const ShopBySection = () => {
                 </div>
               </TabPanel>
 
+
+   {/* this is Macbook Collection tabPanel */}
               <TabPanel>
-                <div style={{ height: "100%", width: "100%" }}>
-                  <Tabs forceRenderTabPanel defaultIndex={0}>
-                    <TabPanel>
-                      <div
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          margin: "0 auto",
-                        }}
-                        className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
-                      >
-                        <div className="card-body">{/* contant */}</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
+                  {macbookData.map((macBook) => (
+                    <div
+                      key={macBook._id}
+                      className="relative group overflow-hidden border border-gray-300 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                    >
+                      <div className="product-image">
+                        <img
+                          src={macBook.productImages[0]}
+                          alt={macBook.productName}
+                          className="w-full h-52 object-cover"
+                        />
                       </div>
-                    </TabPanel>
-                  </Tabs>
+                      <div className="product-info bg-white p-4">
+                        <h2 className="text-sm font-semibold mb-2">
+                          {macBook.productName}
+                        </h2>
+                        <p className="text-gray-700 font-extrabold text-sm">
+                          {macBook.price}
+                        </p>
+                      </div>
+                      <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100 p-1">
+                        <p className="text-gray-800 text-base">
+                          Color: {macBook.productColor}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Description: {macBook.description}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Made In: {macBook.madeIn}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Storage: {macBook?.storage}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Quantity: {macBook.productQuantity}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Discount: ${macBook.discountAmount}
+                        </p>
+
+                        <a
+                          title="Tap to Add Cart"
+                          className="bg-green-400 p-2 rounded-lg"
+                        >
+                          <Link>
+                            <FaShoppingBag></FaShoppingBag>
+                          </Link>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </TabPanel>
 
