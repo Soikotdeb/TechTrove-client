@@ -50,39 +50,59 @@ const ShopBySection = () => {
   return (
     <div className="bg-gray-200 py-10 mt-2">
       <div className="flex gap-4">
-        <div
-          className="relative rounded-lg flex items-center justify-center hidden md:block"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            height: "300px",
-            width: "20%",
-            transition: "background-size 0.3s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundSize = "110%";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundSize = "cover";
-          }}
-        >
-          <div>
-            <div className="text-white py-24 text-center absolute inset-0 bg-black bg-opacity-50">
-              <p>Latest Smartphone Giant</p>
-              <p className="text-3xl">
-                Oneplus is the <br /> latest Giant of <br /> android !!
-              </p>
-              <div className="mt-5">
-                <Link
-                  to=""
-                  className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300"
-                >
-                  BUY NOW
-                </Link>
+        {/* Feature Product */}
+        <div className=" md:w-1/5 w-full mt-2 border border-gray-600">
+          <h1 className="font-extrabold text-white text-lg bg-green-700 text-center p-4">
+            FEATURED PRODUCTS
+          </h1>
+          {FeaturedProduct.slice(0, showAll ? FeaturedProduct.length : 4).map(
+            (featured) => (
+              <div
+                key={featured._id}
+                className="flex flex-col md:flex-row items-center justify-center md:gap-2 mt-2 p-4"
+              >
+                <img
+                  className="rounded h-16 w-16 mt-1 md:mt-0"
+                  src={featured?.productImages[0]}
+                  alt=""
+                />
+                <div className="text-center md:text-left">
+                  <div>
+                    <p className="hover:text-gray-700 font-extrabold">
+                      ❂ {featured.productName}
+                    </p>
+                  </div>
+                  <div>
+                    <p>❂ Price: {featured.price}</p>
+                    <div className="flex gap-7">
+                      <p>❂ Discount: {featured.discountAmount}</p>
+                      <Link
+                        to={`/fullDetails/${featured._id}`}
+                        onClick={() => handleFullDetails(featured)}
+                      >
+                        <FaArrowAltCircleRight
+                          className="text-gray-600"
+                          size={18}
+                          title="Tap to See All Details"
+                        />
+                      </Link>
+                    </div>
+                    <hr className="border-gray-400 border-t-2 w-[90%] mx-auto mt-2" />
+                  </div>
+                </div>
               </div>
+            )
+          )}
+          {!showAll && (
+            <div className="text-center mt-2 mb-4">
+              <Link
+                to="/AllFeaturedProducts"
+                className="bg-blue-500 text-white px-4 py-2 rounded-full"
+              >
+                See All Products
+              </Link>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Tabbed Content Column */}
@@ -150,130 +170,63 @@ const ShopBySection = () => {
               {/* this is Premium Gadget tabPanel */}
 
               <TabPanel>
-                <div style={{ height: "100%", width: "100%" }}>
-                  <Tabs forceRenderTabPanel defaultIndex={0}>
-                    <TabList></TabList>
-                    <TabPanel>
-                      <div
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          margin: "0 auto",
-                        }}
-                        className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
-                      >
-                        <div className="card-body">
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {PremiumGadget.map((gadget) => (
-                              <div
-                                key={gadget._id}
-                                className="relative group overflow-hidden border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
-                              >
-                                <img
-                                  src={gadget.productImages[0]}
-                                  alt={gadget.productName}
-                                  className="w-full h-52 object-cover"
-                                />
-                                <div className="p-4 bg-white">
-                                  <h2 className="text-sm font-semibold mb-2">
-                                    {gadget.productName}
-                                  </h2>
-                                 
-                                  <p className="text-gray-700 font-extrabold text-sm">
-                                    {gadget.price}
-                                  </p>
-                                  <hr className="mt-2" />
-                               
-                                
-                                  <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute top-0 left-0 w-full h-full bg-base-100 bg-opacity-90 flex flex-col justify-center items-center text-center transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100">
-                                    <p className="text-gray-800 text-base">
-                                      Color: {gadget.productColor}
-                                    </p>
-                                    <p className="text-gray-800 text-base">
-                                      Description: {gadget.description}
-                                    </p>
-                                    <p className="text-gray-800 text-base">
-                                      Made In: {gadget.madeIn}
-                                    </p>
-                                    <p className="text-gray-800 text-base">
-                                      Storage: {gadget?.storage}
-                                    </p>
-                                    <p className="text-gray-800 text-base">
-                                      Quantity: {gadget.productQuantity}
-                                    </p>
-                                    <p className="text-gray-800 text-base">
-                                      Discount: ${gadget.discountAmount}
-                                    </p>
-                                    <Link title="Tap to Add Cart" className="absolute top-1 left-1 bg-green-400 p-2 rounded-lg"><FaShoppingBag></FaShoppingBag></Link>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
+                  {PremiumGadget.map((gadget) => (
+                    <div
+                      key={gadget._id}
+                      className="relative group overflow-hidden border border-gray-300 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                    >
+                      <div className="product-image">
+                        <img
+                          src={gadget.productImages[0]}
+                          alt={gadget.productName}
+                          className="w-full h-52 object-cover"
+                        />
                       </div>
-                    </TabPanel>
-                  </Tabs>
+                      <div className="product-info bg-white p-4">
+                        <h2 className="text-sm font-semibold mb-2">
+                          {gadget.productName}
+                        </h2>
+                        <p className="text-gray-700 font-extrabold text-sm">
+                          {gadget.price}
+                        </p>
+                      </div>
+                      <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100">
+                        <p className="text-gray-800 text-base">
+                          Color: {gadget.productColor}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Description: {gadget.description}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Made In: {gadget.madeIn}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Storage: {gadget?.storage}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Quantity: {gadget.productQuantity}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Discount: ${gadget.discountAmount}
+                        </p>
+
+                        <a
+                          title="Tap to Add Cart"
+                          className="bg-green-400 p-2 rounded-lg"
+                        >
+                          <Link>
+                            <FaShoppingBag></FaShoppingBag>
+                          </Link>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </TabPanel>
             </div>
           </Tabs>
         </div>
-      </div>
-
-      {/* Feature Product */}
-      <div className=" md:w-1/5 w-full mt-2 border border-gray-600">
-        <h1 className="font-extrabold text-white text-lg bg-green-700 text-center p-4">
-          FEATURED PRODUCTS
-        </h1>
-        {FeaturedProduct.slice(0, showAll ? FeaturedProduct.length : 4).map(
-          (featured) => (
-            <div
-              key={featured._id}
-              className="flex flex-col md:flex-row items-center justify-center md:gap-2 mt-2 p-4"
-            >
-              <img
-                className="rounded h-16 w-16 mt-1 md:mt-0"
-                src={featured?.productImages[0]}
-                alt=""
-              />
-              <div className="text-center md:text-left">
-                <div>
-                  <p className="hover:text-gray-700 font-extrabold">
-                    ❂ {featured.productName}
-                  </p>
-                </div>
-                <div>
-                  <p>❂ Price: {featured.price}</p>
-                  <div className="flex gap-7">
-                    <p>❂ Discount: {featured.discountAmount}</p>
-                    <Link
-                      to={`/fullDetails/${featured._id}`}
-                      onClick={() => handleFullDetails(featured)}
-                    >
-                      <FaArrowAltCircleRight
-                        className="text-gray-600"
-                        size={18}
-                        title="Tap to See All Details"
-                      />
-                    </Link>
-                  </div>
-                  <hr className="border-gray-400 border-t-2 w-[90%] mx-auto mt-2" />
-                </div>
-              </div>
-            </div>
-          )
-        )}
-        {!showAll && (
-          <div className="text-center mt-2 mb-4">
-            <Link
-              to="/AllFeaturedProducts"
-              className="bg-blue-500 text-white px-4 py-2 rounded-full"
-            >
-              See All Products
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   );
