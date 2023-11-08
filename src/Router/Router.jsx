@@ -20,6 +20,7 @@ import BrowsCategory from "../Pages/Shared/BrowsCategory/BrowsCategory";
 import BrowsCategoryDetails from "../Pages/Shared/BrowsCategory/BrowsCategoryDetails";
 import SearchResults from "../Pages/Shared/SearchResults/SearchResults";
 import AllFeaturedProducts from "../Pages/AllFeaturedProducts/AllFeaturedProducts";
+import ProductCart from "../Pages/ProductCart/ProductCart";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
   {
     path: "/BrowsCategory/:id",
     element: <BrowsCategory></BrowsCategory>,
+  },
+  {
+    path: "productCart",
+    element: <ProductCart></ProductCart>,
   },
   {
     path: "dashboard",

@@ -112,7 +112,7 @@ const MainNav = () => {
             </li>
             <li className="relative">
               <Link
-                to="/cart"
+                to="/productCart"
                 className="text-gray-500 hover:text-purple-700 transition-colors duration-300"
               >
                 <FaShoppingCart className="w-6 h-6" />
