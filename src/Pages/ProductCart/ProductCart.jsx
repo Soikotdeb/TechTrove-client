@@ -1,8 +1,8 @@
-
 import React from 'react';
 import useCart from '../../Hook/useCart';
 import { FaHome, FaTrashAlt, FaWallet } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import cartBg from '../../assets/image/green.jpg';
 
 const ProductCart = () => {
     const [cart] = useCart();
@@ -16,8 +16,14 @@ const ProductCart = () => {
         return sum;
     }, 0);
 
+    const cartStyle = {
+        background: `url(${cartBg})`,
+        backgroundSize: 'cover',
+    };
+
     return (
-        <div className="container mx-auto">
+        <div className="container min-h-screen mx-auto" style={cartStyle}>
+          
             <Link
                 to="/"
                 className="hover:underline mb-2 inline-block font-extrabold hover-text-red-600 text-purple p-2"
@@ -26,14 +32,14 @@ const ProductCart = () => {
             </Link>
             <h2 className="text-2xl font-bold mb-2">Your Shopping Cart</h2>
             <div className='flex justify-between mb-1 p-2 border border-purple-400'>
-            <p className='text-lg'>Total Amount : ৳ {total.toFixed(2)}</p>
-            <button className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover-bg-blue-700">
-               <FaWallet title='Order All Products' size={20} />
-               </button>
+                <p className='text-lg font-semibold'>Total Amount : ৳ {total.toFixed(2)}</p>
+                <button className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover-bg-blue-700">
+                    <FaWallet title='Order All Products' size={20} />
+                </button>
             </div>
-            <table className="w-full border-2 border-yellow-500 border-collapse">
+            <table className="w-full border-2 border-yellow-500 border-collapse text-white font-extrabold">
                 <thead>
-                    <tr className="bg-gray-200">
+                    <tr className="">
                         <th className="p-3 border border-yellow-500">Product Image</th>
                         <th className="p-3 border border-yellow-500">Product Name</th>
                         <th className="p-3 border border-yellow-500">Product Price</th>
@@ -65,4 +71,6 @@ const ProductCart = () => {
 };
 
 export default ProductCart;
+
+
 
