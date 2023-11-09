@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import image from "../../assets/image/section.jpeg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaArrowAltCircleRight, FaShoppingBag } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ShopBySection = () => {
   const [FeaturedProducts, setFeaturedProducts] = useState([]);
@@ -69,6 +71,108 @@ const ShopBySection = () => {
     setMacbookData(fetchedMacbookData);
   }, [fetchedMacbookData]);
   
+// add to cart action------
+
+const { user } = useContext(AuthContext);
+const navigate = useNavigate();
+const location = useLocation();
+
+
+const handleAddToCart = (macBook) => {
+  if (user && user.email) {
+    const cartItem = {
+      menuItemId: macBook._id,
+      name: macBook.productName,
+      image: macBook.productImages[0],
+      price: macBook.price,
+      email: user.email,
+    };
+
+    fetch('http://localhost:5000/carts', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(cartItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          // Show a success toast
+          toast.success('Food added to the cart.', {
+            position: 'top-right',
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          
+        }
+      });
+  } else {
+    // Show a warning toast
+    toast.warning('Please login to order the food', {
+      position: 'top-right',
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    navigate('/login', { state: { from: location } });
+  }
+};
+// gadget add to cart action 
+const handleAddToCartGadget = (gadget) => {
+  if (user && user.email) {
+    const cartItem = {
+      menuItemId: gadget._id,
+      name: gadget.productName,
+      image: gadget.productImages[0],
+      price: gadget.price,
+      email: user.email,
+    };
+
+    fetch('http://localhost:5000/carts', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(cartItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          // Show a success toast
+          toast.success('Food added to the cart.', {
+            position: 'top-right',
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          
+        }
+      });
+  } else {
+    // Show a warning toast
+    toast.warning('Please login to order the food', {
+      position: 'top-right',
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    navigate('/login', { state: { from: location } });
+  }
+};
 
 
 
@@ -217,14 +321,16 @@ const ShopBySection = () => {
                         <p className="text-gray-800 text-base">
                           Discount: ${macBook.discountAmount}
                         </p>
-                        <a
+                       
+                          
+                       
+                          <Link 
+                           onClick={() => handleAddToCart(macBook)}
                           title="Tap to Add Cart"
-                          className="bg-green-400 p-2 rounded-lg"
-                        >
-                          <Link>
+                          className="bg-green-400 p-2 rounded-lg">
                             <FaShoppingBag></FaShoppingBag>
                           </Link>
-                        </a>
+                        
                       </div>
                     </div>
                   ))}
@@ -275,14 +381,15 @@ const ShopBySection = () => {
                           Discount: ${gadget.discountAmount}
                         </p>
 
-                        <a
+                        
+                          <Link
+                           onClick={() => handleAddToCartGadget(gadget)}
                           title="Tap to Add Cart"
                           className="bg-green-400 p-2 rounded-lg"
-                        >
-                          <Link>
+                          >
                             <FaShoppingBag></FaShoppingBag>
                           </Link>
-                        </a>
+                      
                       </div>
                     </div>
                   ))}
