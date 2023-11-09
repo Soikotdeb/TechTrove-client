@@ -91,6 +91,7 @@ const NewOfferDetails = () => {
         name: offerDetails.productName,
         image: offerDetails.productImages[0],
         price: offerDetails.price,
+        quantity: '1',
         email: user.email,
       };
 

@@ -4,7 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import image from "../../assets/image/section.jpeg";
 import { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaArrowAltCircleRight, FaShoppingBag, FaTrashAlt } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaShoppingBag, FaTags, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Provider/AuthProvider";
 import UseAdmin from "../../Hook/UseAdmin";
@@ -139,6 +139,7 @@ const handleAddToCartGadget = (gadget) => {
       name: gadget.productName,
       image: gadget.productImages[0],
       price: gadget.price,
+      quantity: '1',
       email: user.email,
     };
 
@@ -264,7 +265,7 @@ const handleRemove = async (id) => {
                     </p>
                   </div>
                   <div>
-                    <p>❂ Price: {featured.price}</p>
+                    <p>❂ Price: ৳ {featured.price}</p>
                     <div className="flex gap-7">
                       <p>❂ Discount: {featured.discountAmount}</p>
                       <Link
@@ -332,7 +333,9 @@ const handleRemove = async (id) => {
                         }}
                         className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
                       >
-                        <div className="card-body">{/* contant */}</div>
+                        <div className="card-body">
+                          new arebal
+                        </div>
                       </div>
                     </TabPanel>
                   </Tabs>
@@ -355,13 +358,20 @@ const handleRemove = async (id) => {
                           className="w-full h-52 object-cover"
                         />
                         <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
+                        <p
+                className="absolute top-1 left-1 bg-green-500 text-white p-2 rounded-lg flex items-center"
+                title="Discount Price"
+              >
+                <FaTags className="text-gray-100 mr-1" />
+                -৳{macBook.discountAmount}
+              </p>
                       </div>
                       <div className="product-info bg-white p-4">
                         <h2 className="text-sm font-semibold mb-2">
                           {macBook.productName}
                         </h2>
                         <p className="text-gray-700 font-extrabold text-sm">
-                          {macBook.price}
+                        ৳  {macBook.price}
                         </p>
                       </div>
                       <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100 p-1">
@@ -381,7 +391,7 @@ const handleRemove = async (id) => {
                           Available Product: {macBook.productQuantity}
                         </p>
                         <p className="text-gray-800 text-base">
-                          Discount: ${macBook.discountAmount}
+                          Discount: ৳ {macBook.discountAmount}
                         </p>
                        
                           
@@ -430,13 +440,20 @@ const handleRemove = async (id) => {
                           className="w-full h-52 object-cover"
                         />
                         <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
+                        <p
+                className="absolute top-1 left-1 bg-green-500 text-white p-2 rounded-lg flex items-center"
+                title="Discount Price"
+              >
+                <FaTags className="text-gray-100 mr-1" />
+                -৳{gadget.discountAmount}
+              </p>
                       </div>
                       <div className="product-info bg-white p-4">
                         <h2 className="text-sm font-semibold mb-2">
                           {gadget.productName}
                         </h2>
                         <p className="text-gray-700 font-extrabold text-sm">
-                          {gadget.price}
+                        ৳   {gadget.price}
                         </p>
                       </div>
                       <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100">
@@ -456,7 +473,7 @@ const handleRemove = async (id) => {
                         Available Product: {gadget.productQuantity}
                         </p>
                         <p className="text-gray-800 text-base">
-                          Discount: ${gadget.discountAmount}
+                          Discount: ৳  {gadget.discountAmount}
                         </p>
 
                         

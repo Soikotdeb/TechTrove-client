@@ -123,7 +123,7 @@ const LatestOffers = () => {
               </h3>
               <div className="flex items-center justify-between mt-3">
                 <p className="text-gray-600">
-                  <span className="font-semibold">✪ Regular Price :</span>{" "}
+                  <span className="font-semibold">✪ Regular Price ৳ :</span>{" "}
                   {offer.price}
                 </p>
                 <Link

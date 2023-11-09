@@ -96,6 +96,7 @@ const ProductCart = () => {
                         <th className="p-3 border border-yellow-500">Product Image</th>
                         <th className="p-3 border border-yellow-500">Product Name</th>
                         <th className="p-3 border border-yellow-500">Product Price</th>
+                        <th className="p-3 border border-yellow-500">Product Quantity</th>
                         <th className="p-3 border border-yellow-500">Actions</th>
                     </tr>
                 </thead>
@@ -107,6 +108,7 @@ const ProductCart = () => {
                             </td>
                             <td className="p-3 border border-yellow-300"><p className="mt-2">{product.name}</p></td>
                             <td className="p-3 border border-yellow-300">৳ {parseFloat(product.price).toFixed(2)}</td>
+                            <td className="p-3 border border-yellow-300"><p className="mt-2">{product.quantity}</p></td>
                             <td className="p-3 border border-yellow-300">
                                 <button className="px-3 py-1 bg-red-500 text-white rounded hover-bg-red-700">
                                     <FaTrashAlt onClick={() => handleDelete(product._id)} title='Remove to Cart' size={20} />
