@@ -4,6 +4,7 @@ import useCart from '../../Hook/useCart';
 import { FaHome, FaTrashAlt, FaWallet } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import cartBg from '../../assets/image/green.jpg';
+import Swal from 'sweetalert2';
 
 const ProductCart = () => {
     const [cart, refetch] = useCart();
@@ -43,6 +44,37 @@ const ProductCart = () => {
         backgroundSize: 'cover',
     };
 
+
+    // delete action
+    const handleDelete = async (id) => {
+        try {
+          const result = await Swal.fire({
+              title: "Are you sure you want to delete?",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: "Yes",
+              cancelButtonText: "No",
+          });
+    
+          if (result.isConfirmed) {
+              await fetch(`http://localhost:5000/ProductCart/${id}`, {
+                  method: "DELETE",
+              });
+              await Swal.fire({
+                  icon: "success",
+                  title: "Product Deleted",
+                  text: "Cart Data has been deleted successfully.",
+                  confirmButtonText: "OK",
+              });
+              // Refetch Question after delete
+              refetch();
+          }
+      } catch (error) {
+          console.log(error);
+      }
+    
+      };
+
     return (
         <div className="container min-h-screen mx-auto" style={cartStyle}>
             <Link
@@ -77,7 +109,7 @@ const ProductCart = () => {
                             <td className="p-3 border border-yellow-300">৳ {parseFloat(product.price).toFixed(2)}</td>
                             <td className="p-3 border border-yellow-300">
                                 <button className="px-3 py-1 bg-red-500 text-white rounded hover-bg-red-700">
-                                    <FaTrashAlt title='Remove to Cart' size={20} />
+                                    <FaTrashAlt onClick={() => handleDelete(product._id)} title='Remove to Cart' size={20} />
                                 </button>
                                 <button className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover-bg-blue-700">
                                     <FaWallet title='Order Single Product' size={20} />

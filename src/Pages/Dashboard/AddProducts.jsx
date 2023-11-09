@@ -6,7 +6,9 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../Provider/AuthProvider';
 
 const img_hosting_token = import.meta.env.VITE_image_upload_token; // Replace with your actual image upload token
-const img_hosting_url = `https://api.imgbb.com/1/upload?expiration=600&key=${img_hosting_token}`;
+// Don't include the expiration parameter in the URL
+const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+
 
 const ProductAddForm = () => {
     const { user } = useContext(AuthContext); // Make sure you have your user data in context
