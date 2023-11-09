@@ -1,11 +1,33 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import useCart from '../../Hook/useCart';
 import { FaHome, FaTrashAlt, FaWallet } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import cartBg from '../../assets/image/green.jpg';
 
 const ProductCart = () => {
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
+    const [loading, setLoading] = useState(true);
+
+    // Fetch cart data when the component mounts
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await refetch(); // You might need to handle the refetch logic from useCart appropriately
+                setLoading(false);
+            } catch (error) {
+                // Handle any errors during data fetching
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [refetch]);
+
+    if (loading) {
+        // You can render a loading indicator here while data is being fetched.
+        return <div>Loading...</div>;
+    }
 
     // Calculate the total price, handling missing or non-numeric product prices
     const total = cart.reduce((sum, product) => {
@@ -23,7 +45,6 @@ const ProductCart = () => {
 
     return (
         <div className="container min-h-screen mx-auto" style={cartStyle}>
-          
             <Link
                 to="/"
                 className="hover:underline mb-2 inline-block font-extrabold hover-text-red-600 text-purple p-2"
