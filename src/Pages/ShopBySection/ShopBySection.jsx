@@ -429,6 +429,7 @@ const handleRemove = async (id) => {
                           alt={gadget.productName}
                           className="w-full h-52 object-cover"
                         />
+                        <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
                       </div>
                       <div className="product-info bg-white p-4">
                         <h2 className="text-sm font-semibold mb-2">
