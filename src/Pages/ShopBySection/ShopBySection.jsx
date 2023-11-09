@@ -4,14 +4,20 @@ import "react-tabs/style/react-tabs.css";
 import image from "../../assets/image/section.jpeg";
 import { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaArrowAltCircleRight, FaShoppingBag } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaShoppingBag, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Provider/AuthProvider";
+import UseAdmin from "../../Hook/UseAdmin";
+import Swal from "sweetalert2";
+import useCart from "../../Hook/useCart";
 
 const ShopBySection = () => {
   const [FeaturedProducts, setFeaturedProducts] = useState([]);
+  const [isAdminOrInstructor] = UseAdmin();
+  const [refetch] = useCart();
 
-  const { data: FeaturedProduct = [] } = useQuery(
+
+  const { data: FeaturedProduct = []} = useQuery(
     ["FeaturedProducts"],
     async () => {
       const res = await fetch("http://localhost:5000/FeaturedProducts");
@@ -174,7 +180,63 @@ const handleAddToCartGadget = (gadget) => {
   }
 };
 
+// delete action 
+const handleDelete = async (id) => {
+  try {
+    const result = await Swal.fire({
+        title: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    });
 
+    if (result.isConfirmed) {
+        await fetch(`http://localhost:5000/macBook/${id}`, {
+            method: "DELETE",
+        });
+        await Swal.fire({
+            icon: "success",
+            title: "Product Deleted",
+            text: "Data has been deleted successfully.",
+            confirmButtonText: "OK",
+        });
+        // Refetch cart data after delete
+        refetch();
+    }
+  } catch (error) {
+      console.log(error);
+  }
+};
+// premiumGadget  delete action
+const handleRemove = async (id) => {
+  try {
+    const result = await Swal.fire({
+        title: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    });
+
+    if (result.isConfirmed) {
+        await fetch(`http://localhost:5000/premiumGadget/${id}`, {
+            method: "DELETE",
+        });
+        await Swal.fire({
+            icon: "success",
+            title: "Product Deleted",
+            text: "Data has been deleted successfully.",
+            confirmButtonText: "OK",
+        });
+        // Refetch Question after delete
+        refetch();
+    }
+} catch (error) {
+    console.log(error);
+}
+
+};
 
   return (
     <div className="bg-gray-200 py-10 mt-2">
@@ -330,6 +392,21 @@ const handleAddToCartGadget = (gadget) => {
                           className="bg-green-400 p-2 rounded-lg">
                             <FaShoppingBag></FaShoppingBag>
                           </Link>
+                          <div>
+                {isAdminOrInstructor === "admin" ||
+                isAdminOrInstructor === "instructor" ? (
+                  <Link
+                  onClick={() => handleDelete(macBook._id)}
+                    className="absolute top-0 right-3 p-2 rounded-lg flex items-center"
+                    title="Delete Offer"
+                  >
+                    <FaTrashAlt
+                      size={24}
+                      className="text-red-600 hover:text-red-700  mr-1"
+                    />
+                  </Link>
+                ) : null}
+              </div>
                         
                       </div>
                     </div>
@@ -389,6 +466,21 @@ const handleAddToCartGadget = (gadget) => {
                           >
                             <FaShoppingBag></FaShoppingBag>
                           </Link>
+                          <div>
+                {isAdminOrInstructor === "admin" ||
+                isAdminOrInstructor === "instructor" ? (
+                  <Link
+                  onClick={() => handleRemove(gadget._id)}
+                    className="absolute top-0 right-3 p-2 rounded-lg flex items-center"
+                    title="Delete Offer"
+                  >
+                    <FaTrashAlt
+                      size={24}
+                      className="text-red-600 hover:text-red-700  mr-1"
+                    />
+                  </Link>
+                ) : null}
+              </div>
                       
                       </div>
                     </div>
