@@ -38,44 +38,68 @@ const ShopBySection = () => {
 
   // All Premium Gadget  offer data Load to the homepage only category=Premium Gadget
 
-  const [PremiumGadget, setFetchedPremiumGadget] = useState([]);
-
-  const { data: fetchedPremiumGadget = [] } = useQuery(
-    ["premiumGadget"],
-    async () => {
-      const res = await fetch("http://localhost:5000/PremiumGadget");
-      if (!res.ok) {
-        throw new Error("Failed to fetch Premium Gadget data");
-      }
-      return res.json();
-    }
-  );
+  const [PremiumGadget, setPremiumGadgetData] = useState([]);
 
   useEffect(() => {
-    setFetchedPremiumGadget(fetchedPremiumGadget);
-  }, [fetchedPremiumGadget]);
-
-
-
-// All Premium Gadget  offer data Load to the homepage only category=Premium Gadget
-
-  const [macbookData, setMacbookData] = useState([]);
-
-
-  const { data: fetchedMacbookData = [] } = useQuery(
-    ["MacBook"],
-    async () => {
-      const res = await fetch("http://localhost:5000/MacBook"); // Replace with the correct endpoint
-      if (!res.ok) {
-        throw new Error("Failed to fetch MacBook data");
+    const fetchPremiumGadgetData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/PremiumGadget');
+        if (!response.ok) {
+          throw new Error('Failed to fetch Premium Gadget data');
+        }
+        const data = await response.json();
+        setPremiumGadgetData(data);
+      } catch (error) {
+        console.error('Error:', error);
       }
-      return res.json();
-    }
-  );
+    };
   
-  useEffect(() => {
-    setMacbookData(fetchedMacbookData);
-  }, [fetchedMacbookData]);
+    // Fetch Premium Gadget data when the component mounts
+    fetchPremiumGadgetData();
+  
+    // Set up interval for refetching every 3 seconds
+    const intervalId = setInterval(() => {
+      fetchPremiumGadgetData();
+    }, 3000);
+  
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  
+  }, []);
+  
+
+
+
+// All Premium Gadget  offer data Load to the homepage only category=macBook
+const [macbookData, setMacbookData] = useState([]);
+
+useEffect(() => {
+  const fetchMacbookData = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/MacBook');
+      if (!response.ok) {
+        throw new Error('Failed to fetch MacBook data');
+      }
+      const data = await response.json();
+      setMacbookData(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // Fetch MacBook data when the component mounts
+  fetchMacbookData();
+
+  // Set up interval for refetching every 3 seconds
+  const intervalId = setInterval(() => {
+    fetchMacbookData();
+  }, 3000);
+
+  // Clean up the interval when the component unmounts
+  return () => clearInterval(intervalId);
+
+}, []);
+
   
 // add to cart action------
 
@@ -213,11 +237,10 @@ const handleDelete = async (id) => {
 // new arrival data load to the server side ----------------------
 const [newArrivalData, setNewArrivalData] = useState([]);
 
-
 useEffect(() => {
   const fetchNewArrivalData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/NewArrival'); 
+      const response = await fetch('http://localhost:5000/NewArrival');
       if (!response.ok) {
         throw new Error('Failed to fetch new arrival data');
       }
@@ -228,9 +251,19 @@ useEffect(() => {
     }
   };
 
-  fetchNewArrivalData(); // Call the function to fetch data when the component mounts
+  // Fetch data when the component mounts
+  fetchNewArrivalData();
 
-}, []);
+  // Set up interval for refetching every 5 seconds
+  const intervalId = setInterval(() => {
+    fetchNewArrivalData();
+  }, 3000);
+
+  // Clean up the interval when the component unmounts
+  return () => clearInterval(intervalId);
+
+}, []); // Empty dependency array to run only on mount and unmount
+
 
   return (
     <div className="bg-gray-200 py-10 mt-2">
