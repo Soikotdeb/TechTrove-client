@@ -209,35 +209,28 @@ const handleDelete = async (id) => {
       console.log(error);
   }
 };
-// premiumGadget  delete action
-const handleRemove = async (id) => {
-  try {
-    const result = await Swal.fire({
-        title: "Are you sure you want to delete?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
-    });
 
-    if (result.isConfirmed) {
-        await fetch(`http://localhost:5000/premiumGadget/${id}`, {
-            method: "DELETE",
-        });
-        await Swal.fire({
-            icon: "success",
-            title: "Product Deleted",
-            text: "Data has been deleted successfully.",
-            confirmButtonText: "OK",
-        });
-        // Refetch Question after delete
-        refetch();
+// new arrival data load to the server side ----------------------
+const [newArrivalData, setNewArrivalData] = useState([]);
+
+
+useEffect(() => {
+  const fetchNewArrivalData = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/NewArrival'); 
+      if (!response.ok) {
+        throw new Error('Failed to fetch new arrival data');
+      }
+      const data = await response.json();
+      setNewArrivalData(data);
+    } catch (error) {
+      console.error('Error:', error);
     }
-} catch (error) {
-    console.log(error);
-}
+  };
 
-};
+  fetchNewArrivalData(); // Call the function to fetch data when the component mounts
+
+}, []);
 
   return (
     <div className="bg-gray-200 py-10 mt-2">
@@ -247,7 +240,7 @@ const handleRemove = async (id) => {
           <h1 className="font-extrabold text-white text-lg bg-green-700 text-center p-4">
             FEATURED PRODUCTS
           </h1>
-          {FeaturedProduct.slice(0, showAll ? FeaturedProduct.length : 4).map(
+          {FeaturedProduct.slice(0, showAll ? FeaturedProduct.length : 7).map(
             (featured) => (
               <div
                 key={featured._id}
@@ -321,22 +314,88 @@ const handleRemove = async (id) => {
             {/* tabpanal  */}
 
             <div>
+            {/* this is NewArrival Collection tabPanel */}
               <TabPanel>
                 <div style={{ height: "100%", width: "100%" }}>
                   <Tabs forceRenderTabPanel defaultIndex={0}>
                     <TabPanel>
-                      <div
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          margin: "0 auto",
-                        }}
-                        className="card card-side gap-y-16 my-5 mx-3 shadow-xl bg-white p-6 rounded-lg border border-gray-300 mb-4"
-                      >
-                        <div className="card-body">
-                          new arebal
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
+                  {newArrivalData.map((newArrival) => (
+                    <div
+                      key={newArrival._id}
+                      className="relative group overflow-hidden border border-gray-300 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                    >
+                      <div className="product-image">
+                        <img
+                          src={newArrival.productImages[0]}
+                          alt={newArrival.productName}
+                          className="w-full h-52 object-cover"
+                        />
+                        <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
+                        <p
+                className="absolute top-1 left-1 bg-green-500 text-white p-2 rounded-lg flex items-center"
+                title="Discount Price"
+              >
+                <FaTags className="text-gray-100 mr-1" />
+                -৳{newArrival.discountAmount}
+              </p>
                       </div>
+                      <div className="product-info bg-white p-4">
+                        <h2 className="text-sm font-semibold mb-2">
+                          {newArrival.productName}
+                        </h2>
+                        <p className="text-gray-700 font-extrabold text-sm">
+                        ৳   {newArrival.price}
+                        </p>
+                      </div>
+                      <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100">
+                        <p className="text-gray-800 text-base">
+                          Color: {newArrival.productColor}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Description: {newArrival.description}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Made In: {newArrival.madeIn}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Storage: {newArrival?.storage}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                        Available Product: {newArrival.productQuantity}
+                        </p>
+                        <p className="text-gray-800 text-base">
+                          Discount: ৳  {newArrival.discountAmount}
+                        </p>
+
+                        
+                          <Link
+                           onClick={() => handleAddToCartGadget(newArrival)}
+                          title="Tap to Add Cart"
+                          className="bg-green-400 p-2 rounded-lg"
+                          >
+                            <FaShoppingBag></FaShoppingBag>
+                          </Link>
+                          <div>
+                {isAdminOrInstructor === "admin" ||
+                isAdminOrInstructor === "instructor" ? (
+                  <Link
+                  onClick={() => handleDelete(newArrival._id)}
+                    className="absolute top-0 right-3 p-2 rounded-lg flex items-center"
+                    title="Delete Offer"
+                  >
+                    <FaTrashAlt
+                      size={24}
+                      className="text-red-600 hover:text-red-700  mr-1"
+                    />
+                  </Link>
+                ) : null}
+              </div>
+                      
+                      </div>
+                    </div>
+                  ))}
+                </div>
                     </TabPanel>
                   </Tabs>
                 </div>
@@ -488,7 +547,7 @@ const handleRemove = async (id) => {
                 {isAdminOrInstructor === "admin" ||
                 isAdminOrInstructor === "instructor" ? (
                   <Link
-                  onClick={() => handleRemove(gadget._id)}
+                  onClick={() => handleDelete(gadget._id)}
                     className="absolute top-0 right-3 p-2 rounded-lg flex items-center"
                     title="Delete Offer"
                   >
