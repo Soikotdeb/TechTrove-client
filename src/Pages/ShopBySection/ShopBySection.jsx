@@ -193,7 +193,7 @@ const handleDelete = async (id) => {
     });
 
     if (result.isConfirmed) {
-        await fetch(`http://localhost:5000/macBook/${id}`, {
+        await fetch(`http://localhost:5000/delete/${id}`, {
             method: "DELETE",
         });
         await Swal.fire({
