@@ -1,125 +1,96 @@
-
 import React, { useEffect, useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import {
-  FaExchangeAlt,
-  FaHeart,
-  FaShoppingCart,
-  FaSearch,
-  FaEye,
-} from "react-icons/fa";
 import AOS from "aos";
 import { Link } from "react-router-dom";
 
 const TechTroveProducts = () => {
-  const [featured, setFeatured] = useState([]);
-  const [activeTab, setActiveTab] = useState(0);
-  const [numCardsToShow, setNumCardsToShow] = useState(12); // Number of cards to show initially
-  const incrementValue = 12; // Increment value for "See More" button
+  const [TechTrove, setTechTroveProduct] = useState([]);
 
   useEffect(() => {
     AOS.init();
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/TechTrove');
+        if (!response.ok) {
+          throw new Error('Failed to fetch TechTrove data');
+        }
+        const data = await response.json();
+        setTechTroveProduct(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 3000);
+
+    return () => clearInterval(intervalId);
   }, []);
-
-  const handleTabChange = (index) => {
-    setActiveTab(index);
-  };
-
-  useEffect(() => {
-    fetch("product.json")
-      .then((res) => res.json())
-      .then((data) => setFeatured(data));
-  }, []);
-
-  const handleSeeMore = () => {
-    setNumCardsToShow(numCardsToShow + incrementValue);
-  };
 
   return (
-    <div className="bg-gray-100 rounded-lg">
-      <Tabs selectedIndex={activeTab} onSelect={handleTabChange}>
+    <div className="bg-gray-100 rounded-lg p-4">
+      <Tabs>
         <TabList className="flex">
-          <div className="">
-            <div className="font-bold text-3xl mr-2">
-              <small>TechTrove Products </small>
-              <hr className="border-green-500 border-t-2 w-full" />
-            </div>
+          <div className="font-bold text-3xl mr-2">
+            <small>TechTrove Products </small>
+            <hr className="border-green-500 border-t-2 w-full" />
           </div>
-          <Tab>FEATURED</Tab>
-          <Tab>NEW</Tab>
-          <Tab>TOP SELLERS</Tab>
         </TabList>
-        <hr className="border-black border-t-2 w-99" />
-
+        <hr className="border-black border-t-2 w-99 mt-2" />
         <div>
           <TabPanel>
-            <div className="grid grid-cols-1 mt-4 py-3 px-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-x-1 bg-gray-100">
-              {featured.slice(0, numCardsToShow).map((feature) => (
-                <div
-                  key={feature.id}
-                  className="flex justify-center items-center h-scree"
-                >
-                  <div className="relative w-80 h-80 bg-blue-100 p-2 rounded-lg shadow-md transition-transform transform hover:scale-105">
-                    <img src={feature.image} alt="" />
-                    <div className="mt-2">
-                      <p>Name: {feature.phone_name} </p>
-                      <p>Color: {feature.color} </p>
-                      <p>Region: {feature.region} </p>
-                      <p>Price: {feature.price}</p>
-                    </div>
-                    <div className="absolute top-32 left-0 w-full h-full bg-transparent flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity">
-                      <Link
-                        className="icon icon-large hover:text-purple-700"
-                        title="Quick view"
-                      >
-                        <FaSearch className="mr-2" size={30} />
-                      </Link>
-                      <Link
-                        className="icon icon-large hover:text-purple-700"
-                        title="Select options"
-                      >
-                        <FaShoppingCart className="mx-2" size={30} />
-                      </Link>
-                      <Link
-                        className="icon icon-large hover:text-purple-700"
-                        title="Compare"
-                      >
-                        <FaExchangeAlt className="mx-2" size={30} />
-                      </Link>
-                      <Link
-                        className="icon icon-large hover:text-purple-700"
-                        title="Add to wishlist"
-                      >
-                        <FaHeart className="ml-2" size={30} />
-                      </Link>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2">
+              {TechTrove.map((product) => (
+                <div key={product._id} className="max-w-md mx-auto mb-8">
+                  
+                  <div className="bg-gray-400 antialiased text-gray-900">
+                    <img
+                      src={product.productImages[0]}
+                      alt="random image"
+                      className="w-full h-96 object-cover object-center rounded-lg shadow-md"
+                    />
+                    <div className="relative px-3 -mt-16 py-1">
+                      <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="flex items-baseline">
+                          <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+                            New
+                          </span>
+                          <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+                            2 baths &bull; 3 rooms
+                          </div>
+                        </div>
+                        <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
+                          {product.productName}
+                        </h4>
+                        <div className="mt-2 text-xl">
+                        ৳ {product.price}
+                          <span className="text-gray-600 text-base"> /BD</span>
+                        </div>
+                        <div className="mt-1">
+                          <span className="text-teal-600 text-lg font-semibold">
+                            {product.productColor}/color{" "}
+                          </span>
+                          <span className="text-base text-gray-600">
+                            <Link className="hover:underline"> (View All Details)</Link>
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div>
-            {numCardsToShow < featured.length && (
-              <div className="flex justify-center mt-2 ">
-              <Link className="bg-green-500 flex items-center font-semibold hover:text-purple-300 hover:bg-green-600 text-white px-6 py-3 rounded-full focus:outline-none shadow-md transition-shadow duration-300 mb-2" onClick={handleSeeMore}>
-              <FaEye className="mr-1" /> SEE MORE
-            </Link>
-
-              </div>
-            )}
-            </div>
-          </TabPanel>
-
-          <TabPanel>
-            <h2>New Products</h2>
-          </TabPanel>
-
-          <TabPanel>
-            <h2>Top Selling Products</h2>
           </TabPanel>
         </div>
       </Tabs>
     </div>
   );
 };
+
 export default TechTroveProducts;
+
