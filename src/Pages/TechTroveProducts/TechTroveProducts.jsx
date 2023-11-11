@@ -76,16 +76,17 @@ const TechTroveProducts = () => {
         <hr className="border-black border-t-2 w-99 mt-2" />
         <div>
           <TabPanel>
+            <div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2">
               {TechTrove.map((product) => (
-                <div key={product._id} className="max-w-md mx-auto mb-8">
-                  <div className="bg-gray-400 antialiased text-gray-900">
+                <div key={product._id} className="max-w-md mx-auto mb-1">
+                  <div className="bg-gray-400 antialiased text-gray-900 p-1 rounded-lg">
                     <img
                       src={product.productImages[0]}
                       alt="random image"
                       className="w-full h-96 object-cover object-center rounded-lg shadow-md"
-                    />
-                    <div className="relative px-3 -mt-20 py-1">
+                    />             
+                    <div className="relative px-1 -mt-20 py-1">
                       <div className="bg-white p-8 rounded-lg shadow-lg">
                         <div className="flex items-baseline">
                           <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
@@ -121,6 +122,9 @@ const TechTroveProducts = () => {
                   </div>
                 </div>
               ))}
+            </div>
+
+
             </div>
           </TabPanel>
         </div>
