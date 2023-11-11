@@ -74,6 +74,7 @@ const location = useLocation();
         name: product.productName,
         image: product.productImages[0],
         price: product.price,
+        quantity: '1',
         email: user.email,
       };
   
