@@ -1,13 +1,19 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AOS from "aos";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaShoppingBag } from 'react-icons/fa';
+import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const TechTroveProducts = () => {
   const [TechTrove, setTechTroveProduct] = useState([]);
+  const {user}=useContext(AuthContext)
+  const navigate = useNavigate();
+const location = useLocation();
 
   useEffect(() => {
     AOS.init();
@@ -60,6 +66,74 @@ const TechTroveProducts = () => {
     });
   };
   
+  // add to cart action---
+  const handleAddToCart = (product) => {
+    if (user && user.email) {
+      const cartItem = {
+        menuItemId: product._id,
+        name: product.productName,
+        image: product.productImages[0],
+        price: product.price,
+        email: user.email,
+      };
+  
+      fetch('http://localhost:5000/carts', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(cartItem),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Failed to add item to the cart');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // Check for any key in the response to indicate success
+          if (data && (data.insertedId || data.success)) {
+            // Show a success toast
+            toast.success('Product added to the cart.', {
+              position: 'top-right',
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          } else {
+            throw new Error('Failed to add item to the cart');
+          }
+        })
+        .catch((error) => {
+          console.error('Error adding item to the cart:', error);
+          // Show an error toast
+          toast.error('Failed to add item to the cart. Please try again.', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+    } else {
+      // Show a warning toast
+      toast.warning('Please login to order the product', {
+        position: 'top-right',
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate('/login', { state: { from: location } });
+    }
+  };
   
   
   
@@ -92,8 +166,8 @@ const TechTroveProducts = () => {
                           <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
                             New
                           </span>
-                          <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                          &bull; Product Of TechTrove
+                          <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
+                          &bull; Product Of TechTrove <Link onClick={() => handleAddToCart(product)}><FaShoppingBag size={20}/></Link>
                           </div>
                         </div>
                         <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
