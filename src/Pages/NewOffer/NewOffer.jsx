@@ -1,62 +1,156 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { motion } from "framer-motion";
-import { FaArrowAltCircleRight, FaTags, FaTrashAlt } from "react-icons/fa";
-import discount from "../../assets/image/discount.png";
-import specialOffer from "../../assets/image/specialOffer.png";
+import { FaShoppingBag, FaTrashAlt } from "react-icons/fa";
 import limitedTime from "../../assets/image/limitedTime.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAdmin from "../../Hook/UseAdmin";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const LatestOffers = () => {
   const [latestOffers, setLatestOffers] = useState([]);
   const [isAdminOrInstructor] = UseAdmin();
 
-  const { data: fetchedOffers = [],refetch } = useQuery(["latestOffers"], async () => {
-    const res = await fetch("http://localhost:5000/LatestOffers");
-    return res.json();
-  });
+  const { data: fetchedOffers = [], refetch } = useQuery(
+    ["latestOffers"],
+    async () => {
+      const res = await fetch("http://localhost:5000/LatestOffers");
+      return res.json();
+    }
+  );
 
   useEffect(() => {
     setLatestOffers(fetchedOffers);
   }, [fetchedOffers]);
 
-  const handleFullDetails = (offer) => {
-    // Store specific offer information in local storage
-    localStorage.setItem("OfferDetails", JSON.stringify(offer));
-  };
-
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
-          title: "Are you sure you want to delete?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes",
-          cancelButtonText: "No",
+        title: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
       });
 
       if (result.isConfirmed) {
-          await fetch(`http://localhost:5000/LatestOffer/${id}`, {
-              method: "DELETE",
-          });
-          await Swal.fire({
-              icon: "success",
-              title: "Offer Deleted",
-              text: "Offer has been deleted successfully.",
-              confirmButtonText: "OK",
-          });
-          // Refetch Question after delete
-          refetch();
+        await fetch(`http://localhost:5000/LatestOffer/${id}`, {
+          method: "DELETE",
+        });
+        await Swal.fire({
+          icon: "success",
+          title: "Offer Deleted",
+          text: "Offer has been deleted successfully.",
+          confirmButtonText: "OK",
+        });
+        // Refetch Question after delete
+        refetch();
       }
-  } catch (error) {
+    } catch (error) {
       console.log(error);
-  }
-
+    }
   };
 
+  const openModal = (product) => {
+    Swal.fire({
+      title: `${product.productName}`,
+      html: `
+        <div class="w-full h-48 mb-2">
+         <hr/>
+          <img src=${product.productImages[0]} class="w-1/2 h-full object-cover mx-auto" />
+        </div>
+        <hr/>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <div class="flex flex-col items-center hover:bg-gray-100 p-2 rounded-lg">
+            <p class="text-teal-800 mb-2">Price: ৳ ${product.price} /BD</p>
+            <p class="text-blue-800">Color: ${product.productColor}</p>
+          </div>
+          <div class="flex flex-col items-center hover:bg-gray-100  rounded-lg">
+            <p class="text-purple-800 mb-1">Storage: ${product.storage}</p>
+            <p class="text-red-800 mb-1">Made In By: ${product.madeIn}</p>
+          </div>
+            <p class="text-green-800"> ${product.productQuantity} Product Available </p>
+            <p class="text-indigo-800">Discount: ${product.discountAmount} / Tk</p>
+            <p class="text-yellow-800">${product.description}</p>
+        </div>
+      `,
+    });
+  };
 
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // add to cart action---
+  const handleAddToCart = (product) => {
+    if (user && user.email) {
+      const cartItem = {
+        menuItemId: product._id,
+        name: product.productName,
+        image: product.productImages[0],
+        price: product.price,
+        quantity: "1",
+        email: user.email,
+      };
+
+      fetch("http://localhost:5000/carts", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(cartItem),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Failed to add item to the cart");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // Check for any key in the response to indicate success
+          if (data && (data.insertedId || data.success)) {
+            // Show a success toast
+            toast.success("Product added to the cart.", {
+              position: "top-right",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          } else {
+            throw new Error("Failed to add item to the cart");
+          }
+        })
+        .catch((error) => {
+          console.error("Error adding item to the cart:", error);
+          // Show an error toast
+          toast.error("Failed to add item to the cart. Please try again.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+    } else {
+      // Show a warning toast
+      toast.warning("Please login to order the product", {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate("/login", { state: { from: location } });
+    }
+  };
 
   return (
     <div className="container mx-auto py-8">
@@ -64,87 +158,69 @@ const LatestOffers = () => {
         Latest Offers
       </h2>
       <hr className="border border-gray-300" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-4">
-        {latestOffers.map((offer, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl"
-          >
-            <div className="relative overflow-hidden h-52">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2">
+        {latestOffers.map((product) => (
+          <div key={product._id} className="max-w-md mx-auto mb-1 relative">
+            <div className="bg-gray-400 antialiased text-gray-900 p-1 rounded-lg">
               <img
-                src={offer.productImages[0]}
-                alt={offer.productName}
-                className="w-full h-full object-contain"
+                src={product.productImages[0]}
+                alt="random image"
+                className="w-full h-96 object-cover object-center rounded-lg shadow-md"
               />
-              <p
-                className="absolute top-3 right-3 bg-green-500 text-white p-2 rounded-lg flex items-center"
-                title="Discount Price"
-              >
-                <FaTags className="text-gray-100 mr-1" />
-                -${offer.discountAmount}
-              </p>
-              <div>
-                {isAdminOrInstructor === "admin" ||
-                isAdminOrInstructor === "instructor" ? (
-                  <Link
-                  onClick={() => handleDelete(offer._id)}
-                    className="absolute top-16 right-3 p-2 rounded-lg flex items-center"
-                    title="Delete Offer"
-                  >
-                    <FaTrashAlt
-                      size={24}
-                      className="text-red-600 hover:text-red-700  mr-1"
-                    />
-                  </Link>
-                ) : null}
+              <div className="relative px-1 -mt-20 py-1">
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <div className="flex items-baseline">
+                    <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+                      New
+                    </span>
+                    <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
+                      &bull; Product Of TechTrove{" "}
+                      <Link onClick={() => handleAddToCart(product)}>
+                        <FaShoppingBag size={20} />
+                      </Link>
+                    </div>
+                  </div>
+                  <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
+                    {product.productName}
+                  </h4>
+                  <div className="mt-2 text-xl">
+                    ৳ {product.price}
+                    <span className="text-gray-600 text-base"> /BD</span>
+                  </div>
+                  <div className="mt-1">
+                    <span className="text-teal-600 text-lg font-semibold">
+                      {product.productColor}/color{" "}
+                    </span>
+                    <span className="text-base text-gray-600">
+                      <Link
+                        to="#"
+                        className="hover:underline"
+                        onClick={() => openModal(product)}
+                      >
+                        (View All Details)
+                      </Link>
+                    </span>
+                  </div>
+                </div>
               </div>
-              <img
-                className="absolute top-14 left-3 w-10 rounded-lg"
-                src={discount}
-                alt=""
-              />
-              <img
-                className="absolute top-3 left-3 w-10 rounded-lg"
-                src={specialOffer}
-                alt=""
-              />
-              <img
-                className="absolute top-24 left-3 w-10 rounded-lg"
-                src={limitedTime}
-                alt=""
-              />
             </div>
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2">
-                ➺ {offer.productName}
-              </h3>
-              <div className="flex items-center justify-between mt-3">
-                <p className="text-gray-600">
-                  <span className="font-semibold">✪ Regular Price ৳ :</span>{" "}
-                  {offer.price}
-                </p>
-                <Link
-                  to={`/fullDetails/${offer._id}`}
-                  onClick={() => handleFullDetails(offer)}
-                >
-                  <FaArrowAltCircleRight
-                    className="text-gray-600"
-                    size={24}
-                    title="Tap to See All Details"
+            {isAdminOrInstructor === "admin" ||
+            isAdminOrInstructor === "instructor" ? (
+              <div className="absolute top-0 right-0 p-2 rounded-lg flex items-center">
+                <Link>
+                  <FaTrashAlt
+                    size={16}
+                    className="text-red-600 hover:text-red-700 mr-1"
+                    onClick={() => handleDelete(product._id)}
                   />
                 </Link>
               </div>
-              <div className="flex items-center mt-2">
-                <p className="text-gray-500 text-sm">
-                  <span className="font-semibold">✪ Color :</span>{" "}
-                  {offer.productColor}
-                </p>
-              </div>
+            ) : null}
+            <div className="absolute top-0 left-0 w-16 h-14 rounded-lg">
+              <img src={limitedTime} alt="" />
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
