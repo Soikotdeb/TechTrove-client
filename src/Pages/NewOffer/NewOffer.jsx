@@ -89,6 +89,7 @@ const LatestOffers = () => {
         menuItemId: product._id,
         name: product.productName,
         image: product.productImages[0],
+        color: product.productColor,
         price: product.price,
         quantity: "1",
         email: user.email,

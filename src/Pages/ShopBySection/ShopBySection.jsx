@@ -114,6 +114,7 @@ const handleAddToCart = (macBook) => {
       menuItemId: macBook._id,
       name: macBook.productName,
       image: macBook.productImages[0],
+      color: macBook.productColor,
       price: macBook.price,
       quantity: '1',
       email: user.email,

@@ -1,37 +1,19 @@
 
 import React, { useEffect, useState } from 'react';
-import useCart from '../../Hook/useCart';
-import { FaHome, FaTrashAlt, FaWallet } from 'react-icons/fa';
+import {  FaArrowLeft, FaTrashAlt } from 'react-icons/fa';
+import { RiArrowDownDoubleFill } from "react-icons/ri";
+import { GiWallet } from "react-icons/gi";
 import { Link } from 'react-router-dom';
-import cartBg from '../../assets/image/green.jpg';
+import useCart from './../../Hook/useCart';
 import Swal from 'sweetalert2';
 
 const ProductCart = () => {
+
     const [cart, refetch] = useCart();
     const [loading, setLoading] = useState(true);
 
-    // Fetch cart data when the component mounts
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await refetch(); // You might need to handle the refetch logic from useCart appropriately
-                setLoading(false);
-            } catch (error) {
-                // Handle any errors during data fetching
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, [refetch]);
-
-    if (loading) {
-        // You can render a loading indicator here while data is being fetched.
-        return <div>Loading...</div>;
-    }
-
-    // Calculate the total price, handling missing or non-numeric product prices
-    const total = cart.reduce((sum, product) => {
+     // Calculate the total price, handling missing or non-numeric product prices
+     const total = cart.reduce((sum, product) => {
         const price = parseFloat(product.price);
         if (!isNaN(price)) {
             return price + sum;
@@ -39,10 +21,8 @@ const ProductCart = () => {
         return sum;
     }, 0);
 
-    const cartStyle = {
-        background: `url(${cartBg})`,
-        backgroundSize: 'cover',
-    };
+    // shipping charge
+    const shipping = 90
 
 
     // delete action
@@ -75,55 +55,151 @@ const ProductCart = () => {
     
       };
 
-    return (
-        <div className=" min-h-screen mx-auto" style={cartStyle}>
-            <Link
-                to="/"
-                className="hover:underline mb-2 inline-block font-extrabold hover-text-red-600 text-purple p-2"
-            >
-                <FaHome size={28} title="GO HOME" />
-            </Link>
-            <h2 className="text-2xl font-bold mb-2">Your Shopping Cart</h2>
-            <div className='flex justify-between mb-1 p-2 border border-purple-400'>
-                <p className='text-lg font-semibold'>Total Amount : ৳ {total.toFixed(2)}</p>
-                <button className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover-bg-blue-700">
-                    <FaWallet title='Order All Products' size={20} />
-                </button>
+    //   -----------------
+        // Fetch cart data when the component mounts
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    await refetch(); // You might need to handle the refetch logic from useCart appropriately
+                    setLoading(false);
+                } catch (error) {
+                    // Handle any errors during data fetching
+                    console.error('Error fetching data:', error);
+                }
+            };
+    
+            fetchData();
+        }, [refetch]);
+    
+        if (loading) {
+            // You can render a loading indicator here while data is being fetched.
+            return <div>
+                <div className="flex items-center justify-center h-screen bg-blue-200">
+      <div className="border-t-4 border-blue-500 border-solid h-10 w-64 animate-spin"></div>
+      <div className="border-t-4 border-purple-500 border-solid h-12 w-64 animate-spin"></div>
+      <div className="border-t-4 border-blue-500 border-solid h-10 w-64 animate-spin"></div>
+    </div>
+            </div>;
+        }
+  return (
+    <div className="container mx-auto mt-2 p-3 bg-slate-200 rounded shadow-md">
+      <div className="flex flex-row">
+        <div className="w-8/12 min-h-screen">
+          <div className="product-details mr-2">
+            <div className="flex flex-row">
+              <Link to='/' className='flex items-center gap-1 hover:underline'><FaArrowLeft /> Continue Shopping</Link>
             </div>
-            <table className="w-full border-2 border-yellow-500 border-collapse text-white font-extrabold">
-                <thead>
-                    <tr className="">
-                        <th className="p-3 border border-yellow-500">Product Image</th>
-                        <th className="p-3 border border-yellow-500">Product Name</th>
-                        <th className="p-3 border border-yellow-500">Product Price</th>
-                        <th className="p-3 border border-yellow-500">Product Quantity</th>
-                        <th className="p-3 border border-yellow-500">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cart.map(product => (
-                        <tr key={product._id} className="border-t hover-bg-gray-100 transition-colors duration-200">
-                            <td className="p-3 border border-yellow-500">
-                                <img src={product.image} alt={product.name} className="h-16 w-16" />
-                            </td>
-                            <td className="p-3 border border-yellow-300"><p className="mt-2">{product.name}</p></td>
-                            <td className="p-3 border border-yellow-300">৳ {parseFloat(product.price).toFixed(2)}</td>
-                            <td className="p-3 border border-yellow-300"><p className="mt-2">{product.quantity}</p></td>
-                            <td className="p-3 border border-yellow-300">
-                                <button className="px-3 py-1 bg-red-500 text-white rounded hover-bg-red-700">
-                                    <FaTrashAlt onClick={() => handleDelete(product._id)} title='Remove to Cart' size={20} />
-                                </button>
-                                <button className="ml-2 px-3 py-1 bg-blue-500 text-white rounded hover-bg-blue-700">
-                                    <FaWallet title='Order Single Product' size={20} />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <hr className="my-4 border-t border-blue-500" />
+            <h6 className="mb-4 text-lg font-semibold">Shopping cart</h6>
+            <div className="flex justify-between mb-4">
+              <span>You have {cart.length} items in your cart</span>
+              <div className="flex flex-row items-center">
+                <span className="text-gray-500">Sort by:</span>
+                <div className="flex items-center ml-2">
+                  <span className="mr-1">price</span>
+                  <RiArrowDownDoubleFill />
+                </div>
+              </div>
+            </div>
+           
+            <div className='border p-1 border-red-200'>
+            {
+                cart.map(product=> <div key={product._id}>
+            <div className="flex justify-between items-center mb-4 p-2 bg-gray-100 rounded ">
+              <div className="flex flex-row items-center">
+                <img className="rounded" src={product.image} width="40" alt="Product" />
+                <div className="ml-2">
+                  <span className="font-semibold">{product.name}</span> <br />
+                  <span className="text-xs text-gray-500">{product.color}</span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center">
+                <span className="block">Qty. {product.quantity}</span>
+                <span className="ml-5 font-semibold">৳ {parseFloat(product.price).toFixed(2)}</span>
+                <Link onClick={() => handleDelete(product._id)} className="ml-3 text-gray-500"> <FaTrashAlt></FaTrashAlt> </Link>
+                <Link className="ml-3 text-gray-500"><GiWallet /> </Link>
+              </div>
+            </div>
+
+                </div>)
+            }
+            </div>
+
+          </div>
         </div>
-    );
+        <div className="w-4/12 ml-4">
+          <div className="payment-info bg-blue-500 text-white p-3 rounded">
+            <div className="flex justify-between items-center">
+              <span>Card details</span>
+              <img className="rounded" src="https://i.ibb.co/HHc4n4T/Untitled.png" width="50" alt="Card" />
+            </div>
+            <span className="type block mt-3 mb-1">Card type</span>
+           <div className='flex mb-3  gap-2'>
+
+              <span className='border border-red-100 p-2'>
+                <img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" />
+              </span>
+
+              <span className='border border-red-100 p-2'>
+                <img width="30" src="https://img.icons8.com/officel/48/000000/visa.png" alt="VISA" />
+              </span>
+
+              <span className='border border-red-100 p-2'>
+              <img width="30" src="https://i.ibb.co/vxgjPv5/bkash1.png" alt="bkash1" border="0"/>
+              </span>
+ 
+              <span className='border border-red-100 p-2'>
+              <img  width="30" src="https://i.ibb.co/YLML4Vh/nagad.jpg" alt="nagad" border="0"/>
+              </span>
+
+              <span className='border border-red-100 p-2'>
+              <img width="25" src="https://i.ibb.co/j31xJmY/roket.jpg" alt="roket" border="0"/>
+              </span>
+           
+           </div>
+            {/* Repeat the above label.radio block for other card types */}
+            <div>
+              <label className="credit-card-label">Name on card</label>
+              <input type="text" className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2" placeholder="Name" />
+            </div>
+            <div>
+              <label className="credit-card-label">Card number</label>
+              <input type="text" className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2" placeholder="0000 0000 0000 0000" />
+            </div>
+            <div className="row flex gap-5">
+              <div className="col-md-6">
+                <label className="credit-card-label">Date</label>
+                <input type="text" className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2" placeholder="12/24" />
+              </div>
+              <div className="col-md-6">
+                <label className="credit-card-label">CVV</label>
+                <input type="text" className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2 " placeholder="342" />
+              </div>
+            </div>
+            <hr className="line my-4 border-t border-white" />
+            <div className="flex justify-between items-center information">
+              <span>Subtotal</span>
+              <span>৳ {total.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center information">
+              <span>Shipping</span>
+              <span>৳ {shipping}</span>
+            </div>
+            <div className="flex justify-between items-center information">
+              <span>Total(Incl. taxes)</span>
+              <span>৳ {total + shipping} </span>
+            </div>
+            <button className="btn btn-primary btn-block flex justify-between mt-3" type="button">
+              <span>৳ {total + shipping}.00</span>
+              <span>
+                Checkout<i className="fa fa-long-arrow-right ml-1"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProductCart;
-
