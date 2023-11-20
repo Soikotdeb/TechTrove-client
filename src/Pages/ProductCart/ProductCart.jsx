@@ -83,7 +83,7 @@ const ProductCart = () => {
         }
   return (
     <div className="container mx-auto mt-2 p-3 bg-slate-200 rounded shadow-md">
-      <div className="flex flex-row">
+      <div className="flex  flex-col-reverse md:flex-row">
         <div className="w-8/12 min-h-screen">
           <div className="product-details mr-2">
             <div className="flex flex-row">
