@@ -17,7 +17,7 @@ const MyAddedProducts = () => {
 
     const fetchUserAddedProducts = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/users/instructor/myAddedProducts/${encodeURIComponent(user?.email)}`);
+            const response = await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/users/instructor/myAddedProducts/${encodeURIComponent(user?.email)}`);
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
@@ -44,7 +44,7 @@ const MyAddedProducts = () => {
             });
 
             if (result.isConfirmed) {
-                await fetch(`http://localhost:5000/MyAddedProduct/${id}`, {
+                await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/MyAddedProduct/${id}`, {
                     method: 'DELETE'
                 });
                 await Swal.fire({

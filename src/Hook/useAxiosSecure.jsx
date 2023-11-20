@@ -7,7 +7,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
  const axiosSecure = axios.create({
 //    baseURL: 'https://creativescanvas.vercel.app', 
-   baseURL: 'http://localhost:5000/', 
+   baseURL: 'https://tech-trove-gadget-bazar-database.vercel.app/', 
  });
  const useAxiosSecure = () => {
    const { logOut } = useContext(AuthContext)

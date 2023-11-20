@@ -13,7 +13,7 @@ const AllFeaturedProducts = () => {
   const { data: FeaturedProduct = [] } = useQuery(
     ["FeaturedProducts"],
     async () => {
-      const res = await fetch("http://localhost:5000/FeaturedProducts");
+      const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/FeaturedProducts");
       return res.json();
     },
     {
@@ -27,7 +27,7 @@ const AllFeaturedProducts = () => {
 
   const handleSearch = async () => {
     if (searchText) {
-      const res = await fetch(`http://localhost:5000/searchByFeaturedProducts/${searchText}`);
+      const res = await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/searchByFeaturedProducts/${searchText}`);
       const data = await res.json();
       setSearchResults(data);
     } else {

@@ -95,7 +95,7 @@ const NewOfferDetails = () => {
         email: user.email,
       };
 
-      fetch('http://localhost:5000/carts', {
+      fetch('https://tech-trove-gadget-bazar-database.vercel.app/carts', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

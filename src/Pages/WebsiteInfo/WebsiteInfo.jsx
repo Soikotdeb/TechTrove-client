@@ -11,7 +11,7 @@ const WebsiteInfo = () => {
         // Function to fetch feedback count
         const fetchFeedbackCount = async () => {
             try {
-                const res = await fetch("http://localhost:5000/UsersFeedback");
+                const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/UsersFeedback");
                 const data = await res.json();
                 setFeedbackCount(data.length);
             } catch (error) {
@@ -33,7 +33,7 @@ const WebsiteInfo = () => {
         // Function to fetch TotalUser count
         const fetchUserCount = async () => {
             try {
-                const res = await fetch("http://localhost:5000/users");
+                const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/users");
                 const data = await res.json();
                 setTotalUser(data.length);
             } catch (error) {

@@ -12,7 +12,7 @@ const ManageUsers = () => {
   const [adminButtonDisabled, setAdminButtonDisabled] = useState(false);
   const [instructorButtonDisabled, setInstructorButtonDisabled] = useState(false);
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
+    const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/users");
     return res.json();
   });
 
@@ -21,7 +21,7 @@ const ManageUsers = () => {
   // useEffect(() => {
   //   const fetchUserData = async () => {
   //     try {
-  //       const response = await fetch("http://localhost:5000/users");
+  //       const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/users");
   //       if (response.ok) {
   //         const data = await response.json();
   //         setUsers(data);
@@ -38,7 +38,7 @@ const ManageUsers = () => {
   const handleAdmin = (user) => {
     setAdminButtonDisabled(true);
 
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
+    fetch(`https://tech-trove-gadget-bazar-database.vercel.app/users/admin/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -64,7 +64,7 @@ const ManageUsers = () => {
   const handleInstructor = (user) => {
     setInstructorButtonDisabled(true);
 
-    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+    fetch(`https://tech-trove-gadget-bazar-database.vercel.app/users/instructor/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

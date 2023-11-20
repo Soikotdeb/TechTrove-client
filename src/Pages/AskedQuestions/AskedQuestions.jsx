@@ -17,7 +17,7 @@ const AskedQuestions = () => {
    const formData = { ...data, UserProfile,AdminReplay };
 
    // Perform POST request to the server
-   fetch('http://localhost:5000/FrequentlyAskedQuestions', {
+   fetch('https://tech-trove-gadget-bazar-database.vercel.app/FrequentlyAskedQuestions', {
      method: 'POST',
      headers: {
        'content-type': 'application/json',

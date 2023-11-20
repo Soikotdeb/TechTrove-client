@@ -15,7 +15,7 @@
 //   const { data: fetchedOffers = [], refetch } = useQuery(
 //     ["latestOffers"],
 //     async () => {
-//       const res = await fetch("http://localhost:5000/LatestOffers");
+//       const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/LatestOffers");
 //       return res.json();
 //     }
 //   );
@@ -35,7 +35,7 @@
 //       });
 
 //       if (result.isConfirmed) {
-//         await fetch(`http://localhost:5000/LatestOffer/${id}`, {
+//         await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/LatestOffer/${id}`, {
 //           method: "DELETE",
 //         });
 //         await Swal.fire({
@@ -95,7 +95,7 @@
 //         email: user.email,
 //       };
 
-//       fetch("http://localhost:5000/carts", {
+//       fetch("https://tech-trove-gadget-bazar-database.vercel.app/carts", {
 //         method: "POST",
 //         headers: {
 //           "content-type": "application/json",
@@ -252,7 +252,7 @@ const LatestOffers = () => {
   const { data: fetchedOffers = [], refetch } = useQuery(
     ["latestOffers"],
     async () => {
-      const res = await fetch("http://localhost:5000/LatestOffers");
+      const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/LatestOffers");
       return res.json();
     }
   );
@@ -272,7 +272,7 @@ const LatestOffers = () => {
       });
 
       if (result.isConfirmed) {
-        await fetch(`http://localhost:5000/LatestOffer/${id}`, {
+        await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/LatestOffer/${id}`, {
           method: "DELETE",
         });
         await Swal.fire({
@@ -331,7 +331,7 @@ const LatestOffers = () => {
         email: user.email,
       };
 
-      fetch("http://localhost:5000/carts", {
+      fetch("https://tech-trove-gadget-bazar-database.vercel.app/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",

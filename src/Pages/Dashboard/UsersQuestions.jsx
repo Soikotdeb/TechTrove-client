@@ -13,7 +13,7 @@ const UsersQuestions = () => {
     const { data: Questions = [], refetch } = useQuery(
         ["Questions"],
         async () => {
-            const res = await fetch("http://localhost:5000/UsersQuestions");
+            const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/UsersQuestions");
             return res.json();
         }
     );
@@ -36,7 +36,7 @@ const UsersQuestions = () => {
             });
 
             if (result.isConfirmed) {
-                await fetch(`http://localhost:5000/UsersQuestions/${id}`, {
+                await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/UsersQuestions/${id}`, {
                     method: "DELETE",
                 });
                 await Swal.fire({
@@ -72,7 +72,7 @@ const UsersQuestions = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 const replay = result.value;
-                fetch(`http://localhost:5000/AdminReplayToUser/${Question._id}`, {
+                fetch(`https://tech-trove-gadget-bazar-database.vercel.app/AdminReplayToUser/${Question._id}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",

@@ -11,7 +11,7 @@ const SearchResults = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/searchByHomePage/${encodeURIComponent(searchText)}`);
+            const response = await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/searchByHomePage/${encodeURIComponent(searchText)}`);
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }

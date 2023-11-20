@@ -33,7 +33,7 @@ const FeedbackApp = () => {
     const UserName = user?.displayName
 
 
-    fetch('http://localhost:5000/UserFeedback', {
+    fetch('https://tech-trove-gadget-bazar-database.vercel.app/UserFeedback', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

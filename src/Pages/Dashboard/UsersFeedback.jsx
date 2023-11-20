@@ -10,7 +10,7 @@ const UsersFeedback = () => {
     const { data: Feedback = [], refetch } = useQuery(
         ["Feedback"],
         async () => {
-            const res = await fetch("http://localhost:5000/UsersFeedback");
+            const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/UsersFeedback");
             return res.json();
         }
     );

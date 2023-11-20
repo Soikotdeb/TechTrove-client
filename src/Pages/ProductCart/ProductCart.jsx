@@ -52,7 +52,7 @@ const ProductCart = () => {
       });
 
       if (result.isConfirmed) {
-        await fetch(`http://localhost:5000/ProductCart/${id}`, {
+        await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/ProductCart/${id}`, {
           method: "DELETE",
         });
         await Swal.fire({

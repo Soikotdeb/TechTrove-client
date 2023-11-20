@@ -45,7 +45,7 @@ const LogIn = () => {
           
           }
           console.log(loggedUser);
-          fetch('http://localhost:5000/jwt',{
+          fetch('https://tech-trove-gadget-bazar-database.vercel.app/jwt',{
             method:'POST',
             headers:{
               'content-type' : 'application/json'
@@ -115,7 +115,7 @@ const LogIn = () => {
         };
   
         // Perform POST request to the server
-        fetch('http://localhost:5000/GoogleUsers', {
+        fetch('https://tech-trove-gadget-bazar-database.vercel.app/GoogleUsers', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',

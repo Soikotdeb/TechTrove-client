@@ -56,7 +56,7 @@ const ProductAddForm = () => {
             };
 
             // Perform your POST request to the server with productData
-            const serverResponse = await fetch('http://localhost:5000/AddProducts', {
+            const serverResponse = await fetch('https://tech-trove-gadget-bazar-database.vercel.app/AddProducts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ const ShopBySection = () => {
   const { data: FeaturedProduct = [] } = useQuery(
     ["FeaturedProducts"],
     async () => {
-      const res = await fetch("http://localhost:5000/FeaturedProducts");
+      const res = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/FeaturedProducts");
       return res.json();
     }
   );
@@ -47,7 +47,7 @@ const ShopBySection = () => {
   useEffect(() => {
     const fetchPremiumGadgetData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/PremiumGadget");
+        const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/PremiumGadget");
         if (!response.ok) {
           throw new Error("Failed to fetch Premium Gadget data");
         }
@@ -76,7 +76,7 @@ const ShopBySection = () => {
   useEffect(() => {
     const fetchMacbookData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/MacBook");
+        const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/MacBook");
         if (!response.ok) {
           throw new Error("Failed to fetch MacBook data");
         }
@@ -117,7 +117,7 @@ const ShopBySection = () => {
         email: user.email,
       };
 
-      fetch("http://localhost:5000/carts", {
+      fetch("https://tech-trove-gadget-bazar-database.vercel.app/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -166,7 +166,7 @@ const ShopBySection = () => {
       });
 
       if (result.isConfirmed) {
-        await fetch(`http://localhost:5000/delete/${id}`, {
+        await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/delete/${id}`, {
           method: "DELETE",
         });
         await Swal.fire({
@@ -189,7 +189,7 @@ const ShopBySection = () => {
   useEffect(() => {
     const fetchNewArrivalData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/NewArrival");
+        const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/NewArrival");
         if (!response.ok) {
           throw new Error("Failed to fetch new arrival data");
         }

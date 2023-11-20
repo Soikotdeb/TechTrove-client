@@ -53,7 +53,7 @@ const Registration = () => {
         };
   
         // Perform POST request to the server
-        const response = await fetch('http://localhost:5000/manualUsers', {
+        const response = await fetch('https://tech-trove-gadget-bazar-database.vercel.app/manualUsers', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -122,7 +122,7 @@ const Registration = () => {
         };
   
         // Perform POST request to the server
-        fetch('http://localhost:5000/GoogleUsers', {
+        fetch('https://tech-trove-gadget-bazar-database.vercel.app/GoogleUsers', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',

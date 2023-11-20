@@ -20,7 +20,7 @@
 
 //     const fetchData = async () => {
 //       try {
-//         const response = await fetch("http://localhost:5000/TechTrove");
+//         const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/TechTrove");
 //         if (!response.ok) {
 //           throw new Error("Failed to fetch TechTrove data");
 //         }
@@ -79,7 +79,7 @@
 //         email: user.email,
 //       };
   
-//       fetch('http://localhost:5000/carts', {
+//       fetch('https://tech-trove-gadget-bazar-database.vercel.app/carts', {
 //         method: 'POST',
 //         headers: {
 //           'content-type': 'application/json',
@@ -238,7 +238,7 @@ const TechTroveProducts = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/TechTrove");
+        const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/TechTrove");
         if (!response.ok) {
           throw new Error("Failed to fetch TechTrove data");
         }
@@ -300,7 +300,7 @@ const TechTroveProducts = () => {
         email: user.email,
       };
   
-      fetch('http://localhost:5000/carts', {
+      fetch('https://tech-trove-gadget-bazar-database.vercel.app/carts', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
