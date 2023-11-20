@@ -76,7 +76,7 @@ const ProductCart = () => {
       };
 
     return (
-        <div className="container min-h-screen mx-auto" style={cartStyle}>
+        <div className=" min-h-screen mx-auto" style={cartStyle}>
             <Link
                 to="/"
                 className="hover:underline mb-2 inline-block font-extrabold hover-text-red-600 text-purple p-2"

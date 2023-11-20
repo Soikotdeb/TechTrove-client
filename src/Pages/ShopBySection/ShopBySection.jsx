@@ -296,7 +296,7 @@ const openModal = (product) => {
     <div className="bg-gray-200 py-10 mt-2">
       <div className="flex gap-4">
         {/* Feature Product */}
-        <div className=" md:w-1/5 w-full mt-2 border border-gray-600">
+        <div className=" md:w-1/5 w-full mt-2 border border-gray-600 hidden sm:block">
           <h1 className="font-extrabold text-white text-lg bg-green-700 text-center p-4">
             FEATURED PRODUCTS
           </h1>
@@ -448,165 +448,133 @@ const openModal = (product) => {
 
    {/* this is Macbook Collection tabPanel */}
               <TabPanel>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
-                  {macbookData.map((macBook) => (
-                    <div
-                      key={macBook._id}
-                      className="relative group overflow-hidden border border-gray-300 rounded-lg shadow-md transition-transform transform hover:scale-105"
-                    >
-                      <div className="product-image">
-                        <img
-                          src={macBook.productImages[0]}
-                          alt={macBook.productName}
-                          className="w-full h-52 object-cover"
-                        />
-                        <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
-                        <p
-                className="absolute top-1 left-1 bg-green-500 text-white p-2 rounded-lg flex items-center"
-                title="Discount Price"
-              >
-                <FaTags className="text-gray-100 mr-1" />
-                -৳{macBook.discountAmount}
-              </p>
-                      </div>
-                      <div className="product-info bg-white p-4">
-                        <h2 className="text-sm font-semibold mb-2">
-                          {macBook.productName}
-                        </h2>
-                        <p className="text-gray-700 font-extrabold text-sm">
-                        ৳  {macBook.price}
-                        </p>
-                      </div>
-                      <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100 p-1">
-                        <p className="text-gray-800 text-base">
-                          Color: {macBook.productColor}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Description: {macBook.description}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Made In: {macBook.madeIn}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Storage: {macBook?.storage}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Available Product: {macBook.productQuantity}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Discount: ৳ {macBook.discountAmount}
-                        </p>
-                       
-                          
-                       
-                          <Link 
-                           onClick={() => handleAddToCart(macBook)}
-                          title="Tap to Add Cart"
-                          className="bg-green-400 p-2 rounded-lg">
-                            <FaShoppingBag></FaShoppingBag>
-                          </Link>
-                          <div>
-                {isAdminOrInstructor === "admin" ||
-                isAdminOrInstructor === "instructor" ? (
-                  <Link
-                  onClick={() => handleDelete(macBook._id)}
-                    className="absolute top-0 right-3 p-2 rounded-lg flex items-center"
-                    title="Delete Offer"
-                  >
-                    <FaTrashAlt
-                      size={24}
-                      className="text-red-600 hover:text-red-700  mr-1"
-                    />
-                  </Link>
-                ) : null}
-              </div>
-                        
-                      </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 p-2">
+        {macbookData.map((product) => (
+          <div key={product._id} className="max-w-md mx-auto mb-1 relative">
+            <div className="bg-gray-400 antialiased text-gray-900 p-1 rounded-lg">
+              <img
+                src={product.productImages[0]}
+                alt="random image"
+                className="w-full h-96 object-cover object-center rounded-lg shadow-md"
+              />
+              <div className="relative px-1 -mt-20 py-1">
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <div className="flex items-baseline">
+                    <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+                      New
+                    </span>
+                    <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
+                      &bull; Product Of TechTrove{" "}
+                      <Link onClick={() => handleAddToCart(product)}>
+                        <FaShoppingBag size={20} />
+                      </Link>
                     </div>
-                  ))}
+                  </div>
+                  <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
+                    {product.productName}
+                  </h4>
+                  <div className="mt-2 text-xl">
+                    ৳ {product.price}
+                    <span className="text-gray-600 text-base"> /BD</span>
+                  </div>
+                  <div className="mt-1">
+                    <span className="text-teal-600 text-lg font-semibold">
+                      {product.productColor}/color{" "}
+                    </span>
+                    <span className="text-base text-gray-600">
+                      <Link
+                        to="#"
+                        className="hover:underline"
+                        onClick={() => openModal(product)}
+                      >
+                        (View All Details)
+                      </Link>
+                    </span>
+                  </div>
                 </div>
+              </div>
+            </div>
+            {isAdminOrInstructor === "admin" ||
+            isAdminOrInstructor === "instructor" ? (
+              <div className="absolute top-0 right-0 p-2 rounded-lg flex items-center">
+                <Link>
+                  <FaTrashAlt
+                    size={16}
+                    className="text-red-600 hover:text-red-700 mr-1"
+                    onClick={() => handleDelete(product._id)}
+                  />
+                </Link>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
               </TabPanel>
 
               {/* this is Premium Gadget tabPanel */}
 
               <TabPanel>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
-                  {PremiumGadget.map((gadget) => (
-                    <div
-                      key={gadget._id}
-                      className="relative group overflow-hidden border border-gray-300 rounded-lg shadow-md transition-transform transform hover:scale-105"
-                    >
-                      <div className="product-image">
-                        <img
-                          src={gadget.productImages[0]}
-                          alt={gadget.productName}
-                          className="w-full h-52 object-cover"
-                        />
-                        <p className="absolute top-1 right-1 text-purple-400">TechTrove</p>
-                        <p
-                className="absolute top-1 left-1 bg-green-500 text-white p-2 rounded-lg flex items-center"
-                title="Discount Price"
-              >
-                <FaTags className="text-gray-100 mr-1" />
-                -৳{gadget.discountAmount}
-              </p>
-                      </div>
-                      <div className="product-info bg-white p-4">
-                        <h2 className="text-sm font-semibold mb-2">
-                          {gadget.productName}
-                        </h2>
-                        <p className="text-gray-700 font-extrabold text-sm">
-                        ৳   {gadget.price}
-                        </p>
-                      </div>
-                      <div className="product-details opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex flex-col justify-center items-center text-center bg-base-100 bg-opacity-90 transition-all duration-300 ease-in-out transform scale-0 group-hover:scale-100">
-                        <p className="text-gray-800 text-base">
-                          Color: {gadget.productColor}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Description: {gadget.description}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Made In: {gadget.madeIn}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Storage: {gadget?.storage}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                        Available Product: {gadget.productQuantity}
-                        </p>
-                        <p className="text-gray-800 text-base">
-                          Discount: ৳  {gadget.discountAmount}
-                        </p>
-
-                        
-                          <Link
-                           onClick={() => handleAddToCartGadget(gadget)}
-                          title="Tap to Add Cart"
-                          className="bg-green-400 p-2 rounded-lg"
-                          >
-                            <FaShoppingBag></FaShoppingBag>
-                          </Link>
-                          <div>
-                {isAdminOrInstructor === "admin" ||
-                isAdminOrInstructor === "instructor" ? (
-                  <Link
-                  onClick={() => handleDelete(gadget._id)}
-                    className="absolute top-0 right-3 p-2 rounded-lg flex items-center"
-                    title="Delete Offer"
-                  >
-                    <FaTrashAlt
-                      size={24}
-                      className="text-red-600 hover:text-red-700  mr-1"
-                    />
-                  </Link>
-                ) : null}
-              </div>
-                      
-                      </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 p-2">
+        {PremiumGadget.map((product) => (
+          <div key={product._id} className="max-w-md mx-auto mb-1 relative">
+            <div className="bg-gray-400 antialiased text-gray-900 p-1 rounded-lg">
+              <img
+                src={product.productImages[0]}
+                alt="random image"
+                className="w-full h-96 object-cover object-center rounded-lg shadow-md"
+              />
+              <div className="relative px-1 -mt-20 py-1">
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <div className="flex items-baseline">
+                    <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+                      New
+                    </span>
+                    <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
+                      &bull; Product Of TechTrove{" "}
+                      <Link onClick={() => handleAddToCart(product)}>
+                        <FaShoppingBag size={20} />
+                      </Link>
                     </div>
-                  ))}
+                  </div>
+                  <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
+                    {product.productName}
+                  </h4>
+                  <div className="mt-2 text-xl">
+                    ৳ {product.price}
+                    <span className="text-gray-600 text-base"> /BD</span>
+                  </div>
+                  <div className="mt-1">
+                    <span className="text-teal-600 text-lg font-semibold">
+                      {product.productColor}/color{" "}
+                    </span>
+                    <span className="text-base text-gray-600">
+                      <Link
+                        to="#"
+                        className="hover:underline"
+                        onClick={() => openModal(product)}
+                      >
+                        (View All Details)
+                      </Link>
+                    </span>
+                  </div>
                 </div>
+              </div>
+            </div>
+            {isAdminOrInstructor === "admin" ||
+            isAdminOrInstructor === "instructor" ? (
+              <div className="absolute top-0 right-0 p-2 rounded-lg flex items-center">
+                <Link>
+                  <FaTrashAlt
+                    size={16}
+                    className="text-red-600 hover:text-red-700 mr-1"
+                    onClick={() => handleDelete(product._id)}
+                  />
+                </Link>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
               </TabPanel>
             </div>
           </Tabs>
