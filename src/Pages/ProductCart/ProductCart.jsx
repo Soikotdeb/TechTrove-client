@@ -14,16 +14,13 @@ const ProductCart = () => {
 
     // personal details 
     const [customerAddress, setCustomerAddress] = useState('');
-    const [deliveryType, setDeliveryType] = useState('homeDelivery');
     const [paymentType, setPaymentType] = useState('paymentWithOrder');
 
     const handleAddressChange = (e) => {
       setCustomerAddress(e.target.value);
     };
   
-    const handleDeliveryTypeChange = (e) => {
-      setDeliveryType(e.target.value);
-    };
+
   
     const handlePaymentTypeChange = (e) => {
       setPaymentType(e.target.value);
@@ -41,7 +38,7 @@ const ProductCart = () => {
   }, 0);
 
   // shipping charge
-  const shipping = 90;
+  const shipping = 100;
 
   // delete action
   const handleDelete = async (id) => {
