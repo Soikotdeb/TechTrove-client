@@ -199,7 +199,7 @@ const ProductAddForm = () => {
                 </div>
                 <div>
                     <input
-                    required
+                   
                         type="text"
                         {...register('madeIn')}
                         className="bg-gray-700 text-white p-2 w-full rounded"

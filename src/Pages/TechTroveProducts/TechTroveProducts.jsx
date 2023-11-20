@@ -180,7 +180,7 @@ const location = useLocation();
                           <span className="text-gray-600 text-base"> /BD</span>
                         </div>
                         <div className="mt-1">
-                          <span className="text-teal-600 text-lg font-semibold">
+                          <span className="text-teal-600 text-sm font-semibold">
                             {product.productColor}/color{" "}
                           </span>
                           <span className="text-base text-gray-600">

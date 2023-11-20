@@ -169,7 +169,7 @@ const ProductCart = () => {
             <div className="row flex gap-5">
               <div className="col-md-6">
                 <label className="credit-card-label">Date</label>
-                <input type="text" className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2" placeholder="12/24" />
+                <input type="date" className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2" placeholder="12/24" />
               </div>
               <div className="col-md-6">
                 <label className="credit-card-label">CVV</label>
