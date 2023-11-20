@@ -306,7 +306,7 @@ const ProductCart = () => {
             >
               <span>৳ {total + shipping}.00</span>
               <span>
-                Checkout<i className="fa fa-long-arrow-right ml-1"></i>
+                Checkout<i className="fa fa-long-arrow-right ml-1 even:"></i>
               </span>
             </button>
           </div>
