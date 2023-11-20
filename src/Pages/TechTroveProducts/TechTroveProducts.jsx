@@ -431,8 +431,8 @@ const TechTroveProducts = () => {
                   <button
                     key={index}
                     onClick={() => paginate(index + 1)}
-                    className={`mx-2 px-3 py-1 bg-gray-300 rounded ${
-                      currentPage === index + 1 ? "bg-teal-500 text-white" : "hover:bg-gray-400"
+                    className={`mx-2 px-3 py-1 bg-gray-300 rounded-full ${
+                      currentPage === index + 1 ? "bg-teal-500 text-white font-semibold" : "hover:bg-gray-400"
                     }`}
                   >
                     {index + 1}
