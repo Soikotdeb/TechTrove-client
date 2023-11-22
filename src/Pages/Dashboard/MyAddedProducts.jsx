@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { RiSearchLine } from 'react-icons/ri';
+import { Autoplay } from 'swiper';
 
 const MyAddedProducts = () => {
     const { user } = useContext(AuthContext);
@@ -84,13 +85,9 @@ const MyAddedProducts = () => {
               </div>
             ) : (
                 <div>
-                     <div className="border border-green-400 text-white mb-1">
-                        <marquee behavior="alternate" direction="left">
-                            <p className="text-purple-300"> {user?.displayName} - Your All Added Products Here</p>
-                        </marquee>
-                    </div>
+                   
                     <div className="align-middle flex justify-center text-center items-center">
-                    <div className="align-middle flex justify-center text-center items-center mb-2">
+                    <div className="align-middle flex justify-center text-center items-center mb-2 w-1/2">
                         <input
                             type="text"
                             placeholder="Search Your Products"
