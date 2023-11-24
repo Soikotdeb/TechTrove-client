@@ -1,7 +1,9 @@
 
-import React, { useState } from 'react';
-import { FaArrowLeft } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { FaArrowLeft, FaShoppingBag } from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const HomeSearchResult = () => {
   // Retrieve data from localStorage
@@ -16,6 +18,83 @@ const HomeSearchResult = () => {
     }));
   };
 
+
+//   add to cart action
+
+const { user } = useContext(AuthContext);
+const navigate = useNavigate();
+const location = useLocation();
+
+const handleAddToCart = (searchResult) => {
+  if (user && user.email) {
+    const cartItem = {
+      menuItemId: searchResult._id,
+      name: searchResult.productName,
+      image: searchResult.productImages[0],
+      color: searchResult.productColor,
+      price: searchResult.price,
+      quantity: "1",
+      email: user.email,
+    };
+
+    fetch("https://tech-trove-gadget-bazar-database.vercel.app/carts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(cartItem),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to add item to the cart");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        // Check for any key in the response to indicate success
+        if (data && (data.insertedId || data.success)) {
+          // Show a success toast
+          toast.success("Product added to the cart.", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          throw new Error("Failed to add item to the cart");
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding item to the cart:", error);
+        // Show an error toast
+        toast.error("Failed to add item to the cart. Please try again.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  } else {
+    // Show a warning toast
+    toast.warning("Please login to order the product", {
+      position: "top-right",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    navigate("/login", { state: { from: location } });
+  }
+};
+
   return (
     <div>
       <div className="flex flex-row p-2">
@@ -26,7 +105,7 @@ const HomeSearchResult = () => {
       <hr className="my-1 border-t border-blue-500" />
 
       {result.length === 0 ? (
-        <p className="text-lg font-semibold text-center mt-8">No search results found...</p>
+        <p className="text-lg font-semibold text-center mt-8">No search results found.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 p-2">
           {result.map((searchResult) => (
@@ -36,6 +115,17 @@ const HomeSearchResult = () => {
                 alt={searchResult?.productName}
                 className="w-full h-56 object-cover object-center rounded-lg shadow-md"
               />
+               <div className="flex items-baseline mt-1">
+                    <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+                      New
+                    </span>
+                    <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
+                      &bull; Product Of TechTrove{" "}
+                      <Link onClick={() => handleAddToCart(searchResult)}>
+                        <FaShoppingBag title='Add To Cart' size={20} />
+                      </Link>
+                    </div>
+                  </div>
               <h3 className="text-xl font-semibold mb-2 text-teal-600">{searchResult?.productName}</h3>
               <p className="text-gray-600 mb-2">
                 {expandedDescription[searchResult._id]
