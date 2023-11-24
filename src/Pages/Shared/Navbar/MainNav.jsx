@@ -1,28 +1,25 @@
-import {
-  FaExchangeAlt,
-  FaFileAlt,
-  FaHeart,
-  FaSearch,
-  FaShare,
-  FaShoppingCart,
-  FaUserCircle,
-} from "react-icons/fa";
+
+import { useState, useContext } from "react";
+import { FaSearch, FaShoppingCart, FaHeart, FaExchangeAlt, FaUserCircle, FaShare, FaFileAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { HiOutlineLogin } from "react-icons/hi";
-import { HiOutlineLogout } from "react-icons/hi";
-import { useContext, useState } from "react";
-import logo from "../../../assets/image/company logo.png";
-import { AuthContext } from "../../../Provider/AuthProvider";
-import { RiDashboardFill } from "react-icons/ri"; // Remix Icon icons
-import { FiSettings, FiUserPlus } from "react-icons/fi";
-import { AiOutlineCloseCircle, AiOutlineUser } from "react-icons/ai";
-import { MdLocalAtm, MdNotificationsActive, MdLiveHelp } from "react-icons/md";
+import { MdNotificationsActive } from "react-icons/md";
+import { AiOutlineUser, AiOutlineCloseCircle } from "react-icons/ai";
+import { RiDashboardFill } from "react-icons/ri";
+import { FiUserPlus, FiSettings } from "react-icons/fi";
+import { MdLiveHelp, MdLocalAtm } from "react-icons/md";
 import useCart from "../../../Hook/useCart";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import logo from "../../../assets/image/company logo.png";
+import { HiOutlineLogin, HiOutlineLogout } from 'react-icons/hi';
 
 const MainNav = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [cart] = useCart();
+  const [searchText, setSearchText] = useState("");
+  const [searchResult, setSearchResults] = useState([]);
+  console.log(searchResult);
+
 
   const handleLogout = () => {
     logOut()
@@ -33,6 +30,24 @@ const MainNav = () => {
         console.log(error);
       });
   };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    // Add logic to send the search request to the server with the searchText
+    // You may use a fetch or axios to make a GET request to your server endpoint
+    // Replace 'YOUR_SERVER_ENDPOINT' with the actual endpoint for searching
+    fetch(`https://tech-trove-gadget-bazar-database.vercel.app/searchByHomePage/${searchText}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the search results as needed
+        console.log("Search results:", data);
+        setSearchResults(data)
+      })
+      .catch((error) => {
+        console.error("Error during search:", error);
+      });
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -42,11 +57,12 @@ const MainNav = () => {
   };
 
   return (
-    <div className="font-semibold">
+<div>
+<div className="font-semibold">
       <div className="navbar bg-gray-200 ">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -93,16 +109,20 @@ const MainNav = () => {
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="py-2 pr-10 pl-4 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
-            />
-            <Link className="absolute top-1/2 right-4 transform -translate-y-1/2">
-              <FaSearch className="text-gray-900" />
-            </Link>
-          </div>
+          <form onSubmit={handleSearch}>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                className="py-2 pr-10 pl-4 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+              />
+              <button type="submit" className="absolute top-1/2 right-4 transform -translate-y-1/2">
+                <FaSearch className="text-gray-900" />
+              </button>
+            </div>
+          </form>
 
           <ul className="menu menu-horizontal flex items-center gap-4">
             <li>
@@ -134,8 +154,7 @@ const MainNav = () => {
 
         <div>
           <Link to="" title="Notifications">
-            {" "}
-            <MdNotificationsActive className="w-6 h-6 me-4 lg:ms-5 text-gray-500 hover:text-purple-700 transition-colors duration-300" />{" "}
+            <MdNotificationsActive className="w-6 h-6 me-4 lg:ms-5 text-gray-500 hover:text-purple-700 transition-colors duration-300" />
           </Link>
         </div>
 
@@ -155,7 +174,7 @@ const MainNav = () => {
         {isModalOpen && (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="text-white rounded-lg p-8 transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-500">
-              <ul className="grid gap-4">
+            <ul className="grid gap-4">
                 <div>
                   <li>
                     <p className="text-center">
@@ -274,6 +293,7 @@ const MainNav = () => {
         </div>
       </div>
     </div>
+</div>
   );
 };
 
