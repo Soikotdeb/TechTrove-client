@@ -1,7 +1,7 @@
 
 import { useState, useContext } from "react";
 import { FaSearch, FaShoppingCart, FaHeart, FaExchangeAlt, FaUserCircle, FaShare, FaFileAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdNotificationsActive } from "react-icons/md";
 import { AiOutlineUser, AiOutlineCloseCircle } from "react-icons/ai";
 import { RiDashboardFill } from "react-icons/ri";
@@ -12,6 +12,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import logo from "../../../assets/image/company logo.png";
 import { HiOutlineLogin, HiOutlineLogout } from 'react-icons/hi';
 
+
 const MainNav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,6 +20,7 @@ const MainNav = () => {
   const [searchText, setSearchText] = useState("");
   const [searchResult, setSearchResults] = useState([]);
   console.log(searchResult);
+  const navigate = useNavigate();
 
 
   const handleLogout = () => {
@@ -41,7 +43,11 @@ const MainNav = () => {
       .then((data) => {
         // Handle the search results as needed
         console.log("Search results:", data);
+        // Save the search results in local storage
+      localStorage.setItem('searchResults', JSON.stringify(data));
         setSearchResults(data)
+       // Navigate to another route without a full page reload
+       navigate('/HomeSearchResult'); 
       })
       .catch((error) => {
         console.error("Error during search:", error);
@@ -119,7 +125,7 @@ const MainNav = () => {
                 className="py-2 pr-10 pl-4 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
               />
               <button type="submit" className="absolute top-1/2 right-4 transform -translate-y-1/2">
-                <FaSearch className="text-gray-900" />
+               <FaSearch className="text-gray-900" />
               </button>
             </div>
           </form>

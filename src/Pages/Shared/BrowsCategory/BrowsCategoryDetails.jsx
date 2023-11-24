@@ -39,7 +39,7 @@ const BrowsCategoryDetails = () => {
             <p className="mb-2"><span className="font-semibold text-indigo-300 hover:text-indigo-400 text-sm">✶ Discount Amount:➺</span>  <span className="text-base    font-extralight"> {' '} {BrowsCategoryDetails.discountAmount}</span></p>
             <p className="mb-2"><span className="font-semibold text-indigo-300 hover:text-indigo-400 text-sm">✶ Available Product:➺ </span> <span className="text-base    font-extralight"> {' '} {BrowsCategoryDetails.productQuantity}</span></p>
            <div className="flex justify-between"> 
-           <p className="mb-2"><span className="font-semibold text-indigo-300 hover:text-gray-400 text-sm">✶ Total Price:➺ </span>$       {BrowsCategoryDetails.price - BrowsCategoryDetails.discountAmount}  </p>
+           <p className="mb-2"><span className="font-semibold text-indigo-300 hover:text-gray-400 text-sm">✶ Total Price:➺ </span>৳       {BrowsCategoryDetails.price - BrowsCategoryDetails.discountAmount}  </p>
            <p>Shop Now <br />
            <Link><FaShoppingBag size={24} className="text-gray-300 hover:text-gray-400 ms-5 mt-1 "/></Link>
            </p>
