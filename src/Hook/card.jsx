@@ -41,3 +41,113 @@
 // };
 
 // export default TechTroveProducts;
+
+
+
+
+// import React, { useState, useEffect, useContext } from 'react';
+// import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
+// import { AuthContext } from '../../Provider/AuthProvider';
+
+// const stripePromise = loadStripe('YOUR_STRIPE_PUBLIC_KEY');
+
+// const CheckoutForm = () => {
+//   const { user } = useContext(AuthContext);
+//   const [stripe, setStripe] = useState(null);
+//   const [elements, setElements] = useState(null);
+//   const [cardError, setCardError] = useState(null);
+//   const [cardComplete, setCardComplete] = useState(false);
+
+//   useEffect(() => {
+//     const loadStripe = async () => {
+//       if (window.Stripe) {
+//         setStripe(window.Stripe('YOUR_STRIPE_PUBLIC_KEY'));
+//         setElements(window.Stripe('YOUR_STRIPE_PUBLIC_KEY').elements());
+//       } else {
+//         const stripeScript = document.createElement('script');
+//         stripeScript.src = 'https://js.stripe.com/v3/';
+//         stripeScript.async = true;
+//         stripeScript.onload = () => {
+//           setStripe(window.Stripe('YOUR_STRIPE_PUBLIC_KEY'));
+//           setElements(window.Stripe('YOUR_STRIPE_PUBLIC_KEY').elements());
+//         };
+//         document.head.appendChild(stripeScript);
+//       }
+//     };
+
+//     loadStripe();
+//   }, []);
+
+//   const handleCardChange = (event) => {
+//     if (event.error) {
+//       setCardError(event.error.message);
+//     } else {
+//       setCardError(null);
+//     }
+//     setCardComplete(event.complete);
+//   };
+
+//   const handleSubmit = async () => {
+//     if (!stripe || !elements) {
+//       console.error('Stripe.js has not loaded yet.');
+//       return;
+//     }
+
+//     const cardElement = elements.getElement(CardElement);
+
+//     const { token, error } = await stripe.createToken(cardElement);
+
+//     if (error) {
+//       console.error(error);
+//       // Handle error
+//       return;
+//     }
+
+//     // Send the token to your server to complete the charge
+//     const response = await fetch('/api/charge', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         token: token.id,
+//         amount: 1000, // Replace with the actual amount in cents
+//         description: 'Payment for Product',
+//         email: user?.email,
+//       }),
+//     });
+
+//     if (response.ok) {
+//       // Payment success
+//       // You may want to show a success message to the user
+//       console.log('Payment success!');
+//     } else {
+//       console.error('Payment failed');
+//       // Handle payment failure
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <Elements stripe={stripePromise}>
+//         <div>
+//           <label>Card details</label>
+//           <div>
+//             <CardElement options={{}} onChange={handleCardChange} />
+//           </div>
+//           {cardError && <p>{cardError}</p>}
+//         </div>
+//         <button
+//           type="button"
+//           disabled={!cardComplete}
+//           onClick={handleSubmit}
+//         >
+//           Pay
+//         </button>
+//       </Elements>
+//     </div>
+//   );
+// };
+
+// export default CheckoutForm;
