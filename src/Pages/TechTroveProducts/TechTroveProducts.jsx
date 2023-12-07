@@ -1,4 +1,3 @@
-
 // import React, { useContext, useEffect, useState } from "react";
 // import { Tabs, TabList, TabPanel } from "react-tabs";
 // import "react-tabs/style/react-tabs.css";
@@ -65,7 +64,7 @@
 //       `,
 //     });
 //   };
-  
+
 //   // add to cart action---
 //   const handleAddToCart = (product) => {
 //     if (user && user.email) {
@@ -78,7 +77,7 @@
 //         quantity: '1',
 //         email: user.email,
 //       };
-  
+
 //       fetch('https://tech-trove-gadget-bazar-database.vercel.app/carts', {
 //         method: 'POST',
 //         headers: {
@@ -136,9 +135,6 @@
 //       navigate('/login', { state: { from: location } });
 //     }
 //   };
-  
-  
-  
 
 //   return (
 //     <div className="bg-gray-100 rounded-lg p-4">
@@ -161,7 +157,7 @@
 //                       src={product.productImages[0]}
 //                       alt="random image"
 //                       className="w-full h-96 object-cover object-center rounded-lg shadow-md"
-//                     />             
+//                     />
 //                     <div className="relative px-1 -mt-20 py-1">
 //                       <div className="bg-white p-8 rounded-lg shadow-lg">
 //                         <div className="flex items-baseline">
@@ -200,7 +196,6 @@
 //               ))}
 //             </div>
 
-
 //             </div>
 //           </TabPanel>
 //         </div>
@@ -211,17 +206,18 @@
 
 // export default TechTroveProducts;
 
-
-
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AOS from "aos";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaArrowAltCircleLeft, FaArrowCircleRight, FaShoppingBag } from 'react-icons/fa';
+import {
+  FaArrowAltCircleLeft,
+  FaArrowAltCircleRight,
+  FaArrowCircleRight,
+  FaShoppingBag,
+} from "react-icons/fa";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
@@ -238,7 +234,9 @@ const TechTroveProducts = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch("https://tech-trove-gadget-bazar-database.vercel.app/TechTrove");
+        const response = await fetch(
+          "https://tech-trove-gadget-bazar-database.vercel.app/TechTrove"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch TechTrove data");
         }
@@ -257,7 +255,6 @@ const TechTroveProducts = () => {
 
     return () => clearInterval(intervalId);
   }, []);
-
 
   // open modal
 
@@ -286,7 +283,7 @@ const TechTroveProducts = () => {
       `,
     });
   };
-  
+
   // add to cart action---
   const handleAddToCart = (product) => {
     if (user && user.email) {
@@ -296,20 +293,20 @@ const TechTroveProducts = () => {
         image: product.productImages[0],
         color: product.productColor,
         price: product.price,
-        quantity: '1',
+        quantity: "1",
         email: user.email,
       };
-  
-      fetch('https://tech-trove-gadget-bazar-database.vercel.app/carts', {
-        method: 'POST',
+
+      fetch("https://tech-trove-gadget-bazar-database.vercel.app/carts", {
+        method: "POST",
         headers: {
-          'content-type': 'application/json',
+          "content-type": "application/json",
         },
         body: JSON.stringify(cartItem),
       })
         .then((res) => {
           if (!res.ok) {
-            throw new Error('Failed to add item to the cart');
+            throw new Error("Failed to add item to the cart");
           }
           return res.json();
         })
@@ -317,8 +314,8 @@ const TechTroveProducts = () => {
           // Check for any key in the response to indicate success
           if (data && (data.insertedId || data.success)) {
             // Show a success toast
-            toast.success('Product added to the cart.', {
-              position: 'top-right',
+            toast.success("Product added to the cart.", {
+              position: "top-right",
               autoClose: 1500,
               hideProgressBar: false,
               closeOnClick: true,
@@ -327,14 +324,14 @@ const TechTroveProducts = () => {
               progress: undefined,
             });
           } else {
-            throw new Error('Failed to add item to the cart');
+            throw new Error("Failed to add item to the cart");
           }
         })
         .catch((error) => {
-          console.error('Error adding item to the cart:', error);
+          console.error("Error adding item to the cart:", error);
           // Show an error toast
-          toast.error('Failed to add item to the cart. Please try again.', {
-            position: 'top-right',
+          toast.error("Failed to add item to the cart. Please try again.", {
+            position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -345,8 +342,8 @@ const TechTroveProducts = () => {
         });
     } else {
       // Show a warning toast
-      toast.warning('Please login to order the product', {
-        position: 'top-right',
+      toast.warning("Please login to order the product", {
+        position: "top-right",
         autoClose: false,
         hideProgressBar: false,
         closeOnClick: true,
@@ -354,7 +351,7 @@ const TechTroveProducts = () => {
         draggable: true,
         progress: undefined,
       });
-      navigate('/login', { state: { from: location } });
+      navigate("/login", { state: { from: location } });
     }
   };
 
@@ -382,63 +379,79 @@ const TechTroveProducts = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2">
                 {currentItems.map((product) => (
                   <div key={product._id} className="max-w-md mx-auto mb-1">
-                   <div className="bg-gray-400 antialiased text-gray-900 p-1 rounded-lg">
-                    <img
-                      src={product.productImages[0]}
-                      alt="random image"
-                      className="w-full h-96 object-cover object-center rounded-lg shadow-md"
-                    />             
-                    <div className="relative px-1 -mt-20 py-1">
-                      <div className="bg-white p-8 rounded-lg shadow-lg">
-                        <div className="flex items-baseline">
-                          <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
-                            New
-                          </span>
-                          <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
-                          &bull; Product Of TechTrove <Link onClick={() => handleAddToCart(product)}><FaShoppingBag size={20}/></Link>
+                    <div className="bg-gray-400 antialiased text-gray-900 p-1 rounded-lg">
+                      <img
+                        src={product.productImages[0]}
+                        alt="random image"
+                        className="w-full h-96 object-cover object-center rounded-lg shadow-md"
+                      />
+                      <div className="relative px-1 -mt-20 py-1">
+                        <div className="bg-white p-8 rounded-lg shadow-lg">
+                          <div className="flex items-baseline">
+                            <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+                              New
+                            </span>
+                            <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider flex gap-4 items-center">
+                              &bull; Product Of TechTrove{" "}
+                              <Link onClick={() => handleAddToCart(product)}>
+                                <FaShoppingBag size={20} />
+                              </Link>
+                            </div>
                           </div>
-                        </div>
-                        <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
-                          {product.productName}
-                        </h4>
-                        <div className="mt-2 text-xl">
-                          ৳ {product.price}
-                          <span className="text-gray-600 text-base"> /BD</span>
-                        </div>
-                        <div className="mt-1">
-                          <span className="text-teal-600 text-sm font-semibold">
-                            {product.productColor}/color{" "}
-                          </span>
-                          <span className="text-base text-gray-600">
-                            <Link
-                              to="#"
-                              className="hover:underline"
-                              onClick={() => openModal(product)}
-                            >
-                              (View All Details)
-                            </Link>
-                          </span>
+                          <h4 className="mt-2 text-sm font-semibold uppercase leading-tight truncate">
+                            {product.productName}
+                          </h4>
+                          <div className="mt-2 text-xl">
+                            ৳ {product.price}
+                            <span className="text-gray-600 text-base">
+                              {" "}
+                              /BD
+                            </span>
+                          </div>
+                          <div className="mt-1">
+                            <span className="text-teal-600 text-sm font-semibold">
+                              {product.productColor}/color{" "}
+                            </span>
+                            <span className="text-base text-gray-600">
+                              <Link
+                                to="#"
+                                className="hover:underline"
+                                onClick={() => openModal(product)}
+                              >
+                                (View All Details)
+                              </Link>
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  </div>
                 ))}
               </div>
               <div className="flex justify-center mt-4 items-center">
-                <FaArrowAltCircleLeft size={20}/>
-                {Array.from({ length: Math.ceil(TechTrove.length / itemsPerPage) }).map((_, index) => (
+               <Link> <FaArrowAltCircleLeft
+                  onClick={() => paginate(currentPage - 1)}
+                  size={20}
+                /></Link>
+                {Array.from({
+                  length: Math.ceil(TechTrove.length / itemsPerPage),
+                }).map((_, index) => (
                   <button
                     key={index}
                     onClick={() => paginate(index + 1)}
                     className={`mx-2 px-3 py-1 bg-gray-300 rounded-full ${
-                      currentPage === index + 1 ? "bg-teal-500 text-white font-semibold" : "hover:bg-gray-400"
+                      currentPage === index + 1
+                        ? "bg-teal-500 text-white font-semibold"
+                        : "hover:bg-gray-400"
                     }`}
                   >
                     {index + 1}
-                  </button> 
+                  </button>
                 ))}
-                <FaArrowCircleRight size={20}/>
+                <Link><FaArrowAltCircleRight
+                  onClick={() => paginate(currentPage + 1)}
+                  size={20}
+                /></Link>
               </div>
             </div>
           </TabPanel>
@@ -449,5 +462,3 @@ const TechTroveProducts = () => {
 };
 
 export default TechTroveProducts;
-
-

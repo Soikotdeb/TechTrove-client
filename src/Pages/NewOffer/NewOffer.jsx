@@ -472,7 +472,10 @@ const LatestOffers = () => {
       
       {/* Pagination component */}
       <div className="flex justify-center mt-4 items-center">
-        <FaArrowAltCircleLeft size={20}/>
+      <Link> <FaArrowAltCircleLeft
+                  onClick={() => paginate(currentPage - 1)}
+                  size={20}
+                /></Link>
         {Array.from({ length: Math.ceil(latestOffers.length / itemsPerPage) }).map((_, index) => (
           <button
             key={index}
@@ -484,7 +487,10 @@ const LatestOffers = () => {
             {index + 1}
           </button>
         ))}
-        <FaArrowAltCircleRight size={20}/>
+         <Link><FaArrowAltCircleRight
+                onClick={() => paginate(currentPage + 1)}
+                  size={20}
+                /></Link>
       </div>
     </div>
   );

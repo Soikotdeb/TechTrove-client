@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import {
+  FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
   FaArrowCircleLeft,
   FaArrowCircleRight,
@@ -413,7 +414,10 @@ const ShopBySection = () => {
                   </div>
                   {/* Pagination component */}
                   <div className="flex justify-center mt-4 items-center">
-                    <FaArrowCircleLeft size={20}/>
+                  <Link><FaArrowAltCircleLeft
+                  onClick={() => paginateNewArrival(currentPageNewArrival - 1)}
+                  size={20}
+                /></Link>
                     {Array.from({
                       length: Math.ceil(newArrivalData.length / itemsPerPage),
                     }).map((_, index) => (
@@ -429,7 +433,10 @@ const ShopBySection = () => {
                         {index + 1}
                       </button>
                     ))}
-                    <FaArrowCircleRight size={20}/>
+                   <Link><FaArrowAltCircleRight
+                  onClick={() => paginateNewArrival(currentPageNewArrival + 1)}
+                  size={20}
+                /></Link>
                   </div>
                 </div>
               </TabPanel>
@@ -512,7 +519,10 @@ const ShopBySection = () => {
                 </div>
                 {/* Pagination component */}
                 <div className="flex justify-center mt-4 items-center">
-                  <FaArrowCircleLeft size={20}/>
+                <Link><FaArrowAltCircleLeft
+                  onClick={() => paginateMacbook(currentPageMacbook - 1)}
+                  size={20}
+                /></Link>
                   {Array.from({
                     length: Math.ceil(macbookData.length / itemsPerPage),
                   }).map((_, index) => (
@@ -528,7 +538,10 @@ const ShopBySection = () => {
                       {index + 1}
                     </button>
                   ))}
-                  <FaArrowCircleRight size={20}/>
+                  <Link><FaArrowAltCircleRight
+                  onClick={() => paginateMacbook(currentPageMacbook + 1)}
+                  size={20}
+                /></Link>
                 </div>
               </TabPanel>
 
@@ -606,7 +619,10 @@ const ShopBySection = () => {
                 </div>
                 {/* Pagination component */}
                 <div className="flex justify-center mt-4 items-center">
-                  <FaArrowCircleLeft size={20}/>
+                <Link><FaArrowAltCircleLeft
+                  onClick={() => paginatePremiumGadget(currentPagePremiumGadget - 1)}
+                  size={20}
+                /></Link>
                   {Array.from({
                     length: Math.ceil(PremiumGadget.length / itemsPerPage),
                   }).map((_, index) => (
@@ -622,7 +638,10 @@ const ShopBySection = () => {
                       {index + 1}
                     </button>
                   ))}
-                  <FaArrowCircleRight size={20}/>
+                  <Link><FaArrowAltCircleRight
+                  onClick={() => paginatePremiumGadget(currentPagePremiumGadget + 1)}
+                  size={20}
+                /></Link>
                 </div>
               </TabPanel>
             </div>
