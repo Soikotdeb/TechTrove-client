@@ -12,22 +12,6 @@ const ProductCart = () => {
   const [cart, refetch] = useCart();
   const [loading, setLoading] = useState(true);
 
-    // personal details 
-    const [customerAddress, setCustomerAddress] = useState('');
-    const [paymentType, setPaymentType] = useState('paymentWithOrder');
-
-    const handleAddressChange = (e) => {
-      setCustomerAddress(e.target.value);
-    };
-  
-
-  
-    const handlePaymentTypeChange = (e) => {
-      setPaymentType(e.target.value);
-    };
-  
-
-
   // Calculate the total price, handling missing or non-numeric product prices
   const total = cart.reduce((sum, product) => {
     const price = parseFloat(product.price);
@@ -97,10 +81,6 @@ const ProductCart = () => {
       </div>
     );
   }
-
-
-
-
 
   return (
     <div className=" mx-auto mt-2 p-3 bg-slate-200 rounded shadow-md">
@@ -228,65 +208,8 @@ const ProductCart = () => {
             <div className="border border-red-100 p-2">
       <label className="credit-card-label">Customer Details</label>
       <p>Email: {user?.email}</p>
-      {/* Professional Options */}
-      <div className="mt-2">
-        <label className="credit-card-label">Type Your Home Address & Up Code</label>
-        <input
-          type="text"
-          value={customerAddress}
-          onChange={handleAddressChange}
-          className="border p-2 w-full text-black rounded-lg"
-          placeholder="Enter your address & Up Code"
-        />
-      </div>
-
-      <div className="mt-2">
-        <label className="credit-card-label">Payment Type</label>
-        <select
-          value={paymentType}
-          onChange={handlePaymentTypeChange}
-          className="border p-2 w-full text-black rounded-lg"
-        >
-          <option value="paymentWithOrder">Payment with Running Order</option>
-          <option value="paymentWithProductOnHand">Payment with Product on Hand</option>
-        </select>
-      </div>
     </div>
 
-            <div>
-              <label className="credit-card-label">Name on card</label>
-              <input
-                type="text"
-                className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2"
-                placeholder="Name"
-              />
-            </div>
-            <div>
-              <label className="credit-card-label">Card number</label>
-              <input
-                type="text"
-                className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2"
-                placeholder="0000 0000 0000 0000"
-              />
-            </div>
-            <div className="row flex gap-5">
-              <div className="col-md-6">
-                <label className="credit-card-label">Date</label>
-                <input
-                  type="date"
-                  className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2"
-                  placeholder="12/24"
-                />
-              </div>
-              <div className="col-md-6">
-                <label className="credit-card-label">CVV</label>
-                <input
-                  type="text"
-                  className="form-control credit-inputs text-black bg-slate-200 w-full h-8 rounded-md p-2 "
-                  placeholder="342"
-                />
-              </div>
-            </div>
             <hr className="line my-4 border-t border-white" />
             <div className="flex justify-between items-center information">
               <span>Subtotal</span>
