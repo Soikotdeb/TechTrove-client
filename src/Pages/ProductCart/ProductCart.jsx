@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaArrowLeft, FaTrashAlt } from "react-icons/fa";
 import { RiArrowDownDoubleFill } from "react-icons/ri";
 import { GiWallet } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCart from "./../../Hook/useCart";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -11,6 +11,7 @@ const ProductCart = () => {
   const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Calculate the total price, handling missing or non-numeric product prices
   const total = cart.reduce((sum, product) => {
@@ -69,6 +70,13 @@ const ProductCart = () => {
     fetchData();
   }, [refetch]);
 
+
+  const handleSelected = (totalAmount) => {
+    localStorage.setItem("SelectedProduct", JSON.stringify(cart));
+    localStorage.setItem("TotalAmount", JSON.stringify(totalAmount));
+    navigate('/CheckoutPay');
+  }
+ 
   if (loading) {
     // You can render a loading indicator here while data is being fetched.
     return (
@@ -223,15 +231,17 @@ const ProductCart = () => {
               <span>Total(Incl. taxes)</span>
               <span>৳ {total + shipping} </span>
             </div>
-            <button
-              className="btn btn-primary btn-block flex justify-between mt-3"
-              type="button"
-            >
-              <span>৳ {total + shipping}.00</span>
-              <span>
-                Checkout<i className="fa fa-long-arrow-right ml-1 even:"></i>
-              </span>
-            </button>
+            <Link
+  onClick={() => handleSelected(total + shipping)}
+  className="btn btn-primary btn-block flex justify-between mt-3"
+  type="button"
+>
+  <span>৳ {total + shipping}.00</span>
+  <span>
+    Checkout<i className="fa fa-long-arrow-right ml-1 even:"></i>
+  </span>
+</Link>
+
           </div>
         </div>
       </div>

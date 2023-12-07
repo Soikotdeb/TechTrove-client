@@ -22,6 +22,7 @@ import SearchResults from "../Pages/Shared/SearchResults/SearchResults";
 import AllFeaturedProducts from "../Pages/AllFeaturedProducts/AllFeaturedProducts";
 import ProductCart from "../Pages/ProductCart/ProductCart";
 import HomeSearchResult from "../Pages/Shared/Navbar/HomeSearchResult";
+import CheckoutPay from "../Pages/ProductCart/CheckoutPay";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
   {
     path: "productCart",
     element: <ProductCart></ProductCart>,
+  },
+  {
+    path: "CheckoutPay",
+    element: <CheckoutPay></CheckoutPay>,
   },
   {
     path: "dashboard",
