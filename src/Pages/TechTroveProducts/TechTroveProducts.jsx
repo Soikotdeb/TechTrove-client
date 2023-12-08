@@ -293,7 +293,7 @@ const TechTroveProducts = () => {
         image: product.productImages[0],
         color: product.productColor,
         price: product.price,
-        quantity: "1",
+        quantity: product.productQuantity,
         email: user.email,
       };
 

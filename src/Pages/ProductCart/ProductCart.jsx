@@ -137,7 +137,7 @@ const ProductCart = () => {
                       </div>
                     </div>
                     <div className="flex flex-row items-center">
-                      <span className="block">Qty. {product.quantity}</span>
+                      <span className="block">Available Product. {product.quantity}</span>
                       <span className="ml-5 font-semibold">
                         ৳ {parseFloat(product.price).toFixed(2)}
                       </span>

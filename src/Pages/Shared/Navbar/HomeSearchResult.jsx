@@ -33,7 +33,7 @@ const handleAddToCart = (searchResult) => {
       image: searchResult.productImages[0],
       color: searchResult.productColor,
       price: searchResult.price,
-      quantity: "1",
+      quantity: searchResult.productQuantity,
       email: user.email,
     };
 
