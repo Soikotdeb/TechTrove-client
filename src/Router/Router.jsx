@@ -23,6 +23,7 @@ import AllFeaturedProducts from "../Pages/AllFeaturedProducts/AllFeaturedProduct
 import ProductCart from "../Pages/ProductCart/ProductCart";
 import HomeSearchResult from "../Pages/Shared/Navbar/HomeSearchResult";
 import CheckoutPay from "../Pages/ProductCart/CheckoutPay";
+import ParentComponent from "../Pages/ProductCart/ParentComponent";
 
 export const router = createBrowserRouter([
   {
@@ -86,7 +87,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "CheckoutPay",
-    element: <CheckoutPay></CheckoutPay>,
+    element: <ParentComponent></ParentComponent>,
   },
   {
     path: "dashboard",

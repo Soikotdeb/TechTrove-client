@@ -1,22 +1,83 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import { FaArrowLeft } from 'react-icons/fa';
-import { CardElement } from '@stripe/react-stripe-js';
 
-const stripePublicKey = import.meta.env.VITE_PAYMENT;
-const stripePromise = loadStripe(stripePublicKey);
+import React, { useContext, useState } from 'react';
+import { Elements, useElements, useStripe } from '@stripe/react-stripe-js';
+import { CardElement } from '@stripe/react-stripe-js';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const CheckoutPay = () => {
+  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+  const {user}=useContext(AuthContext)
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle Stripe payment submission logic here
+    if (!stripe || !elements) {
+      return;
+    }
+
+    setProcessing(true);
+
+    // Fetch product and amount data
+    const selectedProduct = localStorage.getItem('SelectedProduct');
+    const parsedSelectedProduct = JSON.parse(selectedProduct);
+    const TotalAmount = localStorage.getItem('TotalAmount');
+
+    // Create a payment intent on your server
+    const response = await fetch('http://localhost:5000/create-payment-intent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        amount: parseFloat(TotalAmount) * 100, // Convert amount to cents
+        products: parsedSelectedProduct, // Send product details to the server if needed
+      }),
+    });
+
+    const { clientSecret } = await response.json();
+
+    // Confirm the card payment with the clientSecret
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+
+    if (result.error) {
+      setError(result.error.message);
+      setProcessing(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Payment Error',
+        text: result.error.message,
+        showConfirmButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      });
+    } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+      console.log('Payment successful!');
+      setProcessing(false);
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful',
+        text: 'Thank you for your payment!',
+        showConfirmButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then(() => {
+        // Disable the "Pay Now" button after successful payment
+        const payButton = document.getElementById('payButton');
+        if (payButton) {
+          payButton.disabled = true;
+        }
+      });
+    }
   };
-  
-  const selectedProduct = localStorage.getItem('SelectedProduct');
-  const parsedSelectedProduct = JSON.parse(selectedProduct);
-  const TotalAmount = localStorage.getItem('TotalAmount');
 
   return (
     <div className="p-4">
@@ -25,35 +86,35 @@ const CheckoutPay = () => {
           <FaArrowLeft /> Continue Payment
         </Link>
       </div>
-
-      <div className="mt-6">
-        <p className='mb-3 text-lg'><small>Total Amount: ৳{TotalAmount}.00</small></p>
-        <div className="w-96 mx-auto border rounded p-2">
-          <Elements stripe={stripePromise}>
-            <form onSubmit={handleSubmit}>
-              <CardElement
-                options={{
-                  style: {
-                    base: {
-                      fontSize: '16px',
-                      color: '#424770',
-                      '::placeholder': {
-                        color: '#aab7c4',
-                      },
-                    },
-                    invalid: {
-                      color: '#9e2146',
-                    },
-                  },
-                }}
-              />
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 w-full" type="submit">
-                Pay Now!
-              </button>
-            </form>
-          </Elements>
-        </div>
-        <div className="mt-4 flex justify-center items-center">
+      <form onSubmit={handleSubmit}>
+      <CardElement
+                 options={{
+                   style: {
+                     base: {
+                       fontSize: '16px',
+                       color: '#424770',
+                       '::placeholder': {
+                         color: '#aab7c4',
+                       },
+                     },
+                     invalid: {
+                       color: '#9e2146',
+                     },
+                   },
+                 }}
+               />
+        {error && <div className="text-red-500">{error}</div>}
+        <button
+          id="payButton"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 w-full"
+          type="submit"
+          disabled={processing}
+        >
+          {processing ? 'Processing...' : 'Pay Now!'}
+        </button>
+      </form>
+      <div>
+      <div className="mt-4 flex justify-center items-center">
           <div className="flex justify-between w-44">
             <img
               src="https://i.ibb.co/vxgjPv5/bkash1.png" 
@@ -81,3 +142,7 @@ const CheckoutPay = () => {
 };
 
 export default CheckoutPay;
+
+
+
+
