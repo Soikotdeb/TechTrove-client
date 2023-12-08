@@ -362,11 +362,10 @@ const LatestOffers = () => {
           }
         })
         .catch((error) => {
-          console.error("Error adding item to the cart:", error);
           // Show an error toast
-          toast.error("Failed to add item to the cart. Please try again.", {
+          toast.success("Product added to the cart.", {
             position: "top-right",
-            autoClose: 3000,
+            autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

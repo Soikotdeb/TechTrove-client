@@ -129,7 +129,7 @@ const ShopBySection = () => {
         .then((data) => {
           if (data.insertedId) {
             // Show a success toast
-            toast.success("Food added to the cart.", {
+            toast.success("Product added to the cart.", {
               position: "top-right",
               autoClose: 1500,
               hideProgressBar: false,
@@ -142,7 +142,7 @@ const ShopBySection = () => {
         });
     } else {
       // Show a warning toast
-      toast.warning("Please login to order the food", {
+      toast.warning("Please login to order the Product", {
         position: "top-right",
         autoClose: false,
         hideProgressBar: false,
