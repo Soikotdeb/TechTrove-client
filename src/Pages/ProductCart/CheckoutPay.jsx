@@ -1,12 +1,11 @@
 
 import React, { useContext, useState } from 'react';
-import { Elements, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useElements, useStripe } from '@stripe/react-stripe-js';
 import { CardElement } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import logo from '../../assets/image/Untitled.png';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -93,7 +92,6 @@ const CheckoutPay = () => {
         confirmButtonText: 'OK',
       });
     } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-      console.log('Payment successful!');
       setProcessing(false);
 setTransactionId(result.paymentIntent.id);
 
@@ -103,7 +101,7 @@ const formData = {
   address: document.getElementById('address').value,
   zipCode: document.getElementById('zipCode').value,
   country: document.getElementById('country').value,
-  transactionId: transactionId,
+  transactionId: result.paymentIntent.id,
   userEmail: user?.email,
   userName: user?.displayName,
   userImage: user?.photoURL,
@@ -132,6 +130,24 @@ try {
   console.error('Error occurred while sending data to server:', error);
 }
 
+
+// Delete data based on user email------------------>
+const deleteResponse = await fetch('http://localhost:5000/delete-user-data', {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ userEmail: formData.userEmail }),
+});
+
+if (deleteResponse.ok) {
+  // Data deleted successfully...
+  console.log('User data deleted from the server');
+} else {
+  // Handle delete error...
+  console.error('Failed to delete user data from the server');
+}
+
       Swal.fire({
         icon: 'success',
         title: 'Payment Successful',
@@ -157,6 +173,7 @@ try {
         </Link>
       </div>
 
+{/* payment card */}
 
       <div className='w-1/2 mx-auto'>
   <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -277,7 +294,7 @@ try {
         </p>
       </div>
       <hr className="my-4" />
-      <p className="mb-4">Thank you for purches the product. We appreciate your trust in our services.</p>
+      <p className="mb-4">Thank you for purhes the product. We appreciate your trust in our services.</p>
       <button
         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4"
         onClick={handleDownloadInvoice}
@@ -316,6 +333,6 @@ try {
       </div>
     </div>
   );
-};
+  };
 
 export default CheckoutPay;
