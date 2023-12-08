@@ -37,9 +37,12 @@ const ProductCart = () => {
       });
 
       if (result.isConfirmed) {
-        await fetch(`https://tech-trove-gadget-bazar-database.vercel.app/ProductCart/${id}`, {
-          method: "DELETE",
-        });
+        await fetch(
+          `https://tech-trove-gadget-bazar-database.vercel.app/ProductCart/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
         await Swal.fire({
           icon: "success",
           title: "Product Deleted",
@@ -70,13 +73,14 @@ const ProductCart = () => {
     fetchData();
   }, [refetch]);
 
-
   const handleSelected = (totalAmount) => {
     localStorage.setItem("SelectedProduct", JSON.stringify(cart));
     localStorage.setItem("TotalAmount", JSON.stringify(totalAmount));
-    navigate('/CheckoutPay');
-  }
- 
+    localStorage.setItem("SubTotalAmount", JSON.stringify(total));
+    localStorage.setItem("ShippingAmount", JSON.stringify(shipping));
+    navigate("/CheckoutPay");
+  };
+
   if (loading) {
     // You can render a loading indicator here while data is being fetched.
     return (
@@ -155,7 +159,7 @@ const ProductCart = () => {
           </div>
         </div>
         <div className="w-4/12 ml-4">
-          <div className="payment-info bg-blue-500 text-white p-3 rounded">
+          <div className="payment-info bg-blue-500 text-white p-3 rounded min-h-screen">
             <div className="flex justify-between items-center">
               <span>Card details</span>
               <img
@@ -214,9 +218,9 @@ const ProductCart = () => {
 
             {/*----------------------- personal details-------------------- */}
             <div className="border border-red-100 p-2">
-      <label className="credit-card-label">Customer Details</label>
-      <p>Email: {user?.email}</p>
-    </div>
+              <label className="credit-card-label">Customer Details</label>
+              <p>Email: {user?.email}</p>
+            </div>
 
             <hr className="line my-4 border-t border-white" />
             <div className="flex justify-between items-center information">
@@ -232,16 +236,15 @@ const ProductCart = () => {
               <span>৳ {total + shipping} </span>
             </div>
             <Link
-  onClick={() => handleSelected(total + shipping)}
-  className="btn btn-primary btn-block flex justify-between mt-3"
-  type="button"
->
-  <span>৳ {total + shipping}.00</span>
-  <span>
-    Checkout<i className="fa fa-long-arrow-right ml-1 even:"></i>
-  </span>
-</Link>
-
+              onClick={() => handleSelected(total + shipping)}
+              className="btn btn-primary btn-block flex justify-between mt-3"
+              type="button"
+            >
+              <span>৳ {total + shipping}.00</span>
+              <span>
+                Checkout<i className="fa fa-long-arrow-right ml-1 even:"></i>
+              </span>
+            </Link>
           </div>
         </div>
       </div>
