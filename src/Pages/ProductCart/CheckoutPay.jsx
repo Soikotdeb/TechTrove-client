@@ -60,7 +60,7 @@ const CheckoutPay = () => {
     const TotalAmount = localStorage.getItem('TotalAmount');
 
     // Create a payment intent on your server
-    const response = await fetch('http://localhost:5000/create-payment-intent', {
+    const response = await fetch('https://tech-trove-gadget-bazar-database.vercel.app/create-payment-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const formData = {
 
 // Send form data to server
 try {
-  const response = await fetch('http://localhost:5000/save-payment-details', {
+  const response = await fetch('https://tech-trove-gadget-bazar-database.vercel.app/save-payment-details', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ try {
 
 
 // Delete data based on user email------------------>
-const deleteResponse = await fetch('http://localhost:5000/delete-user-data', {
+const deleteResponse = await fetch('https://tech-trove-gadget-bazar-database.vercel.app/delete-user-data', {
   method: 'DELETE',
   headers: {
     'Content-Type': 'application/json',
