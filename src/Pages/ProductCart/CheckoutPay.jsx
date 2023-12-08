@@ -96,6 +96,42 @@ const CheckoutPay = () => {
       console.log('Payment successful!');
       setProcessing(false);
 setTransactionId(result.paymentIntent.id);
+
+
+// Collect form data
+const formData = {
+  address: document.getElementById('address').value,
+  zipCode: document.getElementById('zipCode').value,
+  country: document.getElementById('country').value,
+  transactionId: transactionId,
+  userEmail: user?.email,
+  userName: user?.displayName,
+  userImage: user?.photoURL,
+  products: parsedSelectedProduct,
+};
+
+// Send form data to server
+try {
+  const response = await fetch('http://localhost:5000/save-payment-details', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (response.ok) {
+    // Handle successful response from server
+    // E.g., display success message to user
+    console.log('Payment details successfully saved on server!');
+  } else {
+    // Handle error response from server
+    console.error('Failed to save payment details on server');
+  }
+} catch (error) {
+  console.error('Error occurred while sending data to server:', error);
+}
+
       Swal.fire({
         icon: 'success',
         title: 'Payment Successful',
@@ -114,15 +150,17 @@ setTransactionId(result.paymentIntent.id);
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-gray-100">
       <div className="flex items-center mb-4">
         <Link to="/productCart" className="flex items-center gap-1 text-blue-500 hover:underline">
           <FaArrowLeft /> Continue Payment
         </Link>
       </div>
-      <div className='w-1/2  mx-auto'>
-      <form onSubmit={handleSubmit}>
-        <CardElement
+
+
+      <div className='w-1/2 mx-auto'>
+  <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <CardElement
           options={{
             style: {
               base: {
@@ -138,7 +176,52 @@ setTransactionId(result.paymentIntent.id);
             },
           }}
         />
-        <button
+    
+   <div className='mt-3'>
+     {/* Address Input */}
+     <div className="mb-4">
+      <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">
+        Address
+      </label>
+      <input
+        type="text"
+        id="address"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Enter your address (Must include Upozila)"
+      />
+    </div>
+
+    {/* Zip Code Input */}
+    <div className="mb-4">
+      <label htmlFor="zipCode" className="block text-gray-700 text-sm font-bold mb-2">
+       UP Zip Code
+      </label>
+      <input
+      required
+        type="number"
+        id="zipCode"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Enter your Up zip code"
+      />
+    </div>
+
+    {/* Country Select Input */}
+    <div className="mb-6">
+      <label htmlFor="country" className="block text-gray-700 text-sm font-bold mb-2">
+        Country
+      </label>
+      <select
+        id="country"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
+        {/* Options for country */}
+        <option value="Bangladesh">Bangladesh</option>
+        <option value="India">India</option>
+      </select>
+    </div>
+
+   </div>
+    <button
           id="payButton"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 w-full"
           type="submit"
@@ -147,8 +230,12 @@ setTransactionId(result.paymentIntent.id);
           {processing ? 'Processing...' : 'Pay Now!'}
         </button>
         {error && <div className="text-red-500">{error}</div>}
-      </form>
-      </div>
+  </form>
+</div>
+
+
+
+
 
       {/* invoice content */}
 <div  id="invoiceContent">
@@ -164,10 +251,14 @@ setTransactionId(result.paymentIntent.id);
           <p>3214</p>
         </div>
       </div>
+      <p>----------------Customer Payment Details----------------</p>
       <div className="flex items-center mb-2">
         <div>
           <p className="font-bold">Name: {user?.displayName}</p>
           <p>Email: {user?.email}</p>
+          <p>Address: {document.getElementById('address').value}</p>
+          <p>Upozila zipCode: { document.getElementById('zipCode').value}</p>
+          <p>Country: {document.getElementById('country').value}</p>
         </div>
       </div>
       <p className="text-green-600">
@@ -182,9 +273,8 @@ setTransactionId(result.paymentIntent.id);
         </p>
         <hr className=" border-t border-blue-500 w-1/2 mt-2" />
         <p className="text-green-600">
-          <small>Total Amount: {invoiceData.TotalAmount} /BDT</small>
+          <small>Total Amount: {invoiceData.TotalAmount} /BDT Only</small>
         </p>
-        {/* Add more invoice details here */}
       </div>
       <hr className="my-4" />
       <p className="mb-4">Thank you for purches the product. We appreciate your trust in our services.</p>
