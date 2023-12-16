@@ -248,7 +248,7 @@ if (deleteResponse.ok) {
             type="submit"
             disabled={processing || (user && !user.emailVerified)}
           >
-            {processing ? 'Processing...' : 'Pay Now!'}
+        {'৳'} <span className='mr-1'>{invoiceData?.TotalAmount}/</span>{processing ? 'Processing...' : 'Pay Now!'}
           </button>
         
         {error && <div className="text-red-500">{error}</div>}
