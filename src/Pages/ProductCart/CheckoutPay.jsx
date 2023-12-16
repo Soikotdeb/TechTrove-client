@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useElements, useStripe } from '@stripe/react-stripe-js';
 import { CardElement } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';
@@ -21,7 +21,6 @@ const CheckoutPay = () => {
     ShippingAmount: localStorage.getItem('ShippingAmount'),
     TotalAmount: localStorage.getItem('TotalAmount'),
   });
-
 
   // Logic for downloading invoice details and generating PDF
   const handleDownloadInvoice = () => {
@@ -48,6 +47,10 @@ const CheckoutPay = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!user || !user.emailVerified) {
+      setError('Please verify your email before making a payment.');
+      return;
+    }
     if (!stripe || !elements) {
       return;
     }
@@ -211,14 +214,14 @@ if (deleteResponse.ok) {
     {/* Zip Code Input */}
     <div className="mb-4">
       <label htmlFor="zipCode" className="block text-gray-700 text-sm font-bold mb-2">
-       UP Zip Code
+       Post Code
       </label>
       <input
       required
         type="number"
         id="zipCode"
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        placeholder="Enter your Up zip code"
+        placeholder="Enter your Post Code"
       />
     </div>
 
@@ -238,15 +241,20 @@ if (deleteResponse.ok) {
     </div>
 
    </div>
-    <button
-          id="payButton"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 w-full"
-          type="submit"
-          disabled={processing}
-        >
-          {processing ? 'Processing...' : 'Pay Now!'}
-        </button>
+   
+          <button
+            id="payButton"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 w-full"
+            type="submit"
+            disabled={processing || (user && !user.emailVerified)}
+          >
+            {processing ? 'Processing...' : 'Pay Now!'}
+          </button>
+        
         {error && <div className="text-red-500">{error}</div>}
+        {user && !user.emailVerified && (
+  <div className="text-red-500 mb-4"> We have sent you a verification code to your email. Please verify your email before making a payment.. </div>
+)}
   </form>
 </div>
 
@@ -304,7 +312,7 @@ if (deleteResponse.ok) {
       </button>
     </div>
   )}
-</div>
+</div> 
 
 {/* another payment */}
       <div>
