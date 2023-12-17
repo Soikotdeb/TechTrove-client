@@ -25,6 +25,7 @@ import HomeSearchResult from "../Pages/Shared/Navbar/HomeSearchResult";
 import CheckoutPay from "../Pages/ProductCart/CheckoutPay";
 import ParentComponent from "../Pages/ProductCart/ParentComponent";
 import UpdateProfile from "../Pages/Shared/UpdateProfile/UpdateProfile";
+import LiveSupport from "../Pages/Shared/LiveSupport/LiveSupport";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
   {
     path: "UpdateProfile",
     element: <UpdateProfile></UpdateProfile>,
+  },
+  {
+    path: "liveSupport",
+    element: <LiveSupport></LiveSupport>,
   },
   {
     path: "contactUs",

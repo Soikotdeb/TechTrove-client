@@ -84,13 +84,9 @@ const ProductCart = () => {
   if (loading) {
     // You can render a loading indicator here while data is being fetched.
     return (
-      <div>
-        <div className="flex items-center justify-center h-screen bg-blue-200">
-          <div className="border-t-4 border-blue-500 border-solid h-10 w-64 animate-spin"></div>
-          <div className="border-t-4 border-purple-500 border-solid h-12 w-64 animate-spin"></div>
-          <div className="border-t-4 border-blue-500 border-solid h-10 w-64 animate-spin"></div>
-        </div>
-      </div>
+      <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-gray-900"></div>
+     </div>
     );
   }
 

@@ -224,7 +224,7 @@ const MainNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/profile">
+                  <Link to="/liveSupport">
                     {" "}
                     <p className="flex items-center gap-1 hover:text-purple-200">
                       {" "}
