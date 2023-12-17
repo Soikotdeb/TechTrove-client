@@ -24,6 +24,7 @@ import ProductCart from "../Pages/ProductCart/ProductCart";
 import HomeSearchResult from "../Pages/Shared/Navbar/HomeSearchResult";
 import CheckoutPay from "../Pages/ProductCart/CheckoutPay";
 import ParentComponent from "../Pages/ProductCart/ParentComponent";
+import UpdateProfile from "../Pages/Shared/UpdateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
   {
     path: "terms",
     element: <TermsCondition></TermsCondition>,
+  },
+  {
+    path: "UpdateProfile",
+    element: <UpdateProfile></UpdateProfile>,
   },
   {
     path: "contactUs",

@@ -91,14 +91,14 @@ const MainNav = () => {
                 </a>
               </li>
               <li>
-                <a className="relative">
+                <Link to={'/productCart'} className="relative">
                   <FaShoppingCart className="w-6 h-6" />
                   {cart.length > 0 && (
                 <div className="absolute top-2 left-4 transform translate-x-2 -translate-y-2 bg-red-500 text-white rounded-xl w-5 h-3 flex items-center justify-center ">
                   {cart.length}
                 </div>
               )}
-                </a>
+                </Link>
               </li>
               <li>
                 <a>
@@ -214,7 +214,7 @@ const MainNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/profile">
+                  <Link to="/UpdateProfile">
                     {" "}
                     <p className="flex items-center gap-1 hover:text-purple-200">
                       {" "}
