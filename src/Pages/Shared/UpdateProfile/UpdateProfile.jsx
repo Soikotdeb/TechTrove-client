@@ -94,23 +94,23 @@ const UpdateProfile = () => {
 
     return (
        <div className=' bg-gradient-to-r from-purple-600 to-indigo-800 rounded-lg shadow-2xl min-h-screen'>
-        <div className="flex items-center mb-4">
-        <Link to="/" className="flex items-center gap-1 text-blue-100 hover:underline p-5">
+        <div className="flex items-center mb-4 border border-y-2">
+        <Link to="/" className="flex items-center gap-1 text-blue-100 hover:underline p-5 border">
           <FaArrowLeft /> Continue Home
         </Link>
       </div>
-         <div className="max-w-xl mx-auto p-8 text-white">
-            <h2 className="text-4xl font-bold mb-8">Update Your Profile</h2>
+         <div className="max-w-xl mx-auto p-8 text-white border border-y-2 border-purple-300">
+            <h2 className="text-3xl font-bold mb-4">Update Your Profile</h2>
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-            <div className="mb-8">
-                <label htmlFor="displayName" className="block text-lg font-semibold mb-2">
+            <div className="mb-4">
+                <label htmlFor="displayName" className="block text-base font-semibold mb-2">
                     Display Name
                 </label>
                 <input
                     required
                     type="text"
                     id="displayName"
-                    className="bg-gray-200 text-gray-800 p-4 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    className="bg-gray-200 text-gray-800 p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                     placeholder={user.displayName}
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
@@ -118,7 +118,7 @@ const UpdateProfile = () => {
             </div>
             <div className="flex justify-between items-center mb-12">
                 <div>
-                    <label htmlFor="displayImage" className="block text-lg font-semibold">
+                    <label htmlFor="displayImage" className="block text-base font-semibold">
                         Profile Picture
                     </label>
                     <img src={user?.photoURL} alt="Profile" className="w-40 h-40 rounded-md" />
