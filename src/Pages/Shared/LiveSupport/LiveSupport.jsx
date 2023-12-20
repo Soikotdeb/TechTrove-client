@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const LiveSupport = () => {
     const [loading, setLoading] = useState(true);
@@ -14,6 +16,11 @@ const LiveSupport = () => {
 
     return (
         <div>
+            <div className="flex flex-row">
+            <Link to="/" className="flex items-center gap-1 text-blue-500 hover:underline p-2">
+             <FaArrowLeft /> Continue Home
+            </Link>
+            </div>
             {loading ? (
                 // Show spinner while loading
                 <div className="flex justify-center items-center h-screen">
