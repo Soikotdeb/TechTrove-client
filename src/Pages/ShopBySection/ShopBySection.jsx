@@ -115,6 +115,7 @@ const ShopBySection = () => {
         color: macBook.productColor,
         price: macBook.price,
         quantity:macBook.productQuantity,
+        category:macBook.category,
         email: user.email,
       };
 

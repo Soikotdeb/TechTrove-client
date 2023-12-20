@@ -294,6 +294,7 @@ const TechTroveProducts = () => {
         color: product.productColor,
         price: product.price,
         quantity: product.productQuantity,
+        category: product.category,
         email: user.email,
       };
 
