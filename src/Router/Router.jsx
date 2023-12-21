@@ -26,6 +26,7 @@ import CheckoutPay from "../Pages/ProductCart/CheckoutPay";
 import ParentComponent from "../Pages/ProductCart/ParentComponent";
 import UpdateProfile from "../Pages/Shared/UpdateProfile/UpdateProfile";
 import LiveSupport from "../Pages/Shared/LiveSupport/LiveSupport";
+import InviteFriend from "../Pages/Shared/InviteFriend/InviteFriend";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
   {
     path: "liveSupport",
     element: <LiveSupport></LiveSupport>,
+  },
+  {
+    path: "InviteFriend",
+    element: <InviteFriend></InviteFriend>,
   },
   {
     path: "contactUs",

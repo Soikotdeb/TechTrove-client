@@ -252,7 +252,7 @@ const MainNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/invite">
+                  <Link to="/InviteFriend">
                     {" "}
                     <p className="flex items-center gap-1 hover:text-purple-200">
                       <FaShare></FaShare>Invite Friend{" "}
